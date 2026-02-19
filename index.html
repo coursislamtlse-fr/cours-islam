@@ -558,6 +558,34 @@ body {
 }
 .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
 
+/* ── COURSES SCREEN ── */
+#courses { background:var(--bg); }
+.courses-screen-header {
+  background: linear-gradient(155deg, var(--green) 0%, #1a3a28 55%, var(--bg) 100%);
+  padding: 58px 26px 22px;
+  flex-shrink: 0;
+}
+.courses-screen-title { font-family:'Amiri',serif; font-size:28px; color:var(--cream); margin-bottom:4px; }
+.courses-screen-sub { font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--gold-dim); }
+.courses-search {
+  margin-top:14px;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:12px; padding:11px 16px;
+  font-family:'Josefin Sans',sans-serif; font-size:13px;
+  color:var(--cream); outline:none; width:100%;
+  transition:border-color 0.2s;
+}
+.courses-search:focus { border-color:rgba(201,168,76,0.3); }
+.courses-search::placeholder { color:rgba(176,165,145,0.35); }
+.category-section { margin-bottom:24px; }
+.category-label {
+  font-size:10px; letter-spacing:3px; text-transform:uppercase;
+  color:var(--gold-dim); margin-bottom:12px;
+  display:flex; align-items:center; gap:8px;
+}
+.category-label::after { content:''; flex:1; height:1px; background:rgba(201,168,76,0.15); }
+
 ::-webkit-scrollbar { width:3px; }
 ::-webkit-scrollbar-thumb { background:rgba(201,168,76,0.15); border-radius:10px; }
 </style>
@@ -596,6 +624,14 @@ body {
   <div class="screen" id="home">
     <div class="home-header geo-bg">
       <div class="greeting">As-salamu alaykum</div>
+      <div style="display:flex; align-items:center; gap:16px; margin-bottom:4px;">
+        <svg viewBox="0 0 120 120" width="54" height="54" style="flex-shrink:0; filter:drop-shadow(0 0 10px rgba(201,168,76,0.35));">
+          <circle cx="60" cy="60" r="45" fill="#c9a84c" opacity="0.95"/>
+          <circle cx="82" cy="48" r="38" fill="#1a3a28"/>
+          <polygon points="92,22 96,34 109,34 99,42 103,54 92,46 81,54 85,42 75,34 88,34" fill="#c9a84c" opacity="0.95"/>
+        </svg>
+        <div style="font-family:'Amiri',serif; font-size:28px; color:var(--cream); line-height:1.2;">Cours Islam</div>
+      </div>
       <div class="ayah-banner">
         <div class="ayah-ar">اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ</div>
         <div class="ayah-fr">« Lis, au nom de ton Seigneur qui a créé »</div>
@@ -614,10 +650,35 @@ body {
       <button class="nav-item active" onclick="goTo('home','home-nav')">
         <span class="nav-icon">🏠</span><span class="nav-label">Accueil</span>
       </button>
-      <button class="nav-item" onclick="goTo('home','home-nav')">
+      <button class="nav-item" onclick="goTo('courses',''); renderCourses()">
         <span class="nav-icon">📚</span><span class="nav-label">Cours</span>
       </button>
-      <button class="nav-item" onclick="goTo('admin-login','')">
+      <button class="nav-item" onclick="goToAdmin()">
+        <span class="nav-icon">⚙️</span><span class="nav-label">Admin</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ════ COURSES ════ -->
+  <div class="screen" id="courses">
+    <div class="courses-screen-header geo-bg">
+      <div class="courses-screen-sub">Bibliothèque</div>
+      <div class="courses-screen-title">Tous les cours</div>
+      <input type="text" class="courses-search" id="courses-search" placeholder="🔍  Rechercher un cours..." oninput="filterCourses(this.value)">
+    </div>
+    <div class="scroll-body">
+      <div class="home-body" id="courses-body">
+        <!-- rendered by JS -->
+      </div>
+    </div>
+    <div class="bottom-nav">
+      <button class="nav-item" onclick="goTo('home','home-nav')">
+        <span class="nav-icon">🏠</span><span class="nav-label">Accueil</span>
+      </button>
+      <button class="nav-item active">
+        <span class="nav-icon">📚</span><span class="nav-label">Cours</span>
+      </button>
+      <button class="nav-item" onclick="goToAdmin()">
         <span class="nav-icon">⚙️</span><span class="nav-label">Admin</span>
       </button>
     </div>
@@ -645,7 +706,7 @@ body {
       <button class="nav-item active">
         <span class="nav-icon">📚</span><span class="nav-label">Cours</span>
       </button>
-      <button class="nav-item" onclick="goTo('admin-login','')">
+      <button class="nav-item" onclick="goToAdmin()">
         <span class="nav-icon">⚙️</span><span class="nav-label">Admin</span>
       </button>
     </div>
@@ -863,6 +924,58 @@ function goTo(screenId, navId) {
 }
 
 // ══════════════════════════════
+// COURSES SCREEN
+// ══════════════════════════════
+function renderCourses(filter) {
+  const body = document.getElementById('courses-body');
+  let filtered = filter
+    ? courses.filter(c =>
+        c.title.toLowerCase().includes(filter.toLowerCase()) ||
+        (c.category || '').toLowerCase().includes(filter.toLowerCase())
+      )
+    : courses;
+
+  if (!filtered.length) {
+    body.innerHTML = `<div class="empty-state"><div class="empty-icon">🔍</div>Aucun cours trouvé.</div>`;
+    return;
+  }
+
+  // Group by category
+  const groups = {};
+  filtered.forEach((c, i) => {
+    const cat = c.category || 'Autres';
+    if (!groups[cat]) groups[cat] = [];
+    groups[cat].push({ course: c, idx: courses.indexOf(c) });
+  });
+
+  body.innerHTML = Object.entries(groups).map(([cat, items]) => `
+    <div class="category-section">
+      <div class="category-label">${cat}</div>
+      <div class="course-list">
+        ${items.map(({ course: c, idx }) => `
+          <div class="course-card-home" onclick="openCourse(${idx})">
+            <div class="card-accent ${c.color}"></div>
+            <div class="course-card-inner">
+              <div class="course-emoji">${c.emoji}</div>
+              <div class="course-info">
+                <div class="course-category">${c.category || 'Cours'}</div>
+                <div class="course-title-text">${c.title}</div>
+                <div class="course-meta">${c.lessons.length} leçon${c.lessons.length > 1 ? 's' : ''}</div>
+              </div>
+              <div class="course-arrow">›</div>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterCourses(val) {
+  renderCourses(val);
+}
+
+// ══════════════════════════════
 // HOME — render courses
 // ══════════════════════════════
 function renderHome() {
@@ -1043,9 +1156,9 @@ function checkLogin() {
   if (pwd === ADMIN_PASSWORD) {
     document.getElementById('admin-pwd').value = '';
     document.getElementById('login-error').textContent = '';
+    sessionStorage.setItem('admin_logged', '1');
     goTo('admin', '');
     renderAdmin();
-    // Reload courses from Supabase when entering admin
     loadCourses().then(() => renderAdmin());
   } else {
     document.getElementById('login-error').textContent = 'Mot de passe incorrect';
@@ -1054,6 +1167,7 @@ function checkLogin() {
 }
 
 function logout() {
+  sessionStorage.removeItem('admin_logged');
   goTo('home', 'home-nav');
 }
 
@@ -1335,7 +1449,19 @@ function escapeAttr(s) {
 async function init() {
   await loadCourses();
   renderHome();
+  renderCourses();
 }
+
+function goToAdmin() {
+  if (sessionStorage.getItem('admin_logged') === '1') {
+    renderAdmin();
+    loadCourses().then(() => renderAdmin());
+    goTo('admin', '');
+  } else {
+    goTo('admin-login', '');
+  }
+}
+
 init();
 </script>
 </body>
