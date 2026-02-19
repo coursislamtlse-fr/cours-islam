@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Noor — Cours d'Islam</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Josefin+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0d0f0e;
+  --bg2: #141714;
+  --bg3: #1b1f1b;
+  --bg4: #222622;
+  --gold: #c9a84c;
+  --gold-light: #e8c97a;
+  --gold-dim: #7a6130;
+  --cream: #f0e8d4;
+  --cream-dim: #b8ad98;
+  --green: #2a5c3f;
+  --green-light: #3a7a55;
+  --red: #c0392b;
+  --radius: 20px;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'Josefin Sans', sans-serif;
+  background: #0a0a0a;
+  color: var(--cream);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ── PHONE SHELL ── */
+.phone {
+  width: 390px;
+  height: 844px;
+  background: var(--bg);
+  border-radius: 48px;
+  box-shadow: 0 0 0 10px #1a1a1a, 0 0 0 12px #2a2a2a, 0 40px 80px rgba(0,0,0,0.9);
+  overflow: hidden;
+  position: relative;
+}
+.notch {
+  width: 126px; height: 34px;
+  background: #080808;
+  border-radius: 0 0 20px 20px;
+  position: absolute;
+  top:0; left:50%; transform:translateX(-50%);
+  z-index: 200;
+}
+
+/* ── SCREENS ── */
+.screen {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+  overflow: hidden;
+}
+.screen.active { opacity:1; pointer-events:all; }
+
+/* Scrollable body inside screen */
+.scroll-body {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.scroll-body::-webkit-scrollbar { display:none; }
+
+/* ── GEO PATTERN ── */
+.geo-bg {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23c9a84c' fill-opacity='0.07'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* ══════════════════════════════
+   SPLASH
+══════════════════════════════ */
+#splash {
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  background: var(--bg);
+}
+.splash-geo { width:110px; height:110px; animation: rotate 18s linear infinite; }
+.splash-geo svg { width:100%; height:100%; }
+@keyframes rotate { to { transform: rotate(360deg); } }
+.splash-title { font-family:'Amiri',serif; font-size:54px; color:var(--gold); letter-spacing:4px; animation:fadeUp 1s ease 0.4s both; }
+.splash-arabic { font-family:'Amiri',serif; font-size:20px; color:var(--cream-dim); direction:rtl; animation:fadeUp 1s ease 0.6s both; }
+.splash-sub { font-size:10px; letter-spacing:4px; text-transform:uppercase; color:var(--gold-dim); animation:fadeUp 1s ease 0.8s both; }
+.btn-gold {
+  background: var(--gold); color: var(--bg);
+  border:none; border-radius:50px;
+  padding:15px 48px;
+  font-family:'Josefin Sans',sans-serif;
+  font-size:12px; letter-spacing:3px; text-transform:uppercase; font-weight:600;
+  cursor:pointer; transition:all 0.25s;
+  animation:fadeUp 1s ease 1s both;
+}
+.btn-gold:hover { background:var(--gold-light); transform:scale(1.03); }
+@keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+
+/* ══════════════════════════════
+   HOME
+══════════════════════════════ */
+#home { background:var(--bg); }
+
+.home-header {
+  background: linear-gradient(155deg, var(--green) 0%, #1a3a28 55%, var(--bg) 100%);
+  padding: 58px 26px 26px;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.home-header::after { content:''; position:absolute; inset:0; } /* geo overlay via class */
+
+.greeting { font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--gold-dim); margin-bottom:3px; position:relative; }
+.app-name { font-family:'Amiri',serif; font-size:30px; color:var(--cream); position:relative; }
+
+.ayah-banner {
+  margin-top:18px;
+  background: rgba(201,168,76,0.08);
+  border: 1px solid rgba(201,168,76,0.18);
+  border-radius:14px;
+  padding:14px 16px;
+  position:relative;
+}
+.ayah-ar { font-family:'Amiri',serif; font-size:17px; direction:rtl; color:var(--gold-light); line-height:1.9; text-align:right; }
+.ayah-fr { font-size:10px; color:var(--cream-dim); margin-top:5px; line-height:1.6; }
+.ayah-ref { font-size:9px; color:var(--gold-dim); margin-top:3px; letter-spacing:1px; }
+
+.home-body { padding: 22px 22px 100px; }
+.section-label { font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--gold-dim); margin-bottom:12px; }
+
+/* Empty state */
+.empty-state {
+  text-align:center; padding:40px 20px;
+  color:var(--cream-dim); font-size:13px; line-height:1.8;
+}
+.empty-state .empty-icon { font-size:36px; margin-bottom:12px; opacity:0.4; }
+
+/* Course cards list */
+.course-list { display:flex; flex-direction:column; gap:12px; }
+
+.course-card-home {
+  background: var(--bg3);
+  border-radius:18px;
+  border: 1px solid rgba(255,255,255,0.04);
+  overflow:hidden;
+  cursor:pointer;
+  transition: all 0.25s;
+}
+.course-card-home:hover { border-color:rgba(201,168,76,0.2); transform:translateY(-2px); }
+.course-card-home .card-accent { height:3px; }
+.card-accent.gold { background: linear-gradient(90deg,var(--gold-dim),var(--gold-light)); }
+.card-accent.green { background: linear-gradient(90deg,var(--green),var(--green-light)); }
+.card-accent.teal { background: linear-gradient(90deg,#1a5c5c,#2a9a8a); }
+.card-accent.indigo { background: linear-gradient(90deg,#3a3a7a,#6a6ac8); }
+
+.course-card-inner { padding:16px 18px; display:flex; align-items:center; gap:14px; }
+.course-emoji { font-size:28px; flex-shrink:0; }
+.course-info { flex:1; min-width:0; }
+.course-category { font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--gold-dim); margin-bottom:3px; }
+.course-title-text { font-family:'Amiri',serif; font-size:17px; color:var(--cream); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.course-meta { font-size:10px; color:var(--cream-dim); margin-top:4px; }
+.course-arrow { color:var(--gold-dim); font-size:18px; flex-shrink:0; }
+
+/* ══════════════════════════════
+   COURSE DETAIL
+══════════════════════════════ */
+#detail { background:var(--bg); }
+
+.detail-header {
+  background: linear-gradient(155deg, var(--green) 0%, #1a3a28 55%, var(--bg) 100%);
+  padding: 58px 24px 26px;
+  position:relative; overflow:hidden; flex-shrink:0;
+}
+.back-btn {
+  background:rgba(255,255,255,0.08); border:none; color:var(--cream);
+  width:36px; height:36px; border-radius:50%;
+  font-size:17px; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  margin-bottom:18px; position:relative;
+  transition:background 0.2s;
+}
+.back-btn:hover { background:rgba(255,255,255,0.15); }
+.detail-emoji { font-size:36px; margin-bottom:8px; }
+.detail-cat { font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--gold-dim); margin-bottom:5px; }
+.detail-title { font-family:'Amiri',serif; font-size:28px; color:var(--cream); margin-bottom:10px; line-height:1.2; }
+.detail-desc { font-size:12px; color:var(--cream-dim); line-height:1.75; }
+
+.detail-body { padding:22px 22px 100px; }
+
+/* Lessons */
+.lesson-item {
+  background:var(--bg3);
+  border-radius:14px;
+  border: 1px solid rgba(255,255,255,0.04);
+  margin-bottom:10px;
+  overflow:hidden;
+  cursor:pointer;
+  transition: all 0.25s;
+}
+.lesson-item:hover { border-color:rgba(201,168,76,0.2); }
+.lesson-header {
+  display:flex; align-items:center; gap:12px;
+  padding:14px 16px;
+}
+.lesson-num-badge {
+  width:32px; height:32px; border-radius:50%;
+  background:rgba(201,168,76,0.1);
+  border:1px solid rgba(201,168,76,0.2);
+  display:flex; align-items:center; justify-content:center;
+  font-size:12px; color:var(--gold); font-weight:600; flex-shrink:0;
+}
+.lesson-texts { flex:1; min-width:0; }
+.lesson-name { font-size:13px; color:var(--cream); margin-bottom:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.lesson-badges { display:flex; gap:6px; align-items:center; }
+.badge {
+  font-size:9px; letter-spacing:1px; text-transform:uppercase;
+  padding:2px 8px; border-radius:20px;
+}
+.badge-audio { background:rgba(201,168,76,0.1); color:var(--gold); border:1px solid rgba(201,168,76,0.2); }
+.badge-text { background:rgba(42,92,63,0.2); color:#5fc48a; border:1px solid rgba(42,92,63,0.3); }
+.lesson-toggle { color:var(--gold-dim); font-size:14px; transition:transform 0.3s; flex-shrink:0; }
+.lesson-toggle.open { transform:rotate(90deg); }
+
+/* Expanded lesson content */
+.lesson-content {
+  max-height:0; overflow:hidden;
+  transition: max-height 0.4s ease;
+  border-top: 0px solid rgba(255,255,255,0.05);
+}
+.lesson-content.open {
+  max-height:600px;
+  border-top-width:1px;
+}
+.lesson-content-inner { padding:16px; }
+
+/* Text content */
+.lesson-text-content {
+  font-size:13px; color:var(--cream-dim);
+  line-height:1.85; letter-spacing:0.3px;
+  white-space: pre-wrap;
+}
+
+/* Audio player */
+.audio-player {
+  margin-top:14px;
+  background:rgba(201,168,76,0.06);
+  border:1px solid rgba(201,168,76,0.15);
+  border-radius:12px;
+  padding:14px;
+}
+.audio-title { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--gold-dim); margin-bottom:10px; }
+.audio-controls { display:flex; align-items:center; gap:10px; }
+.audio-play-btn {
+  width:40px; height:40px;
+  background:var(--gold); border:none; border-radius:50%;
+  color:var(--bg); font-size:16px;
+  cursor:pointer; display:flex; align-items:center; justify-content:center;
+  flex-shrink:0; transition:all 0.2s;
+}
+.audio-play-btn:hover { background:var(--gold-light); transform:scale(1.05); }
+.audio-play-btn .pico { margin-left:2px; }
+.audio-progress-wrap { flex:1; }
+.audio-seek {
+  width:100%; height:4px;
+  background:rgba(255,255,255,0.08);
+  border-radius:10px; overflow:hidden;
+  cursor:pointer; margin-bottom:6px;
+}
+.audio-seek-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--gold-dim),var(--gold)); border-radius:10px; transition:width 0.3s; }
+.audio-time { font-size:10px; color:var(--cream-dim); display:flex; justify-content:space-between; }
+
+/* ══════════════════════════════
+   BOTTOM NAV
+══════════════════════════════ */
+.bottom-nav {
+  position:absolute; bottom:0; left:0; right:0;
+  height:86px;
+  background:rgba(13,15,14,0.97);
+  backdrop-filter:blur(20px);
+  border-top:1px solid rgba(255,255,255,0.05);
+  display:flex; align-items:center; justify-content:space-around;
+  padding:0 8px 20px;
+  z-index:100;
+}
+.nav-item {
+  display:flex; flex-direction:column; align-items:center; gap:3px;
+  padding:8px 14px; border-radius:12px;
+  cursor:pointer; border:none; background:none; transition:all 0.2s;
+}
+.nav-icon { font-size:20px; filter:grayscale(1) opacity(0.35); transition:all 0.2s; }
+.nav-label { font-size:9px; letter-spacing:1.5px; text-transform:uppercase; color:var(--cream-dim); opacity:0.35; transition:all 0.2s; }
+.nav-item.active .nav-icon { filter:none; }
+.nav-item.active .nav-label { color:var(--gold); opacity:1; }
+
+/* ══════════════════════════════
+   ADMIN — LOGIN
+══════════════════════════════ */
+#admin-login {
+  background: var(--bg);
+  align-items:center; justify-content:center; gap:24px;
+  padding:40px 32px;
+}
+.admin-lock { font-size:48px; margin-bottom:4px; }
+.admin-login-title { font-family:'Amiri',serif; font-size:28px; color:var(--gold); text-align:center; }
+.admin-login-sub { font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--cream-dim); text-align:center; }
+
+.field-group { width:100%; display:flex; flex-direction:column; gap:8px; }
+.field-label { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--gold-dim); }
+.field-input {
+  background:var(--bg3); border:1px solid rgba(255,255,255,0.08);
+  border-radius:12px; padding:14px 16px;
+  font-family:'Josefin Sans',sans-serif; font-size:14px;
+  color:var(--cream); outline:none; width:100%;
+  transition:border-color 0.2s;
+}
+.field-input:focus { border-color:rgba(201,168,76,0.4); }
+.field-input::placeholder { color:rgba(176,165,145,0.35); }
+
+.error-msg { font-size:11px; color:#e07070; text-align:center; min-height:16px; letter-spacing:0.5px; }
+
+/* ══════════════════════════════
+   ADMIN — DASHBOARD
+══════════════════════════════ */
+#admin { background:var(--bg); }
+
+.admin-header {
+  background:linear-gradient(155deg,#3a1a0a 0%,#1a0a04 60%,var(--bg) 100%);
+  padding:56px 24px 20px; flex-shrink:0;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.admin-header-left {}
+.admin-tag { font-size:9px; letter-spacing:3px; text-transform:uppercase; color:#c97a3a; margin-bottom:3px; }
+.admin-title { font-family:'Amiri',serif; font-size:26px; color:var(--cream); }
+.logout-btn {
+  background:rgba(255,255,255,0.06); border:none;
+  color:var(--cream-dim); font-size:10px; letter-spacing:2px; text-transform:uppercase;
+  padding:8px 14px; border-radius:20px; cursor:pointer; transition:all 0.2s;
+  font-family:'Josefin Sans',sans-serif;
+}
+.logout-btn:hover { background:rgba(255,255,255,0.1); }
+
+.admin-body { padding:20px 20px 100px; }
+
+/* Stats row */
+.admin-stats { display:flex; gap:10px; margin-bottom:20px; }
+.admin-stat {
+  flex:1; background:var(--bg3); border-radius:14px; padding:14px 12px; text-align:center;
+  border:1px solid rgba(255,255,255,0.04);
+}
+.admin-stat-val { font-family:'Amiri',serif; font-size:26px; color:var(--gold); }
+.admin-stat-lbl { font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--cream-dim); margin-top:2px; }
+
+/* Add course button */
+.btn-add {
+  width:100%; background:rgba(201,168,76,0.1);
+  border:1px dashed rgba(201,168,76,0.3);
+  border-radius:14px; padding:16px;
+  color:var(--gold); font-family:'Josefin Sans',sans-serif;
+  font-size:12px; letter-spacing:2px; text-transform:uppercase;
+  cursor:pointer; transition:all 0.2s; margin-bottom:16px;
+}
+.btn-add:hover { background:rgba(201,168,76,0.15); border-color:rgba(201,168,76,0.5); }
+
+/* Admin course cards */
+.admin-course-card {
+  background:var(--bg3); border-radius:14px;
+  border:1px solid rgba(255,255,255,0.04);
+  margin-bottom:10px; overflow:hidden;
+}
+.admin-course-header {
+  display:flex; align-items:center; gap:12px; padding:14px 16px;
+  cursor:pointer;
+}
+.admin-course-emoji { font-size:22px; flex-shrink:0; }
+.admin-course-info { flex:1; min-width:0; }
+.admin-course-title { font-family:'Amiri',serif; font-size:16px; color:var(--cream); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.admin-course-sub { font-size:10px; color:var(--cream-dim); margin-top:2px; }
+.admin-course-actions { display:flex; gap:8px; align-items:center; }
+.btn-icon {
+  background:none; border:none; font-size:16px; cursor:pointer; padding:6px;
+  border-radius:8px; transition:background 0.2s;
+}
+.btn-icon:hover { background:rgba(255,255,255,0.06); }
+.btn-icon.del:hover { background:rgba(192,57,43,0.15); }
+
+/* Expand admin course */
+.admin-course-body {
+  max-height:0; overflow:hidden; transition:max-height 0.4s ease;
+  border-top:0px solid rgba(255,255,255,0.05);
+}
+.admin-course-body.open { max-height:1200px; border-top-width:1px; }
+.admin-course-body-inner { padding:16px; display:flex; flex-direction:column; gap:12px; }
+
+.field-row { display:flex; flex-direction:column; gap:6px; }
+.field-row .field-label { font-size:9px; }
+.field-textarea {
+  background:var(--bg2); border:1px solid rgba(255,255,255,0.08);
+  border-radius:10px; padding:12px 14px;
+  font-family:'Josefin Sans',sans-serif; font-size:12px;
+  color:var(--cream); outline:none; width:100%;
+  min-height:80px; resize:vertical; line-height:1.7;
+  transition:border-color 0.2s;
+}
+.field-textarea:focus { border-color:rgba(201,168,76,0.4); }
+
+/* Lessons admin list */
+.lessons-admin-list { display:flex; flex-direction:column; gap:8px; }
+.lesson-admin-card {
+  background:var(--bg2); border-radius:10px;
+  border:1px solid rgba(255,255,255,0.05);
+  padding:12px 14px;
+}
+.lesson-admin-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
+.lesson-admin-num { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--gold-dim); }
+
+.btn-add-lesson {
+  background:rgba(42,92,63,0.15); border:1px dashed rgba(42,92,63,0.4);
+  border-radius:10px; padding:12px;
+  color:#5fc48a; font-family:'Josefin Sans',sans-serif;
+  font-size:11px; letter-spacing:2px; text-transform:uppercase;
+  cursor:pointer; transition:all 0.2s; width:100%;
+}
+.btn-add-lesson:hover { background:rgba(42,92,63,0.25); }
+
+.btn-save {
+  background:var(--gold); color:var(--bg);
+  border:none; border-radius:10px; padding:14px;
+  font-family:'Josefin Sans',sans-serif; font-size:12px; letter-spacing:2px; text-transform:uppercase; font-weight:600;
+  cursor:pointer; transition:all 0.2s; width:100%;
+}
+.btn-save:hover { background:var(--gold-light); }
+.btn-danger {
+  background:rgba(192,57,43,0.1); color:#e07070;
+  border:1px solid rgba(192,57,43,0.2); border-radius:10px; padding:12px;
+  font-family:'Josefin Sans',sans-serif; font-size:11px; letter-spacing:2px; text-transform:uppercase;
+  cursor:pointer; transition:all 0.2s; width:100%;
+}
+.btn-danger:hover { background:rgba(192,57,43,0.2); }
+
+/* ══════════════════════════════
+   MODAL — Add/Edit Course
+══════════════════════════════ */
+.modal-overlay {
+  position:absolute; inset:0;
+  background:rgba(0,0,0,0.7); backdrop-filter:blur(6px);
+  z-index:300; display:flex; align-items:flex-end;
+  opacity:0; pointer-events:none;
+  transition:opacity 0.3s ease;
+}
+.modal-overlay.open { opacity:1; pointer-events:all; }
+
+.modal-sheet {
+  background:var(--bg2);
+  border-radius:28px 28px 0 0;
+  width:100%; padding:24px 22px 40px;
+  max-height:92%;
+  overflow-y:auto;
+  transform:translateY(100%);
+  transition:transform 0.3s ease;
+}
+.modal-overlay.open .modal-sheet { transform:translateY(0); }
+
+.modal-handle { width:40px; height:4px; background:rgba(255,255,255,0.15); border-radius:10px; margin:0 auto 20px; }
+.modal-title { font-family:'Amiri',serif; font-size:24px; color:var(--gold); margin-bottom:20px; }
+
+.emoji-picker { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:4px; }
+.emoji-opt {
+  width:42px; height:42px; border-radius:10px;
+  background:var(--bg3); border:2px solid transparent;
+  font-size:22px; cursor:pointer; display:flex; align-items:center; justify-content:center;
+  transition:all 0.2s;
+}
+.emoji-opt:hover { background:var(--bg4); }
+.emoji-opt.selected { border-color:var(--gold); background:rgba(201,168,76,0.1); }
+
+.color-picker { display:flex; gap:10px; }
+.color-opt {
+  width:36px; height:18px; border-radius:20px;
+  cursor:pointer; border:2px solid transparent;
+  transition:all 0.2s;
+}
+.color-opt.selected { border-color:var(--cream); transform:scale(1.1); }
+
+/* toast */
+.toast {
+  position:absolute; bottom:100px; left:50%; transform:translateX(-50%) translateY(20px);
+  background:rgba(42,92,63,0.9); color:var(--cream);
+  font-size:11px; letter-spacing:1px; padding:10px 20px; border-radius:20px;
+  opacity:0; transition:all 0.3s; pointer-events:none; white-space:nowrap; z-index:400;
+}
+.toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+
+::-webkit-scrollbar { width:3px; }
+::-webkit-scrollbar-thumb { background:rgba(201,168,76,0.15); border-radius:10px; }
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="notch"></div>
+
+  <!-- ════ SPLASH ════ -->
+  <div class="screen" id="splash">
+    <div class="splash-geo">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="50,5 61,35 95,35 68,57 79,91 50,70 21,91 32,57 5,35 39,35" fill="none" stroke="#c9a84c" stroke-width="1.5" opacity="0.35"/>
+        <polygon points="50,15 59,38 84,38 64,53 72,78 50,63 28,78 36,53 16,38 41,38" fill="none" stroke="#c9a84c" stroke-width="1"/>
+        <circle cx="50" cy="50" r="15" fill="none" stroke="#c9a84c" stroke-width="1.5"/>
+        <polygon points="50,35 54,46 65,46 57,53 60,64 50,57 40,64 43,53 35,46 46,46" fill="none" stroke="#c9a84c" stroke-width="0.8" opacity="0.5"/>
+      </svg>
+    </div>
+    <div class="splash-title">نور</div>
+    <div class="splash-arabic">تعلّم الإسلام</div>
+    <div class="splash-sub">Cours de Religion Islamique</div>
+    <button class="btn-gold" onclick="goTo('home','home-nav')">Commencer ›</button>
+  </div>
+
+  <!-- ════ HOME ════ -->
+  <div class="screen active" id="home">
+    <div class="home-header geo-bg">
+      <div class="greeting">As-salamu alaykum</div>
+      <div class="ayah-banner">
+        <div class="ayah-ar">اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ</div>
+        <div class="ayah-fr">« Lis, au nom de ton Seigneur qui a créé »</div>
+        <div class="ayah-ref">Sourate Al-Alaq — 96:1</div>
+      </div>
+    </div>
+    <div class="scroll-body">
+      <div class="home-body">
+        <div class="section-label">Cours disponibles</div>
+        <div class="course-list" id="course-list">
+          <!-- rendered by JS -->
+        </div>
+      </div>
+    </div>
+    <div class="bottom-nav" id="home-nav">
+      <button class="nav-item active" onclick="goTo('home','home-nav')">
+        <span class="nav-icon">🏠</span><span class="nav-label">Accueil</span>
+      </button>
+      <button class="nav-item" onclick="goTo('home','home-nav')">
+        <span class="nav-icon">📚</span><span class="nav-label">Cours</span>
+      </button>
+      <button class="nav-item" onclick="goTo('admin-login','')">
+        <span class="nav-icon">⚙️</span><span class="nav-label">Admin</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ════ COURSE DETAIL ════ -->
+  <div class="screen" id="detail">
+    <div class="detail-header geo-bg" id="detail-header">
+      <button class="back-btn" onclick="goTo('home','home-nav')">←</button>
+      <div class="detail-emoji" id="detail-emoji">📖</div>
+      <div class="detail-cat" id="detail-cat">Catégorie</div>
+      <div class="detail-title" id="detail-title">Titre du cours</div>
+      <div class="detail-desc" id="detail-desc">Description</div>
+    </div>
+    <div class="scroll-body">
+      <div class="detail-body">
+        <div class="section-label">Leçons</div>
+        <div id="lessons-list"><!-- rendered by JS --></div>
+      </div>
+    </div>
+    <div class="bottom-nav">
+      <button class="nav-item" onclick="goTo('home','home-nav')">
+        <span class="nav-icon">🏠</span><span class="nav-label">Accueil</span>
+      </button>
+      <button class="nav-item active">
+        <span class="nav-icon">📚</span><span class="nav-label">Cours</span>
+      </button>
+      <button class="nav-item" onclick="goTo('admin-login','')">
+        <span class="nav-icon">⚙️</span><span class="nav-label">Admin</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ════ ADMIN LOGIN ════ -->
+  <div class="screen" id="admin-login">
+    <div class="admin-lock">🔐</div>
+    <div class="admin-login-title">Espace Administrateur</div>
+    <div class="admin-login-sub">Accès réservé</div>
+    <div class="field-group">
+      <div class="field-label">Mot de passe</div>
+      <input type="password" class="field-input" id="admin-pwd" placeholder="••••••••" onkeydown="if(event.key==='Enter')checkLogin()">
+    </div>
+    <div class="error-msg" id="login-error"></div>
+    <button class="btn-gold" onclick="checkLogin()">Connexion ›</button>
+    <button onclick="goTo('home','home-nav')" style="background:none;border:none;color:var(--cream-dim);font-size:11px;letter-spacing:2px;cursor:pointer;text-transform:uppercase;font-family:'Josefin Sans',sans-serif;margin-top:-8px;">← Retour</button>
+  </div>
+
+  <!-- ════ ADMIN DASHBOARD ════ -->
+  <div class="screen" id="admin">
+    <div class="admin-header">
+      <div class="admin-header-left">
+        <div class="admin-tag">Administration</div>
+        <div class="admin-title">Gérer les cours</div>
+      </div>
+      <button class="logout-btn" onclick="logout()">Déconnexion</button>
+    </div>
+    <div class="scroll-body">
+      <div class="admin-body">
+        <div class="admin-stats">
+          <div class="admin-stat">
+            <div class="admin-stat-val" id="stat-courses">0</div>
+            <div class="admin-stat-lbl">Cours</div>
+          </div>
+          <div class="admin-stat">
+            <div class="admin-stat-val" id="stat-lessons">0</div>
+            <div class="admin-stat-lbl">Leçons</div>
+          </div>
+        </div>
+        <button class="btn-add" onclick="openAddModal()">+ Ajouter un cours</button>
+        <div id="admin-course-list"><!-- rendered by JS --></div>
+      </div>
+    </div>
+    <div class="bottom-nav">
+      <button class="nav-item" onclick="goTo('home','home-nav')">
+        <span class="nav-icon">🏠</span><span class="nav-label">Accueil</span>
+      </button>
+      <button class="nav-item" onclick="goTo('home','home-nav')">
+        <span class="nav-icon">📚</span><span class="nav-label">Cours</span>
+      </button>
+      <button class="nav-item active">
+        <span class="nav-icon">⚙️</span><span class="nav-label">Admin</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ════ MODAL: Add/Edit Course ════ -->
+  <div class="modal-overlay" id="modal-overlay" onclick="closeModalOnBg(event)">
+    <div class="modal-sheet" id="modal-sheet">
+      <div class="modal-handle"></div>
+      <div class="modal-title" id="modal-title">Nouveau cours</div>
+
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <!-- Emoji -->
+        <div class="field-row">
+          <div class="field-label">Icône</div>
+          <div class="emoji-picker">
+            <div class="emoji-opt selected" data-emoji="📖" onclick="selectEmoji(this)">📖</div>
+            <div class="emoji-opt" data-emoji="☪️" onclick="selectEmoji(this)">☪️</div>
+            <div class="emoji-opt" data-emoji="🕌" onclick="selectEmoji(this)">🕌</div>
+            <div class="emoji-opt" data-emoji="📿" onclick="selectEmoji(this)">📿</div>
+            <div class="emoji-opt" data-emoji="🤲" onclick="selectEmoji(this)">🤲</div>
+            <div class="emoji-opt" data-emoji="🌙" onclick="selectEmoji(this)">🌙</div>
+            <div class="emoji-opt" data-emoji="⭐" onclick="selectEmoji(this)">⭐</div>
+            <div class="emoji-opt" data-emoji="📜" onclick="selectEmoji(this)">📜</div>
+          </div>
+        </div>
+        <!-- Color -->
+        <div class="field-row">
+          <div class="field-label">Couleur d'accent</div>
+          <div class="color-picker">
+            <div class="color-opt selected" data-color="gold" style="background:linear-gradient(90deg,#7a6130,#e8c97a)" onclick="selectColor(this)"></div>
+            <div class="color-opt" data-color="green" style="background:linear-gradient(90deg,#2a5c3f,#3a7a55)" onclick="selectColor(this)"></div>
+            <div class="color-opt" data-color="teal" style="background:linear-gradient(90deg,#1a5c5c,#2a9a8a)" onclick="selectColor(this)"></div>
+            <div class="color-opt" data-color="indigo" style="background:linear-gradient(90deg,#3a3a7a,#6a6ac8)" onclick="selectColor(this)"></div>
+          </div>
+        </div>
+        <!-- Title -->
+        <div class="field-row">
+          <div class="field-label">Titre du cours *</div>
+          <input type="text" class="field-input" id="m-title" placeholder="Ex: Les Piliers de l'Islam">
+        </div>
+        <!-- Category -->
+        <div class="field-row">
+          <div class="field-label">Catégorie</div>
+          <input type="text" class="field-input" id="m-cat" placeholder="Ex: Aqida, Fiqh, Sira...">
+        </div>
+        <!-- Description -->
+        <div class="field-row">
+          <div class="field-label">Description</div>
+          <textarea class="field-textarea" id="m-desc" placeholder="Courte description du cours..."></textarea>
+        </div>
+
+        <!-- Lessons section -->
+        <div style="margin-top:4px;">
+          <div class="field-label" style="margin-bottom:10px;">Leçons</div>
+          <div id="modal-lessons-list" style="display:flex;flex-direction:column;gap:8px;"></div>
+          <button class="btn-add-lesson" style="margin-top:8px;" onclick="addLessonField()">+ Ajouter une leçon</button>
+        </div>
+
+        <button class="btn-save" onclick="saveCourse()">💾 Enregistrer le cours</button>
+        <button class="btn-danger" id="btn-delete-course" style="display:none;" onclick="deleteCurrentCourse()">🗑 Supprimer ce cours</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <!-- Loading overlay -->
+  <div id="loading-overlay" style="display:none;position:absolute;inset:0;background:rgba(13,15,14,0.7);backdrop-filter:blur(4px);z-index:500;align-items:center;justify-content:center;flex-direction:column;gap:14px;">
+    <div style="width:36px;height:36px;border:3px solid rgba(201,168,76,0.2);border-top-color:var(--gold);border-radius:50%;animation:spin 0.8s linear infinite;"></div>
+    <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--cream-dim);">Chargement...</div>
+  </div>
+  <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
+</div>
+
+<script>
+// ══════════════════════════════
+// SUPABASE CONFIG
+// ══════════════════════════════
+const SUPABASE_URL = 'https://ltalfuvvhjumactclqgn.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_tEHhtoT3fmSv5EgspO5dtg_hUqJF4Ff';
+const HEADERS = {
+  'Content-Type': 'application/json',
+  'apikey': SUPABASE_KEY,
+  'Authorization': 'Bearer ' + SUPABASE_KEY
+};
+
+async function dbGetCourses() {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/courses?order=created_at.asc`, { headers: HEADERS });
+  if (!res.ok) throw new Error('Erreur chargement');
+  return await res.json();
+}
+
+async function dbInsertCourse(data) {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/courses`, {
+    method: 'POST',
+    headers: { ...HEADERS, 'Prefer': 'return=representation' },
+    body: JSON.stringify(data)
+  });
+  if (!res.ok) throw new Error('Erreur insertion');
+  return (await res.json())[0];
+}
+
+async function dbUpdateCourse(id, data) {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/courses?id=eq.${id}`, {
+    method: 'PATCH',
+    headers: { ...HEADERS, 'Prefer': 'return=representation' },
+    body: JSON.stringify(data)
+  });
+  if (!res.ok) throw new Error('Erreur mise à jour');
+  return (await res.json())[0];
+}
+
+async function dbDeleteCourse(id) {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/courses?id=eq.${id}`, {
+    method: 'DELETE',
+    headers: HEADERS
+  });
+  if (!res.ok) throw new Error('Erreur suppression');
+}
+
+// ══════════════════════════════
+// STATE
+// ══════════════════════════════
+const ADMIN_PASSWORD = 'noor2024'; // ← Changez ici votre mot de passe
+
+let currentCourseId = null;
+let editingCourseIndex = null;
+let selectedEmoji = '📖';
+let selectedColor = 'gold';
+
+let activeAudio = null;
+let activePlayBtn = null;
+let activeInterval = null;
+
+let courses = [];
+
+async function loadCourses() {
+  try {
+    showLoading(true);
+    courses = await dbGetCourses();
+  } catch(e) {
+    showToast('⚠️ Erreur de connexion à la base');
+    courses = [];
+  } finally {
+    showLoading(false);
+  }
+}
+
+function showLoading(on) {
+  document.getElementById('loading-overlay').style.display = on ? 'flex' : 'none';
+}
+
+// ══════════════════════════════
+// NAVIGATION
+// ══════════════════════════════
+function goTo(screenId, navId) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(screenId).classList.add('active');
+  // Stop any playing audio when navigating away
+  if (activeAudio) { activeAudio.pause(); stopAudioUI(); }
+}
+
+// ══════════════════════════════
+// HOME — render courses
+// ══════════════════════════════
+function renderHome() {
+  const list = document.getElementById('course-list');
+  if (!courses.length) {
+    list.innerHTML = `<div class="empty-state"><div class="empty-icon">📭</div>Aucun cours disponible pour l'instant.<br>L'administrateur peut en ajouter depuis l'espace Admin.</div>`;
+    return;
+  }
+  list.innerHTML = courses.map((c, i) => `
+    <div class="course-card-home" onclick="openCourse(${i})">
+      <div class="card-accent ${c.color}"></div>
+      <div class="course-card-inner">
+        <div class="course-emoji">${c.emoji}</div>
+        <div class="course-info">
+          <div class="course-category">${c.category || 'Cours'}</div>
+          <div class="course-title-text">${c.title}</div>
+          <div class="course-meta">${c.lessons.length} leçon${c.lessons.length > 1 ? 's' : ''}</div>
+        </div>
+        <div class="course-arrow">›</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ══════════════════════════════
+// COURSE DETAIL
+// ══════════════════════════════
+function openCourse(idx) {
+  currentCourseId = idx;
+  const c = courses[idx];
+  document.getElementById('detail-emoji').textContent = c.emoji;
+  document.getElementById('detail-cat').textContent = c.category || 'Cours';
+  document.getElementById('detail-title').textContent = c.title;
+  document.getElementById('detail-desc').textContent = c.description || '';
+  renderLessons(c.lessons);
+  goTo('detail', '');
+}
+
+function renderLessons(lessons) {
+  const container = document.getElementById('lessons-list');
+  if (!lessons.length) {
+    container.innerHTML = '<div class="empty-state" style="padding:20px 0"><div class="empty-icon">📋</div>Aucune leçon dans ce cours.</div>';
+    return;
+  }
+  container.innerHTML = lessons.map((l, i) => `
+    <div class="lesson-item">
+      <div class="lesson-header" onclick="toggleLesson(${i})">
+        <div class="lesson-num-badge">${i + 1}</div>
+        <div class="lesson-texts">
+          <div class="lesson-name">${l.name}</div>
+          <div class="lesson-badges">
+            ${l.text ? '<span class="badge badge-text">Texte</span>' : ''}
+            ${l.audioUrl ? '<span class="badge badge-audio">🎧 Audio</span>' : ''}
+          </div>
+        </div>
+        <div class="lesson-toggle" id="toggle-${i}">›</div>
+      </div>
+      <div class="lesson-content" id="lesson-content-${i}">
+        <div class="lesson-content-inner">
+          ${l.text ? `<div class="lesson-text-content">${escapeHtml(l.text)}</div>` : ''}
+          ${l.audioUrl ? renderAudioPlayer(i, l.audioUrl, l.name) : ''}
+          ${!l.text && !l.audioUrl ? '<div style="color:var(--cream-dim);font-size:12px;text-align:center;padding:10px 0;opacity:0.5">Aucun contenu pour cette leçon.</div>' : ''}
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderAudioPlayer(idx, url, name) {
+  return `
+  <div class="audio-player" id="audio-player-${idx}">
+    <div class="audio-title">🎧 Écouter la leçon</div>
+    <div class="audio-controls">
+      <button class="audio-play-btn" id="aplay-${idx}" onclick="toggleAudio(${idx}, '${escapeAttr(url)}')">
+        <span class="pico">▶</span>
+      </button>
+      <div class="audio-progress-wrap">
+        <div class="audio-seek" onclick="seekAudio(event, ${idx})">
+          <div class="audio-seek-fill" id="afill-${idx}"></div>
+        </div>
+        <div class="audio-time">
+          <span id="atime-${idx}">0:00</span>
+          <span id="adur-${idx}">--:--</span>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function toggleLesson(i) {
+  const content = document.getElementById(`lesson-content-${i}`);
+  const toggle = document.getElementById(`toggle-${i}`);
+  const isOpen = content.classList.toggle('open');
+  toggle.classList.toggle('open', isOpen);
+}
+
+// ══════════════════════════════
+// AUDIO PLAYER
+// ══════════════════════════════
+const audioObjects = {};
+
+function toggleAudio(idx, url) {
+  if (!url) return;
+
+  // Create audio object if needed
+  if (!audioObjects[idx]) {
+    audioObjects[idx] = new Audio(url);
+    const aud = audioObjects[idx];
+    aud.addEventListener('loadedmetadata', () => {
+      document.getElementById(`adur-${idx}`).textContent = formatTime(aud.duration);
+    });
+    aud.addEventListener('timeupdate', () => {
+      const pct = (aud.currentTime / aud.duration) * 100 || 0;
+      document.getElementById(`afill-${idx}`).style.width = pct + '%';
+      document.getElementById(`atime-${idx}`).textContent = formatTime(aud.currentTime);
+    });
+    aud.addEventListener('ended', () => {
+      document.getElementById(`aplay-${idx}`).innerHTML = '<span class="pico">▶</span>';
+    });
+  }
+
+  const aud = audioObjects[idx];
+  const btn = document.getElementById(`aplay-${idx}`);
+
+  if (!aud.paused) {
+    aud.pause();
+    btn.innerHTML = '<span class="pico">▶</span>';
+  } else {
+    // Pause any other playing audio
+    Object.entries(audioObjects).forEach(([k, a]) => {
+      if (k != idx && !a.paused) {
+        a.pause();
+        const ob = document.getElementById(`aplay-${k}`);
+        if (ob) ob.innerHTML = '<span class="pico">▶</span>';
+      }
+    });
+    aud.play().catch(() => showToast('⚠️ Impossible de lire l\'audio'));
+    btn.innerHTML = '<span>⏸</span>';
+  }
+}
+
+function seekAudio(e, idx) {
+  const aud = audioObjects[idx];
+  if (!aud || !aud.duration) return;
+  const rect = e.currentTarget.getBoundingClientRect();
+  const pct = (e.clientX - rect.left) / rect.width;
+  aud.currentTime = pct * aud.duration;
+}
+
+function stopAudioUI() {
+  Object.entries(audioObjects).forEach(([k, a]) => {
+    if (!a.paused) { a.pause(); }
+    const ob = document.getElementById(`aplay-${k}`);
+    if (ob) ob.innerHTML = '<span class="pico">▶</span>';
+  });
+}
+
+function formatTime(s) {
+  if (!s || isNaN(s)) return '0:00';
+  const m = Math.floor(s / 60);
+  const sec = Math.floor(s % 60);
+  return m + ':' + String(sec).padStart(2, '0');
+}
+
+// ══════════════════════════════
+// ADMIN LOGIN
+// ══════════════════════════════
+function checkLogin() {
+  const pwd = document.getElementById('admin-pwd').value;
+  if (pwd === ADMIN_PASSWORD) {
+    document.getElementById('admin-pwd').value = '';
+    document.getElementById('login-error').textContent = '';
+    goTo('admin', '');
+    renderAdmin();
+    // Reload courses from Supabase when entering admin
+    loadCourses().then(() => renderAdmin());
+  } else {
+    document.getElementById('login-error').textContent = 'Mot de passe incorrect';
+    document.getElementById('admin-pwd').value = '';
+  }
+}
+
+function logout() {
+  goTo('home', 'home-nav');
+}
+
+// ══════════════════════════════
+// ADMIN DASHBOARD
+// ══════════════════════════════
+function renderAdmin() {
+  const totalLessons = courses.reduce((s, c) => s + c.lessons.length, 0);
+  document.getElementById('stat-courses').textContent = courses.length;
+  document.getElementById('stat-lessons').textContent = totalLessons;
+
+  const list = document.getElementById('admin-course-list');
+  if (!courses.length) {
+    list.innerHTML = '<div class="empty-state">Aucun cours. Cliquez sur "+ Ajouter un cours".</div>';
+    return;
+  }
+  list.innerHTML = courses.map((c, i) => `
+    <div class="admin-course-card">
+      <div class="admin-course-header">
+        <div class="admin-course-emoji">${c.emoji}</div>
+        <div class="admin-course-info">
+          <div class="admin-course-title">${c.title}</div>
+          <div class="admin-course-sub">${c.category || ''} · ${c.lessons.length} leçon${c.lessons.length > 1 ? 's' : ''}</div>
+        </div>
+        <div class="admin-course-actions">
+          <button class="btn-icon" onclick="openEditModal(${i})" title="Modifier">✏️</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ══════════════════════════════
+// MODAL
+// ══════════════════════════════
+function openAddModal() {
+  editingCourseIndex = null;
+  selectedEmoji = '📖';
+  selectedColor = 'gold';
+  document.getElementById('modal-title').textContent = 'Nouveau cours';
+  document.getElementById('m-title').value = '';
+  document.getElementById('m-cat').value = '';
+  document.getElementById('m-desc').value = '';
+  document.getElementById('btn-delete-course').style.display = 'none';
+  resetEmojiPicker('📖');
+  resetColorPicker('gold');
+  document.getElementById('modal-lessons-list').innerHTML = '';
+  addLessonField(); // start with 1 empty lesson
+  openModal();
+}
+
+function openEditModal(idx) {
+  editingCourseIndex = idx;
+  const c = courses[idx];
+  selectedEmoji = c.emoji;
+  selectedColor = c.color;
+  document.getElementById('modal-title').textContent = 'Modifier le cours';
+  document.getElementById('m-title').value = c.title;
+  document.getElementById('m-cat').value = c.category || '';
+  document.getElementById('m-desc').value = c.description || '';
+  document.getElementById('btn-delete-course').style.display = 'block';
+  resetEmojiPicker(c.emoji);
+  resetColorPicker(c.color);
+  // Render existing lessons
+  const ll = document.getElementById('modal-lessons-list');
+  ll.innerHTML = '';
+  c.lessons.forEach(l => addLessonField(l));
+  openModal();
+}
+
+function openModal() {
+  document.getElementById('modal-overlay').classList.add('open');
+  document.getElementById('modal-sheet').scrollTop = 0;
+}
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+}
+
+function closeModalOnBg(e) {
+  if (e.target === document.getElementById('modal-overlay')) closeModal();
+}
+
+function resetEmojiPicker(emoji) {
+  document.querySelectorAll('.emoji-opt').forEach(el => {
+    el.classList.toggle('selected', el.dataset.emoji === emoji);
+  });
+}
+
+function resetColorPicker(color) {
+  document.querySelectorAll('.color-opt').forEach(el => {
+    el.classList.toggle('selected', el.dataset.color === color);
+  });
+}
+
+function selectEmoji(el) {
+  document.querySelectorAll('.emoji-opt').forEach(e => e.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedEmoji = el.dataset.emoji;
+}
+
+function selectColor(el) {
+  document.querySelectorAll('.color-opt').forEach(e => e.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedColor = el.dataset.color;
+}
+
+let lessonCounter = 0;
+function addLessonField(lesson) {
+  lessonCounter++;
+  const id = lessonCounter;
+  const name = lesson ? lesson.name : '';
+  const text = lesson ? lesson.text : '';
+  const audio = lesson ? lesson.audioUrl : '';
+
+  const div = document.createElement('div');
+  div.className = 'lesson-admin-card';
+  div.id = `lesson-field-${id}`;
+  div.innerHTML = `
+    <div class="lesson-admin-top">
+      <div class="lesson-admin-num">Leçon</div>
+      <button class="btn-icon del" onclick="removeLessonField(${id})">🗑</button>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div class="field-row">
+        <div class="field-label">Titre de la leçon *</div>
+        <input type="text" class="field-input" id="ln-${id}" placeholder="Ex: Introduction à la foi" value="${escapeAttr(name)}" style="font-size:13px;padding:11px 14px;">
+      </div>
+      <div class="field-row">
+        <div class="field-label">Contenu textuel</div>
+        <textarea class="field-textarea" id="lt-${id}" placeholder="Rédigez le contenu de la leçon ici...">${escapeHtml(text)}</textarea>
+      </div>
+      <div class="field-row">
+        <div class="field-label">Lien audio MP3 (URL)</div>
+        <input type="url" class="field-input" id="la-${id}" placeholder="https://exemple.com/audio.mp3" value="${escapeAttr(audio)}" style="font-size:12px;padding:11px 14px;">
+      </div>
+    </div>
+  `;
+  document.getElementById('modal-lessons-list').appendChild(div);
+}
+
+function removeLessonField(id) {
+  const el = document.getElementById(`lesson-field-${id}`);
+  if (el) el.remove();
+}
+
+async function saveCourse() {
+  const title = document.getElementById('m-title').value.trim();
+  if (!title) { showToast('⚠️ Le titre est requis'); return; }
+
+  const lessons = [];
+  document.querySelectorAll('#modal-lessons-list .lesson-admin-card').forEach(card => {
+    const id = card.id.replace('lesson-field-', '');
+    const name = document.getElementById(`ln-${id}`).value.trim();
+    const text = document.getElementById(`lt-${id}`).value.trim();
+    const audioUrl = document.getElementById(`la-${id}`).value.trim();
+    if (name) lessons.push({ name, text, audioUrl });
+  });
+
+  const payload = {
+    emoji: selectedEmoji,
+    color: selectedColor,
+    title,
+    category: document.getElementById('m-cat').value.trim(),
+    description: document.getElementById('m-desc').value.trim(),
+    lessons
+  };
+
+  try {
+    showLoading(true);
+    if (editingCourseIndex !== null) {
+      const updated = await dbUpdateCourse(courses[editingCourseIndex].id, payload);
+      courses[editingCourseIndex] = updated;
+      showToast('✅ Cours mis à jour');
+    } else {
+      const created = await dbInsertCourse(payload);
+      courses.push(created);
+      showToast('✅ Cours ajouté');
+    }
+    closeModal();
+    renderAdmin();
+    renderHome();
+  } catch(e) {
+    showToast('⚠️ Erreur lors de l\'enregistrement');
+  } finally {
+    showLoading(false);
+  }
+}
+
+async function deleteCurrentCourse() {
+  if (editingCourseIndex === null) return;
+  if (!confirm('Supprimer ce cours définitivement ?')) return;
+  try {
+    showLoading(true);
+    await dbDeleteCourse(courses[editingCourseIndex].id);
+    courses.splice(editingCourseIndex, 1);
+    closeModal();
+    renderAdmin();
+    renderHome();
+    showToast('🗑 Cours supprimé');
+  } catch(e) {
+    showToast('⚠️ Erreur lors de la suppression');
+  } finally {
+    showLoading(false);
+  }
+}
+
+// ══════════════════════════════
+// HELPERS
+// ══════════════════════════════
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+function escapeHtml(s) {
+  if (!s) return '';
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function escapeAttr(s) {
+  if (!s) return '';
+  return s.replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+// ══════════════════════════════
+// INIT
+// ══════════════════════════════
+async function init() {
+  await loadCourses();
+  renderHome();
+}
+init();
+</script>
+</body>
+</html>
