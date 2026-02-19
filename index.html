@@ -539,7 +539,99 @@ body {
 }
 .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
 
-/* ── COURSES SCREEN ── */
+/* ── AUTH SCREENS ── */
+#auth-login, #auth-register, #auth-pending {
+  background: radial-gradient(ellipse at 50% 30%, #1a3a28 0%, #0a1208 60%, #060c05 100%);
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 50px 32px 40px;
+}
+.auth-logo {
+  filter: drop-shadow(0 0 20px rgba(201,168,76,0.3));
+  animation: fadeUp 0.8s ease 0.2s both;
+}
+.auth-title {
+  font-family:'Amiri',serif; font-size:28px; color:var(--gold);
+  text-align:center; animation: fadeUp 0.8s ease 0.4s both;
+}
+.auth-sub {
+  font-size:10px; letter-spacing:3px; text-transform:uppercase;
+  color:var(--cream-dim); text-align:center;
+  animation: fadeUp 0.8s ease 0.5s both;
+}
+.auth-form {
+  width:100%; display:flex; flex-direction:column; gap:12px;
+  animation: fadeUp 0.8s ease 0.6s both;
+}
+.auth-switch {
+  font-size:11px; color:var(--cream-dim); text-align:center;
+  animation: fadeUp 0.8s ease 0.8s both;
+}
+.auth-switch span {
+  color:var(--gold); cursor:pointer; text-decoration:underline;
+  text-underline-offset:3px;
+}
+.auth-error { font-size:11px; color:#e07070; text-align:center; min-height:16px; }
+
+/* Pending screen */
+.pending-icon { font-size:56px; animation: fadeUp 0.8s ease 0.2s both; }
+.pending-title {
+  font-family:'Amiri',serif; font-size:26px; color:var(--gold);
+  text-align:center; animation: fadeUp 0.8s ease 0.4s both;
+}
+.pending-text {
+  font-size:12px; color:var(--cream-dim); text-align:center;
+  line-height:1.8; padding:0 10px;
+  animation: fadeUp 0.8s ease 0.6s both;
+}
+.btn-outline {
+  background:none; border:1px solid rgba(201,168,76,0.3);
+  color:var(--cream-dim); border-radius:50px; padding:13px 36px;
+  font-family:'Josefin Sans',sans-serif; font-size:11px;
+  letter-spacing:2px; text-transform:uppercase;
+  cursor:pointer; transition:all 0.2s;
+  animation: fadeUp 0.8s ease 0.8s both;
+}
+.btn-outline:hover { border-color:var(--gold); color:var(--gold); }
+
+/* Users management in admin */
+.users-tabs { display:flex; gap:8px; margin-bottom:16px; }
+.tab-btn {
+  flex:1; background:var(--bg3); border:1px solid rgba(255,255,255,0.05);
+  border-radius:10px; padding:10px; color:var(--cream-dim);
+  font-family:'Josefin Sans',sans-serif; font-size:10px;
+  letter-spacing:2px; text-transform:uppercase; cursor:pointer;
+  transition:all 0.2s;
+}
+.tab-btn.active { background:rgba(201,168,76,0.1); border-color:rgba(201,168,76,0.3); color:var(--gold); }
+.user-card {
+  background:var(--bg3); border-radius:12px;
+  border:1px solid rgba(255,255,255,0.04);
+  padding:14px 16px; margin-bottom:8px;
+  display:flex; align-items:center; gap:12px;
+}
+.user-avatar {
+  width:36px; height:36px; border-radius:50%;
+  background:rgba(201,168,76,0.1); border:1px solid rgba(201,168,76,0.2);
+  display:flex; align-items:center; justify-content:center;
+  font-size:14px; color:var(--gold); flex-shrink:0; font-weight:600;
+}
+.user-info { flex:1; min-width:0; }
+.user-name { font-size:13px; color:var(--cream); margin-bottom:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.user-email { font-size:10px; color:var(--cream-dim); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.user-status {
+  font-size:9px; letter-spacing:1px; text-transform:uppercase;
+  padding:3px 8px; border-radius:20px;
+}
+.status-pending { background:rgba(201,168,76,0.1); color:var(--gold); border:1px solid rgba(201,168,76,0.2); }
+.status-approved { background:rgba(42,92,63,0.2); color:#5fc48a; border:1px solid rgba(42,92,63,0.3); }
+.status-rejected { background:rgba(192,57,43,0.1); color:#e07070; border:1px solid rgba(192,57,43,0.2); }
+.user-actions { display:flex; gap:6px; }
+.btn-approve { background:rgba(42,92,63,0.2); border:1px solid rgba(42,92,63,0.4); color:#5fc48a; border-radius:8px; padding:6px 10px; font-size:11px; cursor:pointer; transition:all 0.2s; }
+.btn-approve:hover { background:rgba(42,92,63,0.4); }
+.btn-reject { background:rgba(192,57,43,0.1); border:1px solid rgba(192,57,43,0.3); color:#e07070; border-radius:8px; padding:6px 10px; font-size:11px; cursor:pointer; transition:all 0.2s; }
+.btn-reject:hover { background:rgba(192,57,43,0.2); }
 #courses { background:var(--bg); }
 .courses-screen-header {
   background: linear-gradient(155deg, var(--green) 0%, #1a3a28 55%, var(--bg) 100%);
@@ -676,7 +768,71 @@ body {
       <div class="splash-arabic">تعلّم الإسلام</div>
       <div class="splash-sub">Apprendre l'Islam, une leçon à la fois</div>
     </div>
-    <button class="btn-gold" onclick="goTo('home','home-nav')">Commencer ›</button>
+    <button class="btn-gold" onclick="splashStart()">Commencer ›</button>
+  </div>
+
+  <!-- ════ AUTH LOGIN ════ -->
+  <div class="screen" id="auth-login">
+    <div class="auth-logo">
+      <svg viewBox="0 0 120 120" width="80" height="80">
+        <circle cx="60" cy="60" r="45" fill="#c9a84c" opacity="0.95"/>
+        <circle cx="82" cy="48" r="38" fill="#060c05"/>
+        <polygon points="92,22 96,34 109,34 99,42 103,54 92,46 81,54 85,42 75,34 88,34" fill="#c9a84c"/>
+      </svg>
+    </div>
+    <div class="auth-title">Connexion</div>
+    <div class="auth-sub">Accédez à vos cours</div>
+    <div class="auth-form">
+      <div class="field-group">
+        <div class="field-label">Email</div>
+        <input type="email" class="field-input" id="login-email" placeholder="votre@email.com">
+      </div>
+      <div class="field-group">
+        <div class="field-label">Mot de passe</div>
+        <input type="password" class="field-input" id="login-password" placeholder="••••••••" onkeydown="if(event.key==='Enter')authLogin()">
+      </div>
+      <div class="auth-error" id="login-auth-error"></div>
+      <button class="btn-gold" style="width:100%;text-align:center;" onclick="authLogin()">Se connecter ›</button>
+    </div>
+    <div class="auth-switch">Pas encore de compte ? <span onclick="goTo('auth-register','')">S'inscrire</span></div>
+  </div>
+
+  <!-- ════ AUTH REGISTER ════ -->
+  <div class="screen" id="auth-register">
+    <div class="auth-logo">
+      <svg viewBox="0 0 120 120" width="80" height="80">
+        <circle cx="60" cy="60" r="45" fill="#c9a84c" opacity="0.95"/>
+        <circle cx="82" cy="48" r="38" fill="#060c05"/>
+        <polygon points="92,22 96,34 109,34 99,42 103,54 92,46 81,54 85,42 75,34 88,34" fill="#c9a84c"/>
+      </svg>
+    </div>
+    <div class="auth-title">Créer un compte</div>
+    <div class="auth-sub">Votre demande sera validée par l'admin</div>
+    <div class="auth-form">
+      <div class="field-group">
+        <div class="field-label">Nom complet</div>
+        <input type="text" class="field-input" id="reg-name" placeholder="Votre nom">
+      </div>
+      <div class="field-group">
+        <div class="field-label">Email</div>
+        <input type="email" class="field-input" id="reg-email" placeholder="votre@email.com">
+      </div>
+      <div class="field-group">
+        <div class="field-label">Mot de passe</div>
+        <input type="password" class="field-input" id="reg-password" placeholder="Minimum 6 caractères">
+      </div>
+      <div class="auth-error" id="reg-error"></div>
+      <button class="btn-gold" style="width:100%;text-align:center;" onclick="authRegister()">Envoyer la demande ›</button>
+    </div>
+    <div class="auth-switch">Déjà un compte ? <span onclick="goTo('auth-login','')">Se connecter</span></div>
+  </div>
+
+  <!-- ════ AUTH PENDING ════ -->
+  <div class="screen" id="auth-pending">
+    <div class="pending-icon">⏳</div>
+    <div class="pending-title">Demande en attente</div>
+    <div class="pending-text">Votre compte a été créé mais doit être validé par l'administrateur avant de pouvoir accéder aux cours.<br><br>Vous serez notifié dès que votre compte sera activé.</div>
+    <button class="btn-outline" onclick="authLogout()">← Retour à la connexion</button>
   </div>
 
   <!-- ════ HOME ════ -->
@@ -805,9 +961,35 @@ body {
             <div class="admin-stat-val" id="stat-lessons">0</div>
             <div class="admin-stat-lbl">Leçons</div>
           </div>
+          <div class="admin-stat">
+            <div class="admin-stat-val" id="stat-pending">0</div>
+            <div class="admin-stat-lbl">En attente</div>
+          </div>
         </div>
-        <button class="btn-add" onclick="openAddModal()">+ Ajouter un cours</button>
-        <div id="admin-course-list"><!-- rendered by JS --></div>
+
+        <!-- Tabs -->
+        <div class="users-tabs">
+          <button class="tab-btn active" id="tab-courses-btn" onclick="switchAdminTab('courses')">📚 Cours</button>
+          <button class="tab-btn" id="tab-users-btn" onclick="switchAdminTab('users')">👥 Utilisateurs</button>
+        </div>
+
+        <!-- Courses tab -->
+        <div id="tab-courses">
+          <button class="btn-add" onclick="openAddModal()">+ Ajouter un cours</button>
+          <div id="admin-course-list"></div>
+        </div>
+
+        <!-- Users tab -->
+        <div id="tab-users" style="display:none;">
+          <div id="users-pending-section">
+            <div class="section-label" style="margin-bottom:10px;">En attente de validation</div>
+            <div id="users-pending-list"></div>
+          </div>
+          <div id="users-approved-section" style="margin-top:20px;">
+            <div class="section-label" style="margin-bottom:10px;">Comptes validés</div>
+            <div id="users-approved-list"></div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="bottom-nav">
@@ -943,7 +1125,7 @@ async function dbDeleteCourse(id) {
 // ══════════════════════════════
 // STATE
 // ══════════════════════════════
-const ADMIN_PASSWORD = 'CoursIslam!2026'; // ← Changez ici votre mot de passe
+const ADMIN_PASSWORD = 'noor2024'; // ← Changez ici votre mot de passe
 
 let currentCourseId = null;
 let editingCourseIndex = null;
@@ -1488,6 +1670,153 @@ async function deleteCurrentCourse() {
 // ══════════════════════════════
 // HELPERS
 // ══════════════════════════════
+// AUTH — SUPABASE
+// ══════════════════════════════
+let currentUser = null;
+
+async function authLogin() {
+  const email = document.getElementById('login-email').value.trim();
+  const password = document.getElementById('login-password').value;
+  const errEl = document.getElementById('login-auth-error');
+  errEl.textContent = '';
+  if (!email || !password) { errEl.textContent = 'Veuillez remplir tous les champs'; return; }
+  try {
+    showLoading(true);
+    const res = await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=password`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_KEY },
+      body: JSON.stringify({ email, password })
+    });
+    const data = await res.json();
+    if (!res.ok) { errEl.textContent = 'Email ou mot de passe incorrect'; return; }
+    const profile = await getProfile(data.user.id, data.access_token);
+    if (!profile || profile.status === 'pending') {
+      sessionStorage.setItem('auth_token', data.access_token);
+      goTo('auth-pending', ''); return;
+    }
+    if (profile.status === 'rejected') {
+      errEl.textContent = 'Votre compte a été refusé. Contactez l\'administrateur.'; return;
+    }
+    sessionStorage.setItem('auth_token', data.access_token);
+    sessionStorage.setItem('auth_user', JSON.stringify(data.user));
+    currentUser = data.user;
+    await loadCourses(); renderHome(); renderCourses();
+    goTo('home', 'home-nav');
+  } catch(e) { errEl.textContent = 'Erreur de connexion'; }
+  finally { showLoading(false); }
+}
+
+async function authRegister() {
+  const name = document.getElementById('reg-name').value.trim();
+  const email = document.getElementById('reg-email').value.trim();
+  const password = document.getElementById('reg-password').value;
+  const errEl = document.getElementById('reg-error');
+  errEl.textContent = '';
+  if (!name || !email || !password) { errEl.textContent = 'Veuillez remplir tous les champs'; return; }
+  if (password.length < 6) { errEl.textContent = 'Le mot de passe doit faire au moins 6 caractères'; return; }
+  try {
+    showLoading(true);
+    const res = await fetch(`${SUPABASE_URL}/auth/v1/signup`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_KEY },
+      body: JSON.stringify({ email, password })
+    });
+    const data = await res.json();
+    if (!res.ok) { errEl.textContent = data.msg || 'Cet email est déjà utilisé'; return; }
+    await fetch(`${SUPABASE_URL}/rest/v1/profiles`, {
+      method: 'POST',
+      headers: { ...HEADERS, 'Prefer': 'return=minimal' },
+      body: JSON.stringify({ id: data.user.id, email, full_name: name, status: 'pending' })
+    });
+    goTo('auth-pending', '');
+    showToast('✅ Demande envoyée !');
+  } catch(e) { errEl.textContent = 'Erreur lors de l\'inscription'; }
+  finally { showLoading(false); }
+}
+
+async function getProfile(userId, token) {
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/profiles?id=eq.${userId}`, {
+      headers: { ...HEADERS, 'Authorization': 'Bearer ' + (token || SUPABASE_KEY) }
+    });
+    const data = await res.json();
+    return data[0] || null;
+  } catch(e) { return null; }
+}
+
+function authLogout() {
+  sessionStorage.removeItem('auth_token');
+  sessionStorage.removeItem('auth_user');
+  currentUser = null;
+  document.getElementById('login-email').value = '';
+  document.getElementById('login-password').value = '';
+  document.getElementById('login-auth-error').textContent = '';
+  goTo('auth-login', '');
+}
+
+// ══════════════════════════════
+// ADMIN — USERS
+// ══════════════════════════════
+function switchAdminTab(tab) {
+  document.getElementById('tab-courses').style.display = tab === 'courses' ? 'block' : 'none';
+  document.getElementById('tab-users').style.display = tab === 'users' ? 'block' : 'none';
+  document.getElementById('tab-courses-btn').classList.toggle('active', tab === 'courses');
+  document.getElementById('tab-users-btn').classList.toggle('active', tab === 'users');
+  if (tab === 'users') loadUsers();
+}
+
+async function loadUsers() {
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/profiles?order=created_at.desc`, { headers: HEADERS });
+    const users = await res.json();
+    const pending = users.filter(u => u.status === 'pending');
+    const approved = users.filter(u => u.status === 'approved');
+    document.getElementById('stat-pending').textContent = pending.length;
+    document.getElementById('users-pending-list').innerHTML = pending.length
+      ? pending.map(u => renderUserCard(u)).join('')
+      : '<div style="color:var(--cream-dim);font-size:12px;padding:10px 0;opacity:0.5">Aucune demande en attente</div>';
+    document.getElementById('users-approved-list').innerHTML = approved.length
+      ? approved.map(u => renderUserCard(u)).join('')
+      : '<div style="color:var(--cream-dim);font-size:12px;padding:10px 0;opacity:0.5">Aucun compte validé</div>';
+  } catch(e) { showToast('⚠️ Erreur chargement utilisateurs'); }
+}
+
+function renderUserCard(u) {
+  const initials = (u.full_name || u.email || '?').charAt(0).toUpperCase();
+  const statusClass = {pending:'status-pending',approved:'status-approved',rejected:'status-rejected'}[u.status]||'';
+  const statusLabel = {pending:'En attente',approved:'Validé',rejected:'Refusé'}[u.status]||u.status;
+  return `
+  <div class="user-card">
+    <div class="user-avatar">${initials}</div>
+    <div class="user-info">
+      <div class="user-name">${escapeHtml(u.full_name||'Sans nom')}</div>
+      <div class="user-email">${escapeHtml(u.email||'')}</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
+      <span class="user-status ${statusClass}">${statusLabel}</span>
+      <div class="user-actions">
+        ${u.status!=='approved'?`<button class="btn-approve" onclick="updateUserStatus('${u.id}','approved')">✓</button>`:''}
+        ${u.status!=='rejected'?`<button class="btn-reject" onclick="updateUserStatus('${u.id}','rejected')">✕</button>`:''}
+      </div>
+    </div>
+  </div>`;
+}
+
+async function updateUserStatus(userId, status) {
+  try {
+    await fetch(`${SUPABASE_URL}/rest/v1/profiles?id=eq.${userId}`, {
+      method: 'PATCH',
+      headers: { ...HEADERS, 'Prefer': 'return=minimal' },
+      body: JSON.stringify({ status })
+    });
+    showToast(status==='approved' ? '✅ Compte validé' : '❌ Compte refusé');
+    loadUsers();
+  } catch(e) { showToast('⚠️ Erreur'); }
+}
+
+// ══════════════════════════════
+// HELPERS
+// ══════════════════════════════
 function showToast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg;
@@ -1512,6 +1841,30 @@ async function init() {
   await loadCourses();
   renderHome();
   renderCourses();
+  // Check if user already logged in
+  const token = sessionStorage.getItem('auth_token');
+  const userStr = sessionStorage.getItem('auth_user');
+  if (token && userStr) {
+    try {
+      const user = JSON.parse(userStr);
+      const profile = await getProfile(user.id, token);
+      if (profile && profile.status === 'approved') {
+        currentUser = user;
+        // Stay on splash, user will click Commencer
+        return;
+      }
+    } catch(e) {}
+    sessionStorage.removeItem('auth_token');
+    sessionStorage.removeItem('auth_user');
+  }
+}
+
+function splashStart() {
+  if (currentUser) {
+    goTo('home', 'home-nav');
+  } else {
+    goTo('auth-login', '');
+  }
 }
 
 function goToAdmin() {
