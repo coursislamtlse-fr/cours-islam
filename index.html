@@ -1534,7 +1534,11 @@ function addLessonField(lesson) {
   div.innerHTML = `
     <div class="lesson-admin-top">
       <div class="lesson-admin-num">Leçon</div>
-      <button class="btn-icon del" onclick="removeLessonField(${id})">🗑</button>
+      <div style="display:flex;align-items:center;gap:4px;">
+        <button class="btn-icon" onclick="moveLessonUp(this)" title="Monter" style="font-size:13px;opacity:0.7;">▲</button>
+        <button class="btn-icon" onclick="moveLessonDown(this)" title="Descendre" style="font-size:13px;opacity:0.7;">▼</button>
+        <button class="btn-icon del" onclick="removeLessonField(${id})">🗑</button>
+      </div>
     </div>
     <div style="display:flex;flex-direction:column;gap:10px;">
       <div class="field-row">
@@ -1598,6 +1602,22 @@ function clearImage(id) {
   const preview = document.getElementById(`img-preview-${id}`);
   preview.src = '';
   preview.style.display = 'none';
+}
+
+function moveLessonUp(btn) {
+  const card = btn.closest('.lesson-admin-card');
+  const prev = card.previousElementSibling;
+  if (prev && prev.classList.contains('lesson-admin-card')) {
+    card.parentElement.insertBefore(card, prev);
+  }
+}
+
+function moveLessonDown(btn) {
+  const card = btn.closest('.lesson-admin-card');
+  const next = card.nextElementSibling;
+  if (next && next.classList.contains('lesson-admin-card')) {
+    card.parentElement.insertBefore(next, card);
+  }
 }
 
 function removeLessonField(id) {
