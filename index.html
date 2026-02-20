@@ -908,6 +908,9 @@ body {
       <div class="detail-title" id="detail-title">Titre du cours</div>
       <div class="detail-desc" id="detail-desc">Description</div>
     </div>
+    <div id="detail-img-banner" style="display:none;width:100%;max-height:190px;overflow:hidden;flex-shrink:0;">
+      <img id="detail-img" src="" style="width:100%;max-height:190px;object-fit:cover;display:block;">
+    </div>
     <div class="scroll-body">
       <div class="detail-body">
         <div class="section-label">Leçons</div>
@@ -1052,6 +1055,22 @@ body {
           <textarea class="field-textarea" id="m-desc" placeholder="Courte description du cours..."></textarea>
         </div>
 
+        <!-- Course image -->
+        <div class="field-row">
+          <div class="field-label">🖼 Image du cours</div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div id="course-img-preview-wrap" style="display:none;position:relative;border-radius:10px;overflow:hidden;">
+              <img id="course-img-preview" src="" style="width:100%;max-height:150px;object-fit:cover;">
+              <button onclick="clearCourseImage()" style="position:absolute;top:6px;right:6px;background:rgba(0,0,0,0.6);border:none;color:#fff;border-radius:50%;width:24px;height:24px;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;">✕</button>
+            </div>
+            <input type="hidden" id="m-coverImage" value="">
+            <label style="display:flex;align-items:center;justify-content:center;gap:8px;background:rgba(255,255,255,0.04);border:1px dashed rgba(201,168,76,0.3);border-radius:10px;padding:12px;cursor:pointer;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-dim);transition:all 0.2s;" onmouseover="this.style.background='rgba(201,168,76,0.08)'" onmouseout="this.style.background='rgba(255,255,255,0.04)'">
+              📁 Choisir une image
+              <input type="file" accept="image/*" style="display:none;" onchange="handleCourseImageUpload(event)">
+            </label>
+          </div>
+        </div>
+
         <!-- Lessons section -->
         <div style="margin-top:4px;">
           <div class="field-label" style="margin-bottom:10px;">Leçons</div>
@@ -1125,7 +1144,7 @@ async function dbDeleteCourse(id) {
 // ══════════════════════════════
 // STATE
 // ══════════════════════════════
-const ADMIN_PASSWORD = 'CoursIslam!2026'; // ← Changez ici votre mot de passe
+const ADMIN_PASSWORD = 'noor2024'; // ← Changez ici votre mot de passe
 
 let currentCourseId = null;
 let editingCourseIndex = null;
@@ -1255,6 +1274,15 @@ function openCourse(idx) {
   document.getElementById('detail-title').textContent = c.title;
   document.getElementById('detail-desc').textContent = c.description || '';
   renderLessons(c.lessons);
+  const detailBanner = document.getElementById('detail-img-banner');
+  const detailImg = document.getElementById('detail-img');
+  if (c.coverImage) {
+    detailImg.src = c.coverImage;
+    detailBanner.style.display = 'block';
+  } else {
+    detailImg.src = '';
+    detailBanner.style.display = 'none';
+  }
   goTo('detail', '');
 }
 
@@ -1458,6 +1486,9 @@ function openAddModal() {
   document.getElementById('btn-delete-course').style.display = 'none';
   resetEmojiPicker('📖');
   resetColorPicker('gold');
+  document.getElementById('m-coverImage').value = '';
+  document.getElementById('course-img-preview').src = '';
+  document.getElementById('course-img-preview-wrap').style.display = 'none';
   document.getElementById('modal-lessons-list').innerHTML = '';
   addLessonField(); // start with 1 empty lesson
   openModal();
@@ -1475,6 +1506,13 @@ function openEditModal(idx) {
   document.getElementById('btn-delete-course').style.display = 'block';
   resetEmojiPicker(c.emoji);
   resetColorPicker(c.color);
+  // Course image
+  const coverVal = c.coverImage || '';
+  document.getElementById('m-coverImage').value = coverVal;
+  const prevWrap = document.getElementById('course-img-preview-wrap');
+  const prevImg = document.getElementById('course-img-preview');
+  if (coverVal) { prevImg.src = coverVal; prevWrap.style.display = 'block'; }
+  else { prevImg.src = ''; prevWrap.style.display = 'none'; }
   // Render existing lessons
   const ll = document.getElementById('modal-lessons-list');
   ll.innerHTML = '';
@@ -1607,17 +1645,43 @@ function clearImage(id) {
 function moveLessonUp(btn) {
   const card = btn.closest('.lesson-admin-card');
   const prev = card.previousElementSibling;
-  if (prev && prev.classList.contains('lesson-admin-card')) {
-    card.parentElement.insertBefore(card, prev);
-  }
+  if (prev && prev.classList.contains('lesson-admin-card')) card.parentElement.insertBefore(card, prev);
 }
 
 function moveLessonDown(btn) {
   const card = btn.closest('.lesson-admin-card');
   const next = card.nextElementSibling;
-  if (next && next.classList.contains('lesson-admin-card')) {
-    card.parentElement.insertBefore(next, card);
-  }
+  if (next && next.classList.contains('lesson-admin-card')) card.parentElement.insertBefore(next, card);
+}
+
+function handleCourseImageUpload(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const img = new Image();
+    img.onload = function() {
+      const canvas = document.createElement('canvas');
+      const MAX = 1000;
+      let w = img.width, h = img.height;
+      if (w > MAX) { h = Math.round(h * MAX / w); w = MAX; }
+      canvas.width = w; canvas.height = h;
+      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+      const base64 = canvas.toDataURL('image/jpeg', 0.82);
+      document.getElementById('m-coverImage').value = base64;
+      const preview = document.getElementById('course-img-preview');
+      preview.src = base64;
+      document.getElementById('course-img-preview-wrap').style.display = 'block';
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function clearCourseImage() {
+  document.getElementById('m-coverImage').value = '';
+  document.getElementById('course-img-preview').src = '';
+  document.getElementById('course-img-preview-wrap').style.display = 'none';
 }
 
 function removeLessonField(id) {
@@ -1645,6 +1709,7 @@ async function saveCourse() {
     title,
     category: document.getElementById('m-cat').value.trim(),
     description: document.getElementById('m-desc').value.trim(),
+    coverImage: document.getElementById('m-coverImage').value.trim() || null,
     lessons
   };
 
