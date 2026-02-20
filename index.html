@@ -1063,7 +1063,7 @@ body {
               <img id="course-img-preview" src="" style="width:100%;max-height:150px;object-fit:cover;">
               <button onclick="clearCourseImage()" style="position:absolute;top:6px;right:6px;background:rgba(0,0,0,0.6);border:none;color:#fff;border-radius:50%;width:24px;height:24px;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;">✕</button>
             </div>
-            <input type="hidden" id="m-coverImage" value="">
+            <input type="hidden" id="m-cover_image" value="">
             <label style="display:flex;align-items:center;justify-content:center;gap:8px;background:rgba(255,255,255,0.04);border:1px dashed rgba(201,168,76,0.3);border-radius:10px;padding:12px;cursor:pointer;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-dim);transition:all 0.2s;" onmouseover="this.style.background='rgba(201,168,76,0.08)'" onmouseout="this.style.background='rgba(255,255,255,0.04)'">
               📁 Choisir une image
               <input type="file" accept="image/*" style="display:none;" onchange="handleCourseImageUpload(event)">
@@ -1119,7 +1119,10 @@ async function dbInsertCourse(data) {
     headers: { ...HEADERS, 'Prefer': 'return=representation' },
     body: JSON.stringify(data)
   });
-  if (!res.ok) throw new Error('Erreur insertion');
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.message || err.hint || 'Colonne manquante dans Supabase');
+  }
   return (await res.json())[0];
 }
 
@@ -1129,7 +1132,10 @@ async function dbUpdateCourse(id, data) {
     headers: { ...HEADERS, 'Prefer': 'return=representation' },
     body: JSON.stringify(data)
   });
-  if (!res.ok) throw new Error('Erreur mise à jour');
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.message || err.hint || 'Colonne manquante dans Supabase');
+  }
   return (await res.json())[0];
 }
 
@@ -1276,8 +1282,8 @@ function openCourse(idx) {
   renderLessons(c.lessons);
   const detailBanner = document.getElementById('detail-img-banner');
   const detailImg = document.getElementById('detail-img');
-  if (c.coverImage) {
-    detailImg.src = c.coverImage;
+  if (c.cover_image) {
+    detailImg.src = c.cover_image;
     detailBanner.style.display = 'block';
   } else {
     detailImg.src = '';
@@ -1486,7 +1492,7 @@ function openAddModal() {
   document.getElementById('btn-delete-course').style.display = 'none';
   resetEmojiPicker('📖');
   resetColorPicker('gold');
-  document.getElementById('m-coverImage').value = '';
+  document.getElementById('m-cover_image').value = '';
   document.getElementById('course-img-preview').src = '';
   document.getElementById('course-img-preview-wrap').style.display = 'none';
   document.getElementById('modal-lessons-list').innerHTML = '';
@@ -1507,8 +1513,8 @@ function openEditModal(idx) {
   resetEmojiPicker(c.emoji);
   resetColorPicker(c.color);
   // Course image
-  const coverVal = c.coverImage || '';
-  document.getElementById('m-coverImage').value = coverVal;
+  const coverVal = c.cover_image || '';
+  document.getElementById('m-cover_image').value = coverVal;
   const prevWrap = document.getElementById('course-img-preview-wrap');
   const prevImg = document.getElementById('course-img-preview');
   if (coverVal) { prevImg.src = coverVal; prevWrap.style.display = 'block'; }
@@ -1668,7 +1674,7 @@ function handleCourseImageUpload(event) {
       canvas.width = w; canvas.height = h;
       canvas.getContext('2d').drawImage(img, 0, 0, w, h);
       const base64 = canvas.toDataURL('image/jpeg', 0.82);
-      document.getElementById('m-coverImage').value = base64;
+      document.getElementById('m-cover_image').value = base64;
       const preview = document.getElementById('course-img-preview');
       preview.src = base64;
       document.getElementById('course-img-preview-wrap').style.display = 'block';
@@ -1679,7 +1685,7 @@ function handleCourseImageUpload(event) {
 }
 
 function clearCourseImage() {
-  document.getElementById('m-coverImage').value = '';
+  document.getElementById('m-cover_image').value = '';
   document.getElementById('course-img-preview').src = '';
   document.getElementById('course-img-preview-wrap').style.display = 'none';
 }
@@ -1709,7 +1715,7 @@ async function saveCourse() {
     title,
     category: document.getElementById('m-cat').value.trim(),
     description: document.getElementById('m-desc').value.trim(),
-    coverImage: document.getElementById('m-coverImage').value.trim() || null,
+    cover_image: document.getElementById('m-cover_image').value.trim() || null,
     lessons
   };
 
@@ -1728,7 +1734,8 @@ async function saveCourse() {
     renderAdmin();
     renderHome();
   } catch(e) {
-    showToast('⚠️ Erreur lors de l\'enregistrement');
+    console.error('Erreur saveCourse:', e);
+    showToast('⚠️ ' + (e.message || 'Erreur lors de l\'enregistrement'));
   } finally {
     showLoading(false);
   }
