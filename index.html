@@ -797,9 +797,27 @@ body {
   <div class="screen" id="auth-login">
     <div class="auth-logo">
       <svg viewBox="0 0 120 120" width="80" height="80">
-        <circle cx="60" cy="60" r="45" fill="#c9a84c" opacity="0.95"/>
-        <circle cx="82" cy="48" r="38" fill="#060c05"/>
-        <polygon points="92,22 96,34 109,34 99,42 103,54 92,46 81,54 85,42 75,34 88,34" fill="#c9a84c"/>
+        <defs>
+          <radialGradient id="lg2" cx="30%" cy="30%" r="70%">
+            <stop offset="0%" stop-color="#e8c97a"/>
+            <stop offset="60%" stop-color="#c9a84c"/>
+            <stop offset="100%" stop-color="#6a5020"/>
+          </radialGradient>
+          <filter id="lglow2">
+            <feGaussianBlur stdDeviation="3" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <mask id="lmask2">
+            <rect width="120" height="120" fill="white"/>
+            <circle cx="73" cy="47" r="31" fill="black"/>
+          </mask>
+        </defs>
+        <circle cx="55" cy="60" r="38" fill="url(#lg2)" mask="url(#lmask2)" filter="url(#lglow2)"/>
+        <circle cx="55" cy="60" r="38" fill="none" stroke="#c9a84c" stroke-width="0.5" opacity="0.3" mask="url(#lmask2)"/>
+        <g transform="translate(87,35)" filter="url(#lglow2)">
+          <polygon points="0,-13 3,-4.5 12,-4.5 5,1.5 8,10 0,5 -8,10 -5,1.5 -12,-4.5 -3,-4.5" fill="url(#lg2)"/>
+          <circle r="2" fill="#f8e8b0"/>
+        </g>
       </svg>
     </div>
     <div class="auth-title">Connexion</div>
@@ -823,9 +841,27 @@ body {
   <div class="screen" id="auth-register">
     <div class="auth-logo">
       <svg viewBox="0 0 120 120" width="80" height="80">
-        <circle cx="60" cy="60" r="45" fill="#c9a84c" opacity="0.95"/>
-        <circle cx="82" cy="48" r="38" fill="#060c05"/>
-        <polygon points="92,22 96,34 109,34 99,42 103,54 92,46 81,54 85,42 75,34 88,34" fill="#c9a84c"/>
+        <defs>
+          <radialGradient id="lg2" cx="30%" cy="30%" r="70%">
+            <stop offset="0%" stop-color="#e8c97a"/>
+            <stop offset="60%" stop-color="#c9a84c"/>
+            <stop offset="100%" stop-color="#6a5020"/>
+          </radialGradient>
+          <filter id="lglow2">
+            <feGaussianBlur stdDeviation="3" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <mask id="lmask2">
+            <rect width="120" height="120" fill="white"/>
+            <circle cx="73" cy="47" r="31" fill="black"/>
+          </mask>
+        </defs>
+        <circle cx="55" cy="60" r="38" fill="url(#lg2)" mask="url(#lmask2)" filter="url(#lglow2)"/>
+        <circle cx="55" cy="60" r="38" fill="none" stroke="#c9a84c" stroke-width="0.5" opacity="0.3" mask="url(#lmask2)"/>
+        <g transform="translate(87,35)" filter="url(#lglow2)">
+          <polygon points="0,-13 3,-4.5 12,-4.5 5,1.5 8,10 0,5 -8,10 -5,1.5 -12,-4.5 -3,-4.5" fill="url(#lg2)"/>
+          <circle r="2" fill="#f8e8b0"/>
+        </g>
       </svg>
     </div>
     <div class="auth-title">Créer un compte</div>
@@ -863,9 +899,27 @@ body {
       <div class="greeting">As-salamu alaykum</div>
       <div style="display:flex; align-items:center; gap:16px; margin-bottom:4px;">
         <svg viewBox="0 0 120 120" width="54" height="54" style="flex-shrink:0; filter:drop-shadow(0 0 10px rgba(201,168,76,0.35));">
-          <circle cx="60" cy="60" r="45" fill="#c9a84c" opacity="0.95"/>
-          <circle cx="82" cy="48" r="38" fill="#1a3a28"/>
-          <polygon points="92,22 96,34 109,34 99,42 103,54 92,46 81,54 85,42 75,34 88,34" fill="#c9a84c" opacity="0.95"/>
+          <defs>
+            <radialGradient id="lgh" cx="30%" cy="30%" r="70%">
+              <stop offset="0%" stop-color="#e8c97a"/>
+              <stop offset="60%" stop-color="#c9a84c"/>
+              <stop offset="100%" stop-color="#6a5020"/>
+            </radialGradient>
+            <filter id="lglowhome">
+              <feGaussianBlur stdDeviation="2" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <mask id="lmaskhome">
+              <rect width="120" height="120" fill="white"/>
+              <circle cx="73" cy="47" r="31" fill="black"/>
+            </mask>
+          </defs>
+          <circle cx="55" cy="60" r="38" fill="url(#lgh)" mask="url(#lmaskhome)" filter="url(#lglowhome)"/>
+          <circle cx="55" cy="60" r="38" fill="none" stroke="#c9a84c" stroke-width="0.5" opacity="0.3" mask="url(#lmaskhome)"/>
+          <g transform="translate(87,35)" filter="url(#lglowhome)">
+            <polygon points="0,-13 3,-4.5 12,-4.5 5,1.5 8,10 0,5 -8,10 -5,1.5 -12,-4.5 -3,-4.5" fill="url(#lgh)"/>
+            <circle r="2" fill="#f8e8b0"/>
+          </g>
         </svg>
         <div style="font-family:'Amiri',serif; font-size:28px; color:var(--cream); line-height:1.2;">Cours Islam</div>
       </div>
@@ -890,7 +944,7 @@ body {
       <button class="nav-item" onclick="goTo('courses',''); renderCourses()">
         <span class="nav-icon">📚</span><span class="nav-label">Cours</span>
       </button>
-      <button class="nav-item" onclick="goToAdmin()">
+      <button class="nav-item nav-admin-btn" onclick="goToAdmin()">
         <span class="nav-icon">⚙️</span><span class="nav-label">Admin</span>
       </button>
     </div>
@@ -915,7 +969,7 @@ body {
       <button class="nav-item active">
         <span class="nav-icon">📚</span><span class="nav-label">Cours</span>
       </button>
-      <button class="nav-item" onclick="goToAdmin()">
+      <button class="nav-item nav-admin-btn" onclick="goToAdmin()">
         <span class="nav-icon">⚙️</span><span class="nav-label">Admin</span>
       </button>
     </div>
@@ -946,24 +1000,10 @@ body {
       <button class="nav-item active">
         <span class="nav-icon">📚</span><span class="nav-label">Cours</span>
       </button>
-      <button class="nav-item" onclick="goToAdmin()">
+      <button class="nav-item nav-admin-btn" onclick="goToAdmin()">
         <span class="nav-icon">⚙️</span><span class="nav-label">Admin</span>
       </button>
     </div>
-  </div>
-
-  <!-- ════ ADMIN LOGIN ════ -->
-  <div class="screen" id="admin-login">
-    <div class="admin-lock">🔐</div>
-    <div class="admin-login-title">Espace Administrateur</div>
-    <div class="admin-login-sub">Accès réservé</div>
-    <div class="field-group">
-      <div class="field-label">Mot de passe</div>
-      <input type="password" class="field-input" id="admin-pwd" placeholder="••••••••" onkeydown="if(event.key==='Enter')checkLogin()">
-    </div>
-    <div class="error-msg" id="login-error"></div>
-    <button class="btn-gold" onclick="checkLogin()">Connexion ›</button>
-    <button onclick="goTo('home','home-nav')" style="background:none;border:none;color:var(--cream-dim);font-size:11px;letter-spacing:2px;cursor:pointer;text-transform:uppercase;font-family:'Josefin Sans',sans-serif;margin-top:-8px;">← Retour</button>
   </div>
 
   <!-- ════ ADMIN DASHBOARD ════ -->
@@ -1172,8 +1212,6 @@ async function dbDeleteCourse(id) {
 // ══════════════════════════════
 // STATE
 // ══════════════════════════════
-const ADMIN_PASSWORD = 'CoursIslam!2026'; // ← Changez ici votre mot de passe
-
 let currentCourseId = null;
 let editingCourseIndex = null;
 let selectedEmoji = '📖';
@@ -1451,25 +1489,7 @@ function formatTime(s) {
 // ══════════════════════════════
 // ADMIN LOGIN
 // ══════════════════════════════
-function checkLogin() {
-  const pwd = document.getElementById('admin-pwd').value;
-  if (pwd === ADMIN_PASSWORD) {
-    document.getElementById('admin-pwd').value = '';
-    document.getElementById('login-error').textContent = '';
-    sessionStorage.setItem('admin_logged', '1');
-    goTo('admin', '');
-    renderAdmin();
-    loadCourses().then(() => renderAdmin());
-  } else {
-    document.getElementById('login-error').textContent = 'Mot de passe incorrect';
-    document.getElementById('admin-pwd').value = '';
-  }
-}
-
-function logout() {
-  sessionStorage.removeItem('admin_logged');
-  goTo('home', 'home-nav');
-}
+// checkLogin et logout admin supprimés — accès via is_admin Supabase
 
 // ══════════════════════════════
 // ADMIN DASHBOARD
@@ -1813,8 +1833,14 @@ async function authLogin() {
     }
     sessionStorage.setItem('auth_token', data.access_token);
     sessionStorage.setItem('auth_user', JSON.stringify(data.user));
+    sessionStorage.setItem('is_admin', profile.is_admin ? '1' : '0');
     currentUser = data.user;
+    currentUser.is_admin = profile.is_admin;
     await loadCourses(); renderHome(); renderCourses();
+    // Masquer le bouton Admin si pas admin
+    document.querySelectorAll('.nav-admin-btn').forEach(el => {
+      el.style.display = profile.is_admin ? 'flex' : 'none';
+    });
     goTo('home', 'home-nav');
   } catch(e) { errEl.textContent = 'Erreur de connexion'; }
   finally { showLoading(false); }
@@ -1861,6 +1887,7 @@ async function getProfile(userId, token) {
 function authLogout() {
   sessionStorage.removeItem('auth_token');
   sessionStorage.removeItem('auth_user');
+  sessionStorage.removeItem('is_admin');
   currentUser = null;
   document.getElementById('login-email').value = '';
   document.getElementById('login-password').value = '';
@@ -1980,6 +2007,8 @@ async function init() {
       const profile = await getProfile(user.id, token);
       if (profile && profile.status === 'approved') {
         currentUser = user;
+        currentUser.is_admin = profile.is_admin;
+        sessionStorage.setItem('is_admin', profile.is_admin ? '1' : '0');
         // Stay on splash, user will click Commencer
         return;
       }
@@ -1998,12 +2027,12 @@ function splashStart() {
 }
 
 function goToAdmin() {
-  if (sessionStorage.getItem('admin_logged') === '1') {
+  if (sessionStorage.getItem('is_admin') === '1') {
     renderAdmin();
     loadCourses().then(() => renderAdmin());
     goTo('admin', '');
   } else {
-    goTo('admin-login', '');
+    showToast('⛔ Accès réservé aux administrateurs');
   }
 }
 
