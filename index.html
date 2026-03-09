@@ -690,6 +690,47 @@ body {
 
 ::-webkit-scrollbar { width:3px; }
 ::-webkit-scrollbar-thumb { background:rgba(201,168,76,0.15); border-radius:10px; }
+
+/* ── ACTIVITY TAB ── */
+.activity-course-block {
+  background:var(--bg3); border-radius:14px;
+  border:1px solid rgba(255,255,255,0.04);
+  margin-bottom:12px; overflow:hidden;
+}
+.activity-course-header {
+  display:flex; align-items:center; gap:10px;
+  padding:14px 16px; cursor:pointer;
+  transition:background 0.2s;
+}
+.activity-course-header:hover { background:rgba(255,255,255,0.02); }
+.activity-course-name { flex:1; font-family:'Amiri',serif; font-size:15px; color:var(--cream); }
+.activity-count-badge {
+  background:rgba(201,168,76,0.12); color:var(--gold);
+  border:1px solid rgba(201,168,76,0.25);
+  border-radius:20px; font-size:10px; letter-spacing:1px;
+  padding:3px 10px; flex-shrink:0;
+}
+.activity-users-list {
+  max-height:0; overflow:hidden; transition:max-height 0.35s ease;
+  border-top:0px solid rgba(255,255,255,0.05);
+}
+.activity-users-list.open { max-height:600px; border-top-width:1px; }
+.activity-user-row {
+  display:flex; align-items:center; gap:10px;
+  padding:10px 16px; border-bottom:1px solid rgba(255,255,255,0.03);
+}
+.activity-user-row:last-child { border-bottom:none; }
+.activity-user-avatar {
+  width:28px; height:28px; border-radius:50%;
+  background:rgba(201,168,76,0.1); border:1px solid rgba(201,168,76,0.2);
+  display:flex; align-items:center; justify-content:center;
+  font-size:11px; color:var(--gold); font-weight:600; flex-shrink:0;
+}
+.activity-user-name { flex:1; font-size:12px; color:var(--cream); }
+.activity-user-date { font-size:10px; color:var(--cream-dim); opacity:0.6; }
+.activity-empty { text-align:center; padding:30px 20px; color:var(--cream-dim); font-size:12px; opacity:0.5; }
+.activity-toggle-icon { font-size:13px; color:var(--gold-dim); transition:transform 0.3s; }
+.activity-toggle-icon.open { transform:rotate(90deg); }
 </style>
 </head>
 <body>
@@ -1040,9 +1081,10 @@ body {
         </div>
 
         <!-- Tabs -->
-        <div class="users-tabs">
-          <button class="tab-btn active" id="tab-courses-btn" onclick="switchAdminTab('courses')">📚 Cours</button>
-          <button class="tab-btn" id="tab-users-btn" onclick="switchAdminTab('users')">👥 Utilisateurs</button>
+        <div class="users-tabs" style="gap:6px;">
+          <button class="tab-btn active" id="tab-courses-btn" onclick="switchAdminTab('courses')" style="font-size:9px;">📚 Cours</button>
+          <button class="tab-btn" id="tab-users-btn" onclick="switchAdminTab('users')" style="font-size:9px;">👥 Membres</button>
+          <button class="tab-btn" id="tab-activity-btn" onclick="switchAdminTab('activity')" style="font-size:9px;">📊 Activité</button>
         </div>
 
         <!-- Courses tab -->
@@ -1060,6 +1102,14 @@ body {
           <div id="users-approved-section" style="margin-top:20px;">
             <div class="section-label" style="margin-bottom:10px;">Comptes validés</div>
             <div id="users-approved-list"></div>
+          </div>
+        </div>
+
+        <!-- Activity tab -->
+        <div id="tab-activity" style="display:none;">
+          <div class="section-label" style="margin-bottom:12px;">Cours consultés par utilisateur</div>
+          <div id="activity-list">
+            <div class="activity-empty">⏳ Chargement...</div>
           </div>
         </div>
       </div>
@@ -1282,6 +1332,33 @@ async function dbDeleteCourse(id) {
   if (!res.ok) throw new Error('Erreur suppression');
 }
 
+async function dbLogCourseView(courseId, courseTitle) {
+  if (!currentUser) return;
+  try {
+    const token = sessionStorage.getItem('auth_token');
+    await fetch(`${SUPABASE_URL}/rest/v1/course_views`, {
+      method: 'POST',
+      headers: { ...HEADERS, 'Authorization': 'Bearer ' + (token || SUPABASE_KEY), 'Prefer': 'return=minimal' },
+      body: JSON.stringify({
+        user_id: currentUser.id,
+        course_id: courseId,
+        course_title: courseTitle,
+        viewed_at: new Date().toISOString()
+      })
+    });
+  } catch(e) { /* silencieux */ }
+}
+
+async function dbGetCourseViews() {
+  const token = sessionStorage.getItem('auth_token');
+  const res = await fetch(
+    `${SUPABASE_URL}/rest/v1/course_views?select=*,profiles(full_name,email)&order=viewed_at.desc`,
+    { headers: { ...HEADERS, 'Authorization': 'Bearer ' + (token || SUPABASE_KEY) } }
+  );
+  if (!res.ok) throw new Error('Erreur activité');
+  return await res.json();
+}
+
 // ══════════════════════════════
 // STATE
 // ══════════════════════════════
@@ -1482,6 +1559,8 @@ function openCourse(idx) {
     detailImg.src = '';
     detailBanner.style.display = 'none';
   }
+  // Enregistrer la consultation
+  dbLogCourseView(c.id, c.title);
   goTo('detail', '');
 }
 
@@ -2034,12 +2113,73 @@ function authLogout() {
 function switchAdminTab(tab) {
   document.getElementById('tab-courses').style.display = tab === 'courses' ? 'block' : 'none';
   document.getElementById('tab-users').style.display = tab === 'users' ? 'block' : 'none';
+  document.getElementById('tab-activity').style.display = tab === 'activity' ? 'block' : 'none';
   document.getElementById('tab-courses-btn').classList.toggle('active', tab === 'courses');
   document.getElementById('tab-users-btn').classList.toggle('active', tab === 'users');
+  document.getElementById('tab-activity-btn').classList.toggle('active', tab === 'activity');
   if (tab === 'users') loadUsers();
+  if (tab === 'activity') loadActivity();
 }
 
-async function loadUsers() {
+async function loadActivity() {
+  const container = document.getElementById('activity-list');
+  container.innerHTML = '<div class="activity-empty">⏳ Chargement...</div>';
+  try {
+    const views = await dbGetCourseViews();
+    if (!views.length) {
+      container.innerHTML = '<div class="activity-empty">Aucune consultation enregistrée pour l\'instant.</div>';
+      return;
+    }
+    // Group by course_title
+    const byCourse = {};
+    views.forEach(v => {
+      const title = v.course_title || 'Cours inconnu';
+      if (!byCourse[title]) byCourse[title] = [];
+      byCourse[title].push(v);
+    });
+    container.innerHTML = Object.entries(byCourse).map(([title, entries], blockIdx) => {
+      // Deduplicate users (keep latest per user)
+      const byUser = {};
+      entries.forEach(e => {
+        const uid = e.user_id;
+        if (!byUser[uid] || e.viewed_at > byUser[uid].viewed_at) byUser[uid] = e;
+      });
+      const uniqueUsers = Object.values(byUser);
+      const usersHtml = uniqueUsers.map(e => {
+        const profile = e.profiles || {};
+        const name = profile.full_name || profile.email || 'Utilisateur';
+        const initials = name.charAt(0).toUpperCase();
+        const date = new Date(e.viewed_at).toLocaleDateString('fr-FR', { day:'numeric', month:'short', year:'numeric' });
+        return `
+        <div class="activity-user-row">
+          <div class="activity-user-avatar">${initials}</div>
+          <div class="activity-user-name">${escapeHtml(name)}</div>
+          <div class="activity-user-date">${date}</div>
+        </div>`;
+      }).join('');
+      return `
+      <div class="activity-course-block">
+        <div class="activity-course-header" onclick="toggleActivityBlock(${blockIdx})">
+          <div class="activity-toggle-icon" id="act-toggle-${blockIdx}">›</div>
+          <div class="activity-course-name">${escapeHtml(title)}</div>
+          <div class="activity-count-badge">${uniqueUsers.length} membre${uniqueUsers.length > 1 ? 's' : ''}</div>
+        </div>
+        <div class="activity-users-list" id="act-list-${blockIdx}">
+          ${usersHtml}
+        </div>
+      </div>`;
+    }).join('');
+  } catch(e) {
+    container.innerHTML = `<div class="activity-empty">⚠️ Erreur de chargement.<br><small style="opacity:0.6">Vérifiez que la table <code>course_views</code> existe dans Supabase.</small></div>`;
+  }
+}
+
+function toggleActivityBlock(idx) {
+  const list = document.getElementById(`act-list-${idx}`);
+  const icon = document.getElementById(`act-toggle-${idx}`);
+  const isOpen = list.classList.toggle('open');
+  icon.classList.toggle('open', isOpen);
+}
   try {
     const res = await fetch(`${SUPABASE_URL}/rest/v1/profiles?order=created_at.desc`, { headers: HEADERS });
     const users = await res.json();
