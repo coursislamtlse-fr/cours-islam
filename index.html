@@ -1351,12 +1351,28 @@ async function dbLogCourseView(courseId, courseTitle) {
 
 async function dbGetCourseViews() {
   const token = sessionStorage.getItem('auth_token');
-  const res = await fetch(
-    `${SUPABASE_URL}/rest/v1/course_views?select=*,profiles(full_name,email)&order=viewed_at.desc`,
-    { headers: { ...HEADERS, 'Authorization': 'Bearer ' + (token || SUPABASE_KEY) } }
+  const authHeaders = { ...HEADERS, 'Authorization': 'Bearer ' + (token || SUPABASE_KEY) };
+
+  // Fetch views
+  const resViews = await fetch(
+    `${SUPABASE_URL}/rest/v1/course_views?select=*&order=viewed_at.desc`,
+    { headers: authHeaders }
   );
-  if (!res.ok) throw new Error('Erreur activité');
-  return await res.json();
+  if (!resViews.ok) throw new Error('Erreur activité');
+  const views = await resViews.json();
+  if (!views.length) return [];
+
+  // Fetch profiles separately and build a lookup map
+  const resProfiles = await fetch(
+    `${SUPABASE_URL}/rest/v1/profiles?select=id,full_name,email`,
+    { headers: authHeaders }
+  );
+  const profiles = resProfiles.ok ? await resProfiles.json() : [];
+  const profileMap = {};
+  profiles.forEach(p => { profileMap[p.id] = p; });
+
+  // Attach profile data to each view row
+  return views.map(v => ({ ...v, profiles: profileMap[v.user_id] || null }));
 }
 
 // ══════════════════════════════
