@@ -7,15 +7,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Josefin+Sans:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #0d0f0e;
-  --bg2: #141714;
-  --bg3: #1b1f1b;
-  --bg4: #222622;
-  --gold: #c9a84c;
-  --gold-light: #e8c97a;
-  --gold-dim: #7a6130;
-  --cream: #f0e8d4;
-  --cream-dim: #b8ad98;
+  --bg: #f5f2eb;
+  --bg2: #ede9df;
+  --bg3: #e5e0d4;
+  --bg4: #dbd5c7;
+  --gold: #9a6e28;
+  --gold-light: #b8882e;
+  --gold-dim: #c4a05a;
+  --cream: #2c2416;
+  --cream-dim: #6b5e44;
   --green: #2a5c3f;
   --green-light: #3a7a55;
   --red: #c0392b;
@@ -24,7 +24,7 @@
 * { margin:0; padding:0; box-sizing:border-box; }
 body {
   font-family: 'Josefin Sans', sans-serif;
-  background: #0a0a0a;
+  background: #ddd8cc;
   color: var(--cream);
   min-height: 100vh;
   display: flex;
@@ -38,13 +38,13 @@ body {
   height: 844px;
   background: var(--bg);
   border-radius: 48px;
-  box-shadow: 0 0 0 10px #1a1a1a, 0 0 0 12px #2a2a2a, 0 40px 80px rgba(0,0,0,0.9);
+  box-shadow: 0 0 0 10px #ccc7bb, 0 0 0 12px #b8b3a8, 0 40px 80px rgba(0,0,0,0.25);
   overflow: hidden;
   position: relative;
 }
 .notch {
   width: 126px; height: 34px;
-  background: #080808;
+  background: #c8c3b8;
   border-radius: 0 0 20px 20px;
   position: absolute;
   top:0; left:50%; transform:translateX(-50%);
@@ -75,7 +75,7 @@ body {
 
 /* ── GEO PATTERN ── */
 .geo-bg {
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23c9a84c' fill-opacity='0.07'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%239a6e28' fill-opacity='0.07'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
 
 /* ══════════════════════════════
@@ -85,11 +85,11 @@ body {
   align-items: center;
   justify-content: center;
   gap: 20px;
-  background: radial-gradient(ellipse at 50% 35%, #1a3a28 0%, #0a1208 60%, #060c05 100%);
+  background: radial-gradient(ellipse at 50% 35%, #c8e8d4 0%, #e8f2ec 60%, #f0ede4 100%);
   overflow: hidden;
 }
 .splash-bg-rings { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; }
-.ring { position:absolute; border-radius:50%; border:1px solid rgba(201,168,76,0.08); animation:expandRing 3s ease-out infinite; }
+.ring { position:absolute; border-radius:50%; border:1px solid rgba(154,110,40,0.18); animation:expandRing 3s ease-out infinite; }
 .ring1 { width:200px; height:200px; animation-delay:0s; }
 .ring2 { width:320px; height:320px; animation-delay:0.8s; }
 .ring3 { width:450px; height:450px; animation-delay:1.6s; }
@@ -98,7 +98,7 @@ body {
 .splash-mandala {
   position:relative; z-index:1;
   animation: fadeUp 1.2s ease 0.2s both;
-  filter: drop-shadow(0 0 50px rgba(201,168,76,0.3));
+  filter: drop-shadow(0 0 50px rgba(154,110,40,0.2));
 }
 .geo-rotate-slow { animation:geoRotate 30s linear infinite; transform-origin:0 0; }
 .geo-rotate-reverse { animation:geoRotate 20s linear infinite reverse; transform-origin:0 0; }
@@ -133,21 +133,21 @@ body {
 #home { background:var(--bg); }
 
 .home-header {
-  background: linear-gradient(155deg, var(--green) 0%, #1a3a28 55%, var(--bg) 100%);
+  background: linear-gradient(155deg, #a8d4bc 0%, #c8e4d4 55%, var(--bg) 100%);
   padding: 58px 26px 26px;
   position: relative;
   overflow: hidden;
   flex-shrink: 0;
 }
-.home-header::after { content:''; position:absolute; inset:0; } /* geo overlay via class */
+.home-header::after { content:''; position:absolute; inset:0; pointer-events:none; } /* geo overlay via class */
 
 .greeting { font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--gold-dim); margin-bottom:3px; position:relative; }
 .app-name { font-family:'Amiri',serif; font-size:30px; color:var(--cream); position:relative; }
 
 .ayah-banner {
   margin-top:18px;
-  background: rgba(201,168,76,0.08);
-  border: 1px solid rgba(201,168,76,0.18);
+  background: rgba(154,110,40,0.06);
+  border: 1px solid rgba(154,110,40,0.2);
   border-radius:14px;
   padding:14px 16px;
   position:relative;
@@ -172,12 +172,12 @@ body {
 .course-card-home {
   background: var(--bg3);
   border-radius:18px;
-  border: 1px solid rgba(255,255,255,0.04);
+  border: 1px solid rgba(0,0,0,0.06);
   overflow:hidden;
   cursor:pointer;
   transition: all 0.25s;
 }
-.course-card-home:hover { border-color:rgba(201,168,76,0.2); transform:translateY(-2px); }
+.course-card-home:hover { border-color:rgba(154,110,40,0.2); transform:translateY(-2px); }
 .course-card-home .card-accent { height:3px; }
 .card-accent.gold { background: linear-gradient(90deg,var(--gold-dim),var(--gold-light)); }
 .card-accent.green { background: linear-gradient(90deg,var(--green),var(--green-light)); }
@@ -198,19 +198,19 @@ body {
 #detail { background:var(--bg); }
 
 .detail-header {
-  background: linear-gradient(155deg, var(--green) 0%, #1a3a28 55%, var(--bg) 100%);
+  background: linear-gradient(155deg, #a8d4bc 0%, #c8e4d4 55%, var(--bg) 100%);
   padding: 58px 24px 26px;
   position:relative; overflow:hidden; flex-shrink:0;
 }
 .back-btn {
-  background:rgba(255,255,255,0.08); border:none; color:var(--cream);
+  background:rgba(0,0,0,0.08); border:none; color:var(--cream);
   width:36px; height:36px; border-radius:50%;
   font-size:17px; cursor:pointer;
   display:flex; align-items:center; justify-content:center;
   margin-bottom:18px; position:relative;
   transition:background 0.2s;
 }
-.back-btn:hover { background:rgba(255,255,255,0.15); }
+.back-btn:hover { background:rgba(0,0,0,0.1); }
 .detail-emoji { font-size:36px; margin-bottom:8px; display:flex; align-items:center; }
 .detail-cat { font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--gold-dim); margin-bottom:5px; }
 .detail-title { font-family:'Amiri',serif; font-size:28px; color:var(--cream); margin-bottom:10px; line-height:1.2; }
@@ -222,21 +222,21 @@ body {
 .lesson-item {
   background:var(--bg3);
   border-radius:14px;
-  border: 1px solid rgba(255,255,255,0.04);
+  border: 1px solid rgba(0,0,0,0.06);
   margin-bottom:10px;
   overflow:hidden;
   cursor:pointer;
   transition: all 0.25s;
 }
-.lesson-item:hover { border-color:rgba(201,168,76,0.2); }
+.lesson-item:hover { border-color:rgba(154,110,40,0.2); }
 .lesson-header {
   display:flex; align-items:center; gap:12px;
   padding:14px 16px;
 }
 .lesson-num-badge {
   width:32px; height:32px; border-radius:50%;
-  background:rgba(201,168,76,0.1);
-  border:1px solid rgba(201,168,76,0.2);
+  background:rgba(154,110,40,0.1);
+  border:1px solid rgba(154,110,40,0.2);
   display:flex; align-items:center; justify-content:center;
   font-size:12px; color:var(--gold); font-weight:600; flex-shrink:0;
 }
@@ -247,8 +247,8 @@ body {
   font-size:9px; letter-spacing:1px; text-transform:uppercase;
   padding:2px 8px; border-radius:20px;
 }
-.badge-audio { background:rgba(201,168,76,0.1); color:var(--gold); border:1px solid rgba(201,168,76,0.2); }
-.badge-text { background:rgba(42,92,63,0.2); color:#5fc48a; border:1px solid rgba(42,92,63,0.3); }
+.badge-audio { background:rgba(154,110,40,0.1); color:var(--gold); border:1px solid rgba(154,110,40,0.2); }
+.badge-text { background:rgba(42,92,63,0.12); color:#2a6640; border:1px solid rgba(42,92,63,0.25); }
 .lesson-toggle { color:var(--gold-dim); font-size:14px; transition:transform 0.3s; flex-shrink:0; }
 .lesson-toggle.open { transform:rotate(90deg); }
 
@@ -256,7 +256,7 @@ body {
 .lesson-content {
   max-height:0; overflow:hidden;
   transition: max-height 0.4s ease;
-  border-top: 0px solid rgba(255,255,255,0.05);
+  border-top: 0px solid rgba(0,0,0,0.07);
 }
 .lesson-content.open {
   max-height:600px;
@@ -274,8 +274,8 @@ body {
 /* Audio player */
 .audio-player {
   margin-top:14px;
-  background:rgba(201,168,76,0.06);
-  border:1px solid rgba(201,168,76,0.15);
+  background:rgba(154,110,40,0.06);
+  border:1px solid rgba(154,110,40,0.15);
   border-radius:12px;
   padding:14px;
 }
@@ -293,7 +293,7 @@ body {
 .audio-progress-wrap { flex:1; }
 .audio-seek {
   width:100%; height:4px;
-  background:rgba(255,255,255,0.08);
+  background:rgba(0,0,0,0.08);
   border-radius:10px; overflow:hidden;
   cursor:pointer; margin-bottom:6px;
 }
@@ -304,15 +304,15 @@ body {
 .lesson-image-wrap {
   width:100%; border-radius:12px; overflow:hidden;
   margin-bottom:14px;
-  border:1px solid rgba(201,168,76,0.12);
+  border:1px solid rgba(154,110,40,0.12);
 }
 .lesson-image-wrap img {
   width:100%; display:block;
   max-height:400px; object-fit:contain;
-  background:#0a0a0a;
+  background:#f5f2eb;
 }
 .lesson-image-caption {
-  background:rgba(201,168,76,0.06);
+  background:rgba(154,110,40,0.06);
   padding:8px 12px;
   font-size:10px; color:var(--cream-dim); letter-spacing:0.5px;
   text-align:center; font-style:italic;
@@ -324,9 +324,9 @@ body {
 .bottom-nav {
   position:absolute; bottom:0; left:0; right:0;
   height:86px;
-  background:rgba(13,15,14,0.97);
+  background:rgba(240,236,228,0.97);
   backdrop-filter:blur(20px);
-  border-top:1px solid rgba(255,255,255,0.05);
+  border-top:1px solid rgba(0,0,0,0.07);
   display:flex; align-items:center; justify-content:space-around;
   padding:0 8px 20px;
   z-index:100;
@@ -339,7 +339,7 @@ body {
 .nav-icon { font-size:20px; filter:grayscale(1) opacity(0.35); transition:all 0.2s; }
 .nav-label { font-size:9px; letter-spacing:1.5px; text-transform:uppercase; color:var(--cream-dim); opacity:0.35; transition:all 0.2s; }
 .nav-item.active .nav-icon { filter:none; }
-.nav-item.active .nav-label { color:var(--gold); opacity:1; }
+.nav-item.active .nav-label { color:var(--gold); opacity:1; font-weight:600; }
 
 /* ══════════════════════════════
    ADMIN — LOGIN
@@ -356,13 +356,13 @@ body {
 .field-group { width:100%; display:flex; flex-direction:column; gap:8px; }
 .field-label { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--gold-dim); }
 .field-input {
-  background:var(--bg3); border:1px solid rgba(255,255,255,0.08);
+  background:var(--bg2); border:1px solid rgba(0,0,0,0.1);
   border-radius:12px; padding:14px 16px;
   font-family:'Josefin Sans',sans-serif; font-size:14px;
   color:var(--cream); outline:none; width:100%;
   transition:border-color 0.2s;
 }
-.field-input:focus { border-color:rgba(201,168,76,0.4); }
+.field-input:focus { border-color:rgba(154,110,40,0.4); }
 .field-input::placeholder { color:rgba(176,165,145,0.35); }
 
 .error-msg { font-size:11px; color:#e07070; text-align:center; min-height:16px; letter-spacing:0.5px; }
@@ -373,20 +373,20 @@ body {
 #admin { background:var(--bg); }
 
 .admin-header {
-  background:linear-gradient(155deg,#3a1a0a 0%,#1a0a04 60%,var(--bg) 100%);
+  background:linear-gradient(155deg,#f0d8c0 0%,#f5e8d8 60%,var(--bg) 100%);
   padding:56px 24px 20px; flex-shrink:0;
   display:flex; align-items:center; justify-content:space-between;
 }
 .admin-header-left {}
-.admin-tag { font-size:9px; letter-spacing:3px; text-transform:uppercase; color:#c97a3a; margin-bottom:3px; }
+.admin-tag { font-size:9px; letter-spacing:3px; text-transform:uppercase; color:#9a5820; margin-bottom:3px; }
 .admin-title { font-family:'Amiri',serif; font-size:26px; color:var(--cream); }
 .logout-btn {
-  background:rgba(255,255,255,0.06); border:none;
+  background:rgba(0,0,0,0.07); border:none;
   color:var(--cream-dim); font-size:10px; letter-spacing:2px; text-transform:uppercase;
   padding:8px 14px; border-radius:20px; cursor:pointer; transition:all 0.2s;
   font-family:'Josefin Sans',sans-serif;
 }
-.logout-btn:hover { background:rgba(255,255,255,0.1); }
+.logout-btn:hover { background:rgba(0,0,0,0.08); }
 
 .admin-body { padding:20px 20px 100px; }
 
@@ -394,26 +394,26 @@ body {
 .admin-stats { display:flex; gap:10px; margin-bottom:20px; }
 .admin-stat {
   flex:1; background:var(--bg3); border-radius:14px; padding:14px 12px; text-align:center;
-  border:1px solid rgba(255,255,255,0.04);
+  border:1px solid rgba(0,0,0,0.06);
 }
 .admin-stat-val { font-family:'Amiri',serif; font-size:26px; color:var(--gold); }
 .admin-stat-lbl { font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--cream-dim); margin-top:2px; }
 
 /* Add course button */
 .btn-add {
-  width:100%; background:rgba(201,168,76,0.1);
-  border:1px dashed rgba(201,168,76,0.3);
+  width:100%; background:rgba(154,110,40,0.1);
+  border:1px dashed rgba(154,110,40,0.3);
   border-radius:14px; padding:16px;
   color:var(--gold); font-family:'Josefin Sans',sans-serif;
   font-size:12px; letter-spacing:2px; text-transform:uppercase;
   cursor:pointer; transition:all 0.2s; margin-bottom:16px;
 }
-.btn-add:hover { background:rgba(201,168,76,0.15); border-color:rgba(201,168,76,0.5); }
+.btn-add:hover { background:rgba(154,110,40,0.15); border-color:rgba(154,110,40,0.5); }
 
 /* Admin course cards */
 .admin-course-card {
   background:var(--bg3); border-radius:14px;
-  border:1px solid rgba(255,255,255,0.04);
+  border:1px solid rgba(0,0,0,0.06);
   margin-bottom:10px; overflow:hidden;
 }
 .admin-course-header {
@@ -429,13 +429,13 @@ body {
   background:none; border:none; font-size:16px; cursor:pointer; padding:6px;
   border-radius:8px; transition:background 0.2s;
 }
-.btn-icon:hover { background:rgba(255,255,255,0.06); }
+.btn-icon:hover { background:rgba(0,0,0,0.07); }
 .btn-icon.del:hover { background:rgba(192,57,43,0.15); }
 
 /* Expand admin course */
 .admin-course-body {
   max-height:0; overflow:hidden; transition:max-height 0.4s ease;
-  border-top:0px solid rgba(255,255,255,0.05);
+  border-top:0px solid rgba(0,0,0,0.07);
 }
 .admin-course-body.open { max-height:1200px; border-top-width:1px; }
 .admin-course-body-inner { padding:16px; display:flex; flex-direction:column; gap:12px; }
@@ -443,20 +443,20 @@ body {
 .field-row { display:flex; flex-direction:column; gap:6px; }
 .field-row .field-label { font-size:9px; }
 .field-textarea {
-  background:var(--bg2); border:1px solid rgba(255,255,255,0.08);
+  background:var(--bg2); border:1px solid rgba(0,0,0,0.08);
   border-radius:10px; padding:12px 14px;
   font-family:'Josefin Sans',sans-serif; font-size:12px;
   color:var(--cream); outline:none; width:100%;
   min-height:80px; resize:vertical; line-height:1.7;
   transition:border-color 0.2s;
 }
-.field-textarea:focus { border-color:rgba(201,168,76,0.4); }
+.field-textarea:focus { border-color:rgba(154,110,40,0.4); }
 
 /* Lessons admin list */
 .lessons-admin-list { display:flex; flex-direction:column; gap:8px; }
 .lesson-admin-card {
   background:var(--bg2); border-radius:10px;
-  border:1px solid rgba(255,255,255,0.05);
+  border:1px solid rgba(0,0,0,0.07);
   padding:12px 14px;
 }
 .lesson-admin-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
@@ -465,7 +465,7 @@ body {
 .btn-add-lesson {
   background:rgba(42,92,63,0.15); border:1px dashed rgba(42,92,63,0.4);
   border-radius:10px; padding:12px;
-  color:#5fc48a; font-family:'Josefin Sans',sans-serif;
+  color:#2a6640; font-family:'Josefin Sans',sans-serif;
   font-size:11px; letter-spacing:2px; text-transform:uppercase;
   cursor:pointer; transition:all 0.2s; width:100%;
 }
@@ -491,7 +491,7 @@ body {
 ══════════════════════════════ */
 .modal-overlay {
   position:absolute; inset:0;
-  background:rgba(0,0,0,0.7); backdrop-filter:blur(6px);
+  background:rgba(0,0,0,0.3); backdrop-filter:blur(6px);
   z-index:300; display:flex; align-items:flex-end;
   opacity:0; pointer-events:none;
   transition:opacity 0.3s ease;
@@ -509,7 +509,7 @@ body {
 }
 .modal-overlay.open .modal-sheet { transform:translateY(0); }
 
-.modal-handle { width:40px; height:4px; background:rgba(255,255,255,0.15); border-radius:10px; margin:0 auto 20px; }
+.modal-handle { width:40px; height:4px; background:rgba(0,0,0,0.1); border-radius:10px; margin:0 auto 20px; }
 .modal-title { font-family:'Amiri',serif; font-size:24px; color:var(--gold); margin-bottom:20px; }
 
 .emoji-picker { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:4px; }
@@ -521,12 +521,12 @@ body {
 }
 .emoji-opt::before {
   content:''; position:absolute; inset:0;
-  background:radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.08), transparent 70%);
+  background:radial-gradient(ellipse at 50% 0%, rgba(154,110,40,0.08), transparent 70%);
   opacity:0; transition:opacity 0.2s;
 }
-.emoji-opt:hover { background:var(--bg4); border-color:rgba(201,168,76,0.2); }
+.emoji-opt:hover { background:var(--bg4); border-color:rgba(154,110,40,0.2); }
 .emoji-opt:hover::before { opacity:1; }
-.emoji-opt.selected { border-color:var(--gold); background:rgba(201,168,76,0.12); box-shadow:0 0 12px rgba(201,168,76,0.15); }
+.emoji-opt.selected { border-color:var(--gold); background:rgba(154,110,40,0.12); box-shadow:0 0 12px rgba(154,110,40,0.15); }
 .emoji-opt svg { position:relative; z-index:1; }
 
 .color-picker { display:flex; gap:10px; }
@@ -549,7 +549,7 @@ body {
 /* ── FULLSCREEN IMAGE ── */
 .img-fullscreen-overlay {
   position:absolute; inset:0;
-  background:rgba(0,0,0,0.92);
+  background:rgba(0,0,0,0.75);
   z-index:600;
   display:flex; align-items:center; justify-content:center;
   padding:20px;
@@ -562,7 +562,7 @@ body {
 }
 .img-fullscreen-close {
   position:absolute; top:16px; right:16px;
-  background:rgba(255,255,255,0.1); border:none;
+  background:rgba(0,0,0,0.08); border:none;
   color:#fff; font-size:20px; width:36px; height:36px;
   border-radius:50%; cursor:pointer; display:flex;
   align-items:center; justify-content:center;
@@ -570,14 +570,14 @@ body {
 
 /* ── AUTH SCREENS ── */
 #auth-login, #auth-register, #auth-pending {
-  background: radial-gradient(ellipse at 50% 30%, #1a3a28 0%, #0a1208 60%, #060c05 100%);
+  background: radial-gradient(ellipse at 50% 30%, #c8e4d4 0%, #e8f2ec 60%, #f0ede4 100%);
   align-items: center;
   justify-content: center;
   gap: 18px;
   padding: 50px 32px 40px;
 }
 .auth-logo {
-  filter: drop-shadow(0 0 20px rgba(201,168,76,0.3));
+  filter: drop-shadow(0 0 20px rgba(154,110,40,0.3));
   animation: fadeUp 0.8s ease 0.2s both;
 }
 .auth-title {
@@ -615,7 +615,7 @@ body {
   animation: fadeUp 0.8s ease 0.6s both;
 }
 .btn-outline {
-  background:none; border:1px solid rgba(201,168,76,0.3);
+  background:none; border:1px solid rgba(154,110,40,0.3);
   color:var(--cream-dim); border-radius:50px; padding:13px 36px;
   font-family:'Josefin Sans',sans-serif; font-size:11px;
   letter-spacing:2px; text-transform:uppercase;
@@ -627,22 +627,22 @@ body {
 /* Users management in admin */
 .users-tabs { display:flex; gap:8px; margin-bottom:16px; }
 .tab-btn {
-  flex:1; background:var(--bg3); border:1px solid rgba(255,255,255,0.05);
+  flex:1; background:var(--bg3); border:1px solid rgba(0,0,0,0.07);
   border-radius:10px; padding:10px; color:var(--cream-dim);
   font-family:'Josefin Sans',sans-serif; font-size:10px;
   letter-spacing:2px; text-transform:uppercase; cursor:pointer;
   transition:all 0.2s;
 }
-.tab-btn.active { background:rgba(201,168,76,0.1); border-color:rgba(201,168,76,0.3); color:var(--gold); }
+.tab-btn.active { background:rgba(154,110,40,0.1); border-color:rgba(154,110,40,0.3); color:var(--gold); }
 .user-card {
   background:var(--bg3); border-radius:12px;
-  border:1px solid rgba(255,255,255,0.04);
+  border:1px solid rgba(0,0,0,0.06);
   padding:14px 16px; margin-bottom:8px;
   display:flex; align-items:center; gap:12px;
 }
 .user-avatar {
   width:36px; height:36px; border-radius:50%;
-  background:rgba(201,168,76,0.1); border:1px solid rgba(201,168,76,0.2);
+  background:rgba(154,110,40,0.1); border:1px solid rgba(154,110,40,0.2);
   display:flex; align-items:center; justify-content:center;
   font-size:14px; color:var(--gold); flex-shrink:0; font-weight:600;
 }
@@ -653,17 +653,17 @@ body {
   font-size:9px; letter-spacing:1px; text-transform:uppercase;
   padding:3px 8px; border-radius:20px;
 }
-.status-pending { background:rgba(201,168,76,0.1); color:var(--gold); border:1px solid rgba(201,168,76,0.2); }
-.status-approved { background:rgba(42,92,63,0.2); color:#5fc48a; border:1px solid rgba(42,92,63,0.3); }
+.status-pending { background:rgba(154,110,40,0.1); color:var(--gold); border:1px solid rgba(154,110,40,0.2); }
+.status-approved { background:rgba(42,92,63,0.12); color:#2a6640; border:1px solid rgba(42,92,63,0.25); }
 .status-rejected { background:rgba(192,57,43,0.1); color:#e07070; border:1px solid rgba(192,57,43,0.2); }
 .user-actions { display:flex; gap:6px; }
-.btn-approve { background:rgba(42,92,63,0.2); border:1px solid rgba(42,92,63,0.4); color:#5fc48a; border-radius:8px; padding:6px 10px; font-size:11px; cursor:pointer; transition:all 0.2s; }
+.btn-approve { background:rgba(42,92,63,0.2); border:1px solid rgba(42,92,63,0.4); color:#2a6640; border-radius:8px; padding:6px 10px; font-size:11px; cursor:pointer; transition:all 0.2s; }
 .btn-approve:hover { background:rgba(42,92,63,0.4); }
 .btn-reject { background:rgba(192,57,43,0.1); border:1px solid rgba(192,57,43,0.3); color:#e07070; border-radius:8px; padding:6px 10px; font-size:11px; cursor:pointer; transition:all 0.2s; }
 .btn-reject:hover { background:rgba(192,57,43,0.2); }
 #courses { background:var(--bg); }
 .courses-screen-header {
-  background: linear-gradient(155deg, var(--green) 0%, #1a3a28 55%, var(--bg) 100%);
+  background: linear-gradient(155deg, #a8d4bc 0%, #c8e4d4 55%, var(--bg) 100%);
   padding: 58px 26px 22px;
   flex-shrink: 0;
 }
@@ -671,14 +671,14 @@ body {
 .courses-screen-sub { font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--gold-dim); }
 .courses-search {
   margin-top:14px;
-  background:rgba(255,255,255,0.06);
-  border:1px solid rgba(255,255,255,0.08);
+  background:rgba(0,0,0,0.07);
+  border:1px solid rgba(0,0,0,0.08);
   border-radius:12px; padding:11px 16px;
   font-family:'Josefin Sans',sans-serif; font-size:13px;
   color:var(--cream); outline:none; width:100%;
   transition:border-color 0.2s;
 }
-.courses-search:focus { border-color:rgba(201,168,76,0.3); }
+.courses-search:focus { border-color:rgba(154,110,40,0.3); }
 .courses-search::placeholder { color:rgba(176,165,145,0.35); }
 .category-section { margin-bottom:24px; }
 .category-label {
@@ -686,15 +686,148 @@ body {
   color:var(--gold-dim); margin-bottom:12px;
   display:flex; align-items:center; gap:8px;
 }
-.category-label::after { content:''; flex:1; height:1px; background:rgba(201,168,76,0.15); }
+.category-label::after { content:''; flex:1; height:1px; background:rgba(154,110,40,0.15); }
 
 ::-webkit-scrollbar { width:3px; }
-::-webkit-scrollbar-thumb { background:rgba(201,168,76,0.15); border-radius:10px; }
+::-webkit-scrollbar-thumb { background:rgba(154,110,40,0.15); border-radius:10px; }
+
+/* ══════════════════════════════
+   HUB — Choix du type de cours
+══════════════════════════════ */
+#hub {
+  background: radial-gradient(ellipse at 50% 30%, #c8e4d4 0%, #e8f2ec 60%, #f0ede4 100%);
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.hub-content {
+  position:relative; z-index:1;
+  display:flex; flex-direction:column; align-items:center;
+  gap:28px; padding:40px 28px 50px; width:100%;
+}
+.hub-title-block { text-align:center; }
+.hub-salam { font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--gold-dim); margin-bottom:6px; }
+.hub-title { font-family:'Amiri',serif; font-size:32px; color:var(--cream); line-height:1.2; }
+.hub-sub { font-size:11px; color:var(--cream-dim); letter-spacing:1px; margin-top:6px; }
+.hub-cards { display:flex; flex-direction:column; gap:16px; width:100%; }
+.hub-card {
+  background: rgba(255,255,255,0.55);
+  border: 1px solid rgba(154,110,40,0.18);
+  border-radius:22px; padding: 22px 24px;
+  cursor:pointer; transition: all 0.25s;
+  backdrop-filter: blur(8px);
+  display:flex; align-items:center; gap:18px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+.hub-card:hover { transform:translateY(-3px); box-shadow:0 8px 30px rgba(0,0,0,0.1); border-color:rgba(154,110,40,0.35); background:rgba(255,255,255,0.75); }
+.hub-card-icon { width:60px; height:60px; border-radius:18px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:30px; }
+.hub-card-icon.audio { background:linear-gradient(135deg,#d4ead8,#b8d8c8); }
+.hub-card-icon.written { background:linear-gradient(135deg,#e8dfc8,#d4c8a8); }
+.hub-card-texts { flex:1; }
+.hub-card-label { font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--gold-dim); margin-bottom:4px; }
+.hub-card-name { font-family:'Amiri',serif; font-size:22px; color:var(--cream); line-height:1.2; }
+.hub-card-desc { font-size:11px; color:var(--cream-dim); margin-top:4px; line-height:1.5; }
+.hub-card-arrow { font-size:22px; color:var(--gold-dim); flex-shrink:0; }
+
+/* ══════════════════════════════
+   WRITTEN COURSES LIST
+══════════════════════════════ */
+#written { background:var(--bg); }
+.written-header {
+  background: linear-gradient(155deg, #e8d8a8 0%, #f0e8cc 55%, var(--bg) 100%);
+  padding: 58px 26px 22px; flex-shrink:0;
+}
+.written-header-sub { font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--gold-dim); margin-bottom:4px; }
+.written-header-title { font-family:'Amiri',serif; font-size:28px; color:var(--cream); }
+.written-search {
+  margin-top:14px; background:rgba(0,0,0,0.05); border:1px solid rgba(0,0,0,0.08);
+  border-radius:12px; padding:11px 16px;
+  font-family:'Josefin Sans',sans-serif; font-size:13px;
+  color:var(--cream); outline:none; width:100%; transition:border-color 0.2s;
+}
+.written-search:focus { border-color:rgba(154,110,40,0.3); }
+.written-search::placeholder { color:rgba(107,94,68,0.4); }
+.written-card {
+  background: var(--bg2); border-radius:18px;
+  border:1px solid rgba(154,110,40,0.1);
+  margin-bottom:12px; cursor:pointer; transition:all 0.25s; overflow:hidden;
+}
+.written-card:hover { transform:translateY(-2px); border-color:rgba(154,110,40,0.25); box-shadow:0 6px 20px rgba(0,0,0,0.08); }
+.written-card-inner { padding:18px 20px; }
+.written-card-cat { font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--gold-dim); margin-bottom:6px; }
+.written-card-title { font-family:'Amiri',serif; font-size:19px; color:var(--cream); line-height:1.3; margin-bottom:8px; }
+.written-card-excerpt { font-size:12px; color:var(--cream-dim); line-height:1.7; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+.written-card-footer { display:flex; align-items:center; justify-content:space-between; margin-top:12px; padding-top:10px; border-top:1px solid rgba(154,110,40,0.1); }
+.written-card-meta { font-size:10px; color:var(--gold-dim); letter-spacing:0.5px; }
+.written-card-read { font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); }
+
+/* ══════════════════════════════
+   WRITTEN COURSE DETAIL
+══════════════════════════════ */
+#written-detail { background:var(--bg); }
+.written-detail-header {
+  background: linear-gradient(155deg, #e8d8a8 0%, #f0e8cc 55%, var(--bg) 100%);
+  padding: 58px 24px 26px; flex-shrink:0;
+}
+.written-detail-cat { font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--gold-dim); margin-bottom:6px; }
+.written-detail-title { font-family:'Amiri',serif; font-size:26px; color:var(--cream); line-height:1.25; }
+.written-detail-meta { font-size:10px; color:var(--cream-dim); margin-top:8px; letter-spacing:0.5px; }
+.written-body { padding:24px 22px 100px; }
+.written-body-text { font-size:14px; color:var(--cream); line-height:1.95; letter-spacing:0.2px; }
+.written-body-text h2 {
+  font-family:'Amiri',serif; font-size:22px; color:var(--cream);
+  margin:28px 0 12px; padding-bottom:8px;
+  border-bottom:1px solid rgba(154,110,40,0.18);
+}
+.written-body-text h3 {
+  font-family:'Amiri',serif; font-size:18px; color:var(--cream); margin:20px 0 8px;
+}
+.written-body-text p { margin-bottom:14px; }
+.written-body-text strong { color:var(--cream); font-weight:700; }
+.written-body-text em { font-style:italic; color:var(--cream-dim); }
+.written-body-text blockquote {
+  background:rgba(154,110,40,0.07);
+  border-left:3px solid var(--gold-dim);
+  border-radius:0 10px 10px 0;
+  padding:14px 16px; margin:18px 0;
+  font-size:13px; color:var(--cream-dim); line-height:1.8;
+}
+.written-body-text blockquote cite {
+  font-size:10px; letter-spacing:1px; color:var(--gold-dim);
+  text-transform:uppercase; display:block; margin-top:8px; font-style:normal;
+}
+.written-body-text hr {
+  border:none; border-top:1px solid rgba(154,110,40,0.2); margin:24px 0;
+}
+.written-body-text .arabic {
+  font-family:'Amiri',serif; font-size:22px; direction:rtl;
+  color:var(--gold); display:block; text-align:right;
+  margin:18px 0; line-height:2.2;
+  background:rgba(154,110,40,0.05); border-radius:10px; padding:12px 16px;
+}
+.written-cover-img { width:100%; border-radius:14px; overflow:hidden; margin-bottom:20px; border:1px solid rgba(154,110,40,0.12); }
+.written-cover-img img { width:100%; display:block; object-fit:contain; }
+
+/* Admin written modal overlay */
+#modal-written-overlay {
+  position:absolute; inset:0;
+  background:rgba(0,0,0,0.3); backdrop-filter:blur(6px);
+  z-index:300; display:flex; align-items:flex-end;
+  opacity:0; pointer-events:none; transition:opacity 0.3s ease;
+}
+#modal-written-overlay.open { opacity:1; pointer-events:all; }
+.written-modal-sheet {
+  background:var(--bg2); border-radius:28px 28px 0 0;
+  width:100%; padding:24px 22px 40px;
+  max-height:92%; overflow-y:auto;
+  transform:translateY(100%); transition:transform 0.3s ease;
+}
+#modal-written-overlay.open .written-modal-sheet { transform:translateY(0); }
 
 /* ── ACTIVITY TAB ── */
 .activity-course-block {
   background:var(--bg3); border-radius:14px;
-  border:1px solid rgba(255,255,255,0.04);
+  border:1px solid rgba(0,0,0,0.06);
   margin-bottom:12px; overflow:hidden;
 }
 .activity-course-header {
@@ -705,14 +838,14 @@ body {
 .activity-course-header:hover { background:rgba(255,255,255,0.02); }
 .activity-course-name { flex:1; font-family:'Amiri',serif; font-size:15px; color:var(--cream); }
 .activity-count-badge {
-  background:rgba(201,168,76,0.12); color:var(--gold);
-  border:1px solid rgba(201,168,76,0.25);
+  background:rgba(154,110,40,0.12); color:var(--gold);
+  border:1px solid rgba(154,110,40,0.25);
   border-radius:20px; font-size:10px; letter-spacing:1px;
   padding:3px 10px; flex-shrink:0;
 }
 .activity-users-list {
   max-height:0; overflow:hidden; transition:max-height 0.35s ease;
-  border-top:0px solid rgba(255,255,255,0.05);
+  border-top:0px solid rgba(0,0,0,0.07);
 }
 .activity-users-list.open { max-height:600px; border-top-width:1px; }
 .activity-user-row {
@@ -722,7 +855,7 @@ body {
 .activity-user-row:last-child { border-bottom:none; }
 .activity-user-avatar {
   width:28px; height:28px; border-radius:50%;
-  background:rgba(201,168,76,0.1); border:1px solid rgba(201,168,76,0.2);
+  background:rgba(154,110,40,0.1); border:1px solid rgba(154,110,40,0.2);
   display:flex; align-items:center; justify-content:center;
   font-size:11px; color:var(--gold); font-weight:600; flex-shrink:0;
 }
@@ -746,90 +879,81 @@ body {
       <div class="ring ring3"></div>
     </div>
 
-    <!-- Main geometric SVG -->
+    <!-- Croissant & Étoiles -->
     <div class="splash-mandala">
-      <svg viewBox="0 0 400 400" width="340" height="340" xmlns="http://www.w3.org/2000/svg">
+      <svg viewBox="0 0 340 340" width="300" height="300" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="gGold" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stop-color="#f0d888"/>
             <stop offset="50%" stop-color="#c9a84c"/>
             <stop offset="100%" stop-color="#7a6130"/>
           </linearGradient>
-          <linearGradient id="gGreen" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#3a7a55"/>
-            <stop offset="100%" stop-color="#1a3a28"/>
-          </linearGradient>
+          <radialGradient id="gGlow" cx="48%" cy="44%" r="52%">
+            <stop offset="0%" stop-color="#f0d888" stop-opacity="0.45"/>
+            <stop offset="100%" stop-color="#c9a84c" stop-opacity="0"/>
+          </radialGradient>
+          <filter id="fGlow">
+            <feGaussianBlur stdDeviation="7" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <filter id="fSoft">
+            <feGaussianBlur stdDeviation="3" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <mask id="mCroissant">
+            <rect width="340" height="340" fill="white"/>
+            <circle cx="196" cy="140" r="82" fill="black"/>
+          </mask>
         </defs>
 
-        <g transform="translate(200,200)">
-          <!-- Outer ring -->
-          <circle r="185" fill="none" stroke="url(#gGold)" stroke-width="1" opacity="0.2"/>
+        <!-- Halo -->
+        <ellipse cx="170" cy="170" rx="140" ry="140" fill="url(#gGlow)"/>
 
-          <!-- 12-pointed outer star -->
-          <g class="geo-rotate-slow">
-            <polygon points="0,-175 14,-14 175,0 14,14 0,175 -14,14 -175,0 -14,-14"
-              fill="none" stroke="url(#gGold)" stroke-width="1" opacity="0.3"/>
-            <polygon points="0,-175 14,-14 175,0 14,14 0,175 -14,14 -175,0 -14,-14"
-              fill="none" stroke="url(#gGold)" stroke-width="1" opacity="0.2" transform="rotate(22.5)"/>
-            <polygon points="0,-175 14,-14 175,0 14,14 0,175 -14,14 -175,0 -14,-14"
-              fill="none" stroke="url(#gGold)" stroke-width="0.8" opacity="0.15" transform="rotate(45)"/>
-          </g>
-
-          <!-- 16 diamond accents on outer ring -->
-          <g opacity="0.5">
-            <polygon points="0,-188 5,-178 0,-168 -5,-178" fill="url(#gGold)"/>
-            <polygon points="0,-188 5,-178 0,-168 -5,-178" fill="url(#gGold)" transform="rotate(22.5)"/>
-            <polygon points="0,-188 5,-178 0,-168 -5,-178" fill="url(#gGold)" transform="rotate(45)"/>
-            <polygon points="0,-188 5,-178 0,-168 -5,-178" fill="url(#gGold)" transform="rotate(67.5)"/>
-            <polygon points="0,-188 5,-178 0,-168 -5,-178" fill="url(#gGold)" transform="rotate(90)"/>
-            <polygon points="0,-188 5,-178 0,-168 -5,-178" fill="url(#gGold)" transform="rotate(112.5)"/>
-            <polygon points="0,-188 5,-178 0,-168 -5,-178" fill="url(#gGold)" transform="rotate(135)"/>
-            <polygon points="0,-188 5,-178 0,-168 -5,-178" fill="url(#gGold)" transform="rotate(157.5)"/>
-            <polygon points="0,-188 5,-178 0,-168 -5,-178" fill="url(#gGold)" transform="rotate(180)"/>
-            <polygon points="0,-188 5,-178 0,-168 -5,-178" fill="url(#gGold)" transform="rotate(202.5)"/>
-            <polygon points="0,-188 5,-178 0,-168 -5,-178" fill="url(#gGold)" transform="rotate(225)"/>
-            <polygon points="0,-188 5,-178 0,-168 -5,-178" fill="url(#gGold)" transform="rotate(247.5)"/>
-            <polygon points="0,-188 5,-178 0,-168 -5,-178" fill="url(#gGold)" transform="rotate(270)"/>
-            <polygon points="0,-188 5,-178 0,-168 -5,-178" fill="url(#gGold)" transform="rotate(292.5)"/>
-            <polygon points="0,-188 5,-178 0,-168 -5,-178" fill="url(#gGold)" transform="rotate(315)"/>
-            <polygon points="0,-188 5,-178 0,-168 -5,-178" fill="url(#gGold)" transform="rotate(337.5)"/>
-          </g>
-
-          <!-- Middle ring -->
-          <circle r="135" fill="none" stroke="url(#gGold)" stroke-width="1" opacity="0.25"/>
-
-          <!-- Main 8-pointed star filled -->
-          <polygon points="0,-130 32,-32 130,0 32,32 0,130 -32,32 -130,0 -32,-32"
-            fill="url(#gGreen)" opacity="0.6"/>
-          <polygon points="0,-130 32,-32 130,0 32,32 0,130 -32,32 -130,0 -32,-32"
-            fill="none" stroke="url(#gGold)" stroke-width="2" opacity="0.8"/>
-          <polygon points="0,-130 32,-32 130,0 32,32 0,130 -32,32 -130,0 -32,-32"
-            fill="none" stroke="url(#gGold)" stroke-width="1.5" opacity="0.5" transform="rotate(22.5)"/>
-
-          <!-- Inner decorative squares -->
-          <rect x="-88" y="-88" width="176" height="176" fill="none" stroke="url(#gGold)" stroke-width="1" opacity="0.3" transform="rotate(45)"/>
-          <rect x="-88" y="-88" width="176" height="176" fill="none" stroke="url(#gGold)" stroke-width="1" opacity="0.2"/>
-
-          <!-- Inner circle -->
-          <circle r="70" fill="url(#gGreen)" opacity="0.5"/>
-          <circle r="70" fill="none" stroke="url(#gGold)" stroke-width="2" opacity="0.6"/>
-
-          <!-- Inner 6-pointed star -->
-          <g class="geo-rotate-reverse">
-            <polygon points="0,-58 17,-17 58,0 17,17 0,58 -17,17 -58,0 -17,-17"
-              fill="url(#gGold)" opacity="0.25"/>
-            <polygon points="0,-58 17,-17 58,0 17,17 0,58 -17,17 -58,0 -17,-17"
-              fill="none" stroke="url(#gGold)" stroke-width="2" opacity="0.9"/>
-            <polygon points="0,-58 17,-17 58,0 17,17 0,58 -17,17 -58,0 -17,-17"
-              fill="none" stroke="url(#gGold)" stroke-width="1.5" opacity="0.6" transform="rotate(22.5)"/>
-          </g>
-
-          <!-- Center gem -->
-          <circle r="22" fill="url(#gGold)" opacity="0.9"/>
-          <circle r="22" fill="none" stroke="#f0d888" stroke-width="1.5" opacity="0.6"/>
-          <circle r="12" fill="#0d1f15"/>
-          <circle r="5" fill="url(#gGold)"/>
+        <!-- Cercle pointillé tournant -->
+        <g class="geo-rotate-slow" style="transform-origin:170px 170px">
+          <circle cx="170" cy="170" r="150" fill="none" stroke="url(#gGold)" stroke-width="0.8" stroke-dasharray="3 11" opacity="0.35"/>
         </g>
+
+        <!-- Cercle externe fixe -->
+        <circle cx="170" cy="170" r="140" fill="none" stroke="url(#gGold)" stroke-width="1.2" opacity="0.3"/>
+
+        <!-- Cercle intérieur -->
+        <circle cx="170" cy="170" r="116" fill="rgba(42,92,63,0.08)" stroke="url(#gGold)" stroke-width="1" opacity="0.4"/>
+
+        <!-- Grand croissant -->
+        <circle cx="155" cy="155" r="106" fill="url(#gGold)" filter="url(#fGlow)" mask="url(#mCroissant)" opacity="0.93"/>
+        <!-- Reflet sur le croissant -->
+        <circle cx="155" cy="155" r="106" fill="none" stroke="#f5e4a0" stroke-width="1.5" opacity="0.25" mask="url(#mCroissant)"/>
+
+        <!-- Étoile principale à 5 branches (grande) -->
+        <g transform="translate(226,112)" filter="url(#fSoft)">
+          <polygon points="0,-34 8,-12 32,-12 14,2 21,26 0,13 -21,26 -14,2 -32,-12 -8,-12"
+            fill="url(#gGold)" opacity="0.97"/>
+          <circle r="5.5" fill="#f8e8b0" opacity="0.8"/>
+        </g>
+
+        <!-- Petite étoile haute droite -->
+        <g transform="translate(264,64)" filter="url(#fSoft)">
+          <polygon points="0,-16 4,-6 15,-6 7,1 10,12 0,6 -10,12 -7,1 -15,-6 -4,-6"
+            fill="url(#gGold)" opacity="0.8"/>
+          <circle r="2.5" fill="#f8e8b0" opacity="0.7"/>
+        </g>
+
+        <!-- Petite étoile bas droite -->
+        <g transform="translate(272,175)" filter="url(#fSoft)">
+          <polygon points="0,-13 3,-5 12,-5 6,1 8,10 0,5 -8,10 -6,1 -12,-5 -3,-5"
+            fill="url(#gGold)" opacity="0.7"/>
+          <circle r="2" fill="#f8e8b0" opacity="0.6"/>
+        </g>
+
+        <!-- Ligne ornementale bas -->
+        <line x1="55" y1="286" x2="285" y2="286" stroke="url(#gGold)" stroke-width="1" opacity="0.4"/>
+        <!-- Petits cercles aux extrémités -->
+        <circle cx="55" cy="286" r="3.5" fill="url(#gGold)" opacity="0.5"/>
+        <circle cx="285" cy="286" r="3.5" fill="url(#gGold)" opacity="0.5"/>
+        <!-- Petit cercle centre bas -->
+        <circle cx="170" cy="294" r="4" fill="url(#gGold)" opacity="0.45"/>
+        <circle cx="170" cy="294" r="8" fill="none" stroke="url(#gGold)" stroke-width="0.8" opacity="0.25"/>
       </svg>
     </div>
 
@@ -839,6 +963,98 @@ body {
       <div class="splash-sub">Apprendre l'Islam, une leçon à la fois</div>
     </div>
     <button class="btn-gold" onclick="splashStart()">Commencer ›</button>
+  </div>
+
+  <!-- ════ HUB ════ -->
+  <div class="screen" id="hub">
+    <div class="splash-bg-rings">
+      <div class="ring ring1"></div>
+      <div class="ring ring2"></div>
+      <div class="ring ring3"></div>
+    </div>
+    <div class="hub-content">
+      <div class="hub-title-block">
+        <div class="hub-salam">Bienvenue</div>
+        <div class="hub-title">Que souhaitez-vous apprendre ?</div>
+        <div class="hub-sub">Choisissez votre format de cours</div>
+      </div>
+      <div class="hub-cards">
+        <div class="hub-card" onclick="goTo('home','home-nav')">
+          <div class="hub-card-icon audio">🎧</div>
+          <div class="hub-card-texts">
+            <div class="hub-card-label">Format audio</div>
+            <div class="hub-card-name">Cours Audio</div>
+            <div class="hub-card-desc">Leçons avec écoute, texte et illustrations</div>
+          </div>
+          <div class="hub-card-arrow">›</div>
+        </div>
+        <div class="hub-card" onclick="goToWritten()">
+          <div class="hub-card-icon written">📝</div>
+          <div class="hub-card-texts">
+            <div class="hub-card-label">Format écrit</div>
+            <div class="hub-card-name">Cours Écrits</div>
+            <div class="hub-card-desc">Articles approfondis à lire à votre rythme</div>
+          </div>
+          <div class="hub-card-arrow">›</div>
+        </div>
+      </div>
+      <div style="font-size:10px;letter-spacing:1.5px;color:var(--cream-dim);text-align:center;opacity:0.6;cursor:pointer;" onclick="goToAdmin()">⚙ Administration</div>
+    </div>
+  </div>
+
+  <!-- ════ WRITTEN COURSES LIST ════ -->
+  <div class="screen" id="written">
+    <div class="written-header geo-bg">
+      <button class="back-btn" onclick="goTo('hub','')">←</button>
+      <div class="written-header-sub">Bibliothèque</div>
+      <div class="written-header-title">Cours Écrits</div>
+      <input type="text" class="written-search" id="written-search" placeholder="🔍  Rechercher un cours..." oninput="filterWrittenCourses(this.value)">
+    </div>
+    <div class="scroll-body">
+      <div class="home-body" id="written-list">
+        <!-- rendered by JS -->
+      </div>
+    </div>
+    <div class="bottom-nav">
+      <button class="nav-item" onclick="goTo('hub','')">
+        <span class="nav-icon">🏠</span><span class="nav-label">Accueil</span>
+      </button>
+      <button class="nav-item active">
+        <span class="nav-icon">📝</span><span class="nav-label">Écrits</span>
+      </button>
+      <button class="nav-item nav-admin-btn" onclick="goToAdmin()">
+        <span class="nav-icon">⚙️</span><span class="nav-label">Admin</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ════ WRITTEN COURSE DETAIL ════ -->
+  <div class="screen" id="written-detail">
+    <div class="written-detail-header geo-bg">
+      <button class="back-btn" onclick="goTo('written','')">←</button>
+      <div class="written-detail-cat" id="wd-cat">Catégorie</div>
+      <div class="written-detail-title" id="wd-title">Titre</div>
+      <div class="written-detail-meta" id="wd-meta"></div>
+    </div>
+    <div class="scroll-body">
+      <div class="written-body">
+        <div id="wd-cover" style="display:none;" class="written-cover-img">
+          <img id="wd-cover-img" src="" alt="">
+        </div>
+        <div class="written-body-text" id="wd-body"></div>
+      </div>
+    </div>
+    <div class="bottom-nav">
+      <button class="nav-item" onclick="goTo('hub','')">
+        <span class="nav-icon">🏠</span><span class="nav-label">Accueil</span>
+      </button>
+      <button class="nav-item active">
+        <span class="nav-icon">📝</span><span class="nav-label">Écrits</span>
+      </button>
+      <button class="nav-item nav-admin-btn" onclick="goToAdmin()">
+        <span class="nav-icon">⚙️</span><span class="nav-label">Admin</span>
+      </button>
+    </div>
   </div>
 
   <!-- ════ AUTH LOGIN ════ -->
@@ -944,9 +1160,10 @@ body {
   <!-- ════ HOME ════ -->
   <div class="screen" id="home">
     <div class="home-header geo-bg">
+      <button class="back-btn" onclick="goTo('hub','')">←</button>
       <div class="greeting">As-salamu alaykum</div>
       <div style="display:flex; align-items:center; gap:16px; margin-bottom:4px;">
-        <svg viewBox="0 0 120 120" width="54" height="54" style="flex-shrink:0; filter:drop-shadow(0 0 10px rgba(201,168,76,0.35));">
+        <svg viewBox="0 0 120 120" width="54" height="54" style="flex-shrink:0; filter:drop-shadow(0 0 10px rgba(154,110,40,0.35));">
           <defs>
             <radialGradient id="lgh" cx="30%" cy="30%" r="70%">
               <stop offset="0%" stop-color="#e8c97a"/>
@@ -986,7 +1203,7 @@ body {
       </div>
     </div>
     <div class="bottom-nav" id="home-nav">
-      <button class="nav-item active" onclick="goTo('home','home-nav')">
+      <button class="nav-item active" onclick="goTo('hub','')">
         <span class="nav-icon">🏠</span><span class="nav-label">Accueil</span>
       </button>
       <button class="nav-item" onclick="goTo('courses',''); renderCourses()">
@@ -1001,6 +1218,7 @@ body {
   <!-- ════ COURSES ════ -->
   <div class="screen" id="courses">
     <div class="courses-screen-header geo-bg">
+      <button class="back-btn" onclick="goTo('hub','')">←</button>
       <div class="courses-screen-sub">Bibliothèque</div>
       <div class="courses-screen-title">Tous les cours</div>
       <input type="text" class="courses-search" id="courses-search" placeholder="🔍  Rechercher un cours..." oninput="filterCourses(this.value)">
@@ -1011,7 +1229,7 @@ body {
       </div>
     </div>
     <div class="bottom-nav">
-      <button class="nav-item" onclick="goTo('home','home-nav')">
+      <button class="nav-item" onclick="goTo('hub','')">
         <span class="nav-icon">🏠</span><span class="nav-label">Accueil</span>
       </button>
       <button class="nav-item active">
@@ -1034,7 +1252,7 @@ body {
     </div>
     <div class="scroll-body">
       <div class="detail-body">
-        <div id="detail-img-banner" style="display:none;width:100%;margin-bottom:20px;border-radius:16px;overflow:hidden;border:1px solid rgba(201,168,76,0.15);">
+        <div id="detail-img-banner" style="display:none;width:100%;margin-bottom:20px;border-radius:16px;overflow:hidden;border:1px solid rgba(154,110,40,0.15);">
           <img id="detail-img" src="" style="width:100%;height:auto;display:block;" onclick="openImageFullscreen(this.src)">
         </div>
         <div class="section-label">Leçons</div>
@@ -1042,7 +1260,7 @@ body {
       </div>
     </div>
     <div class="bottom-nav">
-      <button class="nav-item" onclick="goTo('home','home-nav')">
+      <button class="nav-item" onclick="goTo('hub','')">
         <span class="nav-icon">🏠</span><span class="nav-label">Accueil</span>
       </button>
       <button class="nav-item active">
@@ -1082,15 +1300,22 @@ body {
 
         <!-- Tabs -->
         <div class="users-tabs" style="gap:6px;">
-          <button class="tab-btn active" id="tab-courses-btn" onclick="switchAdminTab('courses')" style="font-size:9px;">📚 Cours</button>
+          <button class="tab-btn active" id="tab-courses-btn" onclick="switchAdminTab('courses')" style="font-size:9px;">📚 Audio</button>
+          <button class="tab-btn" id="tab-written-btn" onclick="switchAdminTab('written')" style="font-size:9px;">📝 Écrits</button>
           <button class="tab-btn" id="tab-users-btn" onclick="switchAdminTab('users')" style="font-size:9px;">👥 Membres</button>
-          <button class="tab-btn" id="tab-activity-btn" onclick="switchAdminTab('activity')" style="font-size:9px;">📊 Activité</button>
+          <button class="tab-btn" id="tab-activity-btn" onclick="switchAdminTab('activity')" style="font-size:9px;">📊 Stats</button>
         </div>
 
         <!-- Courses tab -->
         <div id="tab-courses">
-          <button class="btn-add" onclick="openAddModal()">+ Ajouter un cours</button>
+          <button class="btn-add" onclick="openAddModal()">+ Ajouter un cours audio</button>
           <div id="admin-course-list"></div>
+        </div>
+
+        <!-- Written tab -->
+        <div id="tab-written" style="display:none;">
+          <button class="btn-add" onclick="openAddWrittenModal()" style="border-color:rgba(154,110,40,0.4);color:var(--gold);">+ Ajouter un cours écrit</button>
+          <div id="admin-written-list"></div>
         </div>
 
         <!-- Users tab -->
@@ -1115,10 +1340,10 @@ body {
       </div>
     </div>
     <div class="bottom-nav">
-      <button class="nav-item" onclick="goTo('home','home-nav')">
+      <button class="nav-item" onclick="goTo('hub','')">
         <span class="nav-icon">🏠</span><span class="nav-label">Accueil</span>
       </button>
-      <button class="nav-item" onclick="goTo('home','home-nav')">
+      <button class="nav-item" onclick="goTo('hub','')">
         <span class="nav-icon">📚</span><span class="nav-label">Cours</span>
       </button>
       <button class="nav-item active">
@@ -1249,7 +1474,7 @@ body {
               <button onclick="clearCourseImage()" style="position:absolute;top:6px;right:6px;background:rgba(0,0,0,0.6);border:none;color:#fff;border-radius:50%;width:24px;height:24px;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;">✕</button>
             </div>
             <input type="hidden" id="m-cover_image" value="">
-            <label style="display:flex;align-items:center;justify-content:center;gap:8px;background:rgba(255,255,255,0.04);border:1px dashed rgba(201,168,76,0.3);border-radius:10px;padding:12px;cursor:pointer;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-dim);transition:all 0.2s;" onmouseover="this.style.background='rgba(201,168,76,0.08)'" onmouseout="this.style.background='rgba(255,255,255,0.04)'">
+            <label style="display:flex;align-items:center;justify-content:center;gap:8px;background:rgba(0,0,0,0.06);border:1px dashed rgba(154,110,40,0.3);border-radius:10px;padding:12px;cursor:pointer;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-dim);transition:all 0.2s;" onmouseover="this.style.background='rgba(154,110,40,0.08)'" onmouseout="this.style.background='rgba(0,0,0,0.06)'">
               📁 Choisir une image
               <input type="file" accept="image/*" style="display:none;" onchange="handleCourseImageUpload(event)">
             </label>
@@ -1269,12 +1494,69 @@ body {
     </div>
   </div>
 
+  <!-- ════ MODAL: Add/Edit Written Course ════ -->
+  <div id="modal-written-overlay" onclick="closeWrittenModalOnBg(event)">
+    <div class="written-modal-sheet" id="written-modal-sheet">
+      <div class="modal-handle"></div>
+      <div class="modal-title" id="written-modal-title">Nouveau cours écrit</div>
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <!-- Title -->
+        <div class="field-row">
+          <div class="field-label">Titre *</div>
+          <input type="text" class="field-input" id="wm-title" placeholder="Ex: La prière en Islam">
+        </div>
+        <!-- Category -->
+        <div class="field-row">
+          <div class="field-label">Catégorie</div>
+          <input type="text" class="field-input" id="wm-cat" placeholder="Ex: Aqida, Fiqh, Sira...">
+        </div>
+        <!-- Excerpt -->
+        <div class="field-row">
+          <div class="field-label">Résumé (extrait)</div>
+          <textarea class="field-textarea" id="wm-excerpt" placeholder="Court résumé affiché dans la liste..." style="min-height:60px;"></textarea>
+        </div>
+        <!-- Cover image -->
+        <div class="field-row">
+          <div class="field-label">🖼 Image de couverture</div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div id="wm-img-preview-wrap" style="display:none;position:relative;border-radius:10px;overflow:hidden;">
+              <img id="wm-img-preview" src="" style="width:100%;max-height:150px;object-fit:cover;">
+              <button onclick="clearWrittenImage()" style="position:absolute;top:6px;right:6px;background:rgba(0,0,0,0.5);border:none;color:#fff;border-radius:50%;width:24px;height:24px;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;">✕</button>
+            </div>
+            <input type="hidden" id="wm-cover" value="">
+            <label style="display:flex;align-items:center;justify-content:center;gap:8px;background:rgba(0,0,0,0.06);border:1px dashed rgba(154,110,40,0.3);border-radius:10px;padding:12px;cursor:pointer;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-dim);" onmouseover="this.style.background='rgba(154,110,40,0.08)'" onmouseout="this.style.background='rgba(0,0,0,0.06)'">
+              📁 Choisir une image
+              <input type="file" accept="image/*" style="display:none;" onchange="handleWrittenImageUpload(event)">
+            </label>
+          </div>
+        </div>
+        <!-- Body content -->
+        <div class="field-row">
+          <div class="field-label">Contenu complet du cours *</div>
+          <div style="font-size:10px;color:var(--cream-dim);margin-bottom:6px;line-height:1.7;background:rgba(154,110,40,0.06);border-radius:8px;padding:8px 10px;">
+            <strong style="color:var(--gold-dim);">Mise en page Markdown :</strong><br>
+            <code style="font-size:10px;">## Titre</code> &nbsp;
+            <code style="font-size:10px;">### Sous-titre</code> &nbsp;
+            <code style="font-size:10px;">> Citation</code><br>
+            <code style="font-size:10px;">**gras**</code> &nbsp;
+            <code style="font-size:10px;">*italique*</code> &nbsp;
+            <code style="font-size:10px;">---</code> séparateur &nbsp;
+            <code style="font-size:10px;">{arabe}</code> bloc arabe
+          </div>
+          <textarea class="field-textarea" id="wm-body" placeholder="## Introduction&#10;&#10;Rédigez ici le contenu du cours...&#10;&#10;> Une citation ou hadith important&#10;-- Source (Bukhari, Muslim...)&#10;&#10;## Première partie&#10;&#10;Votre texte ici..." style="min-height:200px;font-size:13px;line-height:1.7;font-family:monospace;"></textarea>
+        </div>
+        <button class="btn-save" onclick="saveWrittenCourse()">💾 Enregistrer le cours écrit</button>
+        <button class="btn-danger" id="btn-delete-written" style="display:none;" onclick="deleteCurrentWrittenCourse()">🗑 Supprimer ce cours</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Toast -->
   <div class="toast" id="toast"></div>
 
   <!-- Loading overlay -->
   <div id="loading-overlay" style="display:none;position:absolute;inset:0;background:rgba(13,15,14,0.7);backdrop-filter:blur(4px);z-index:500;align-items:center;justify-content:center;flex-direction:column;gap:14px;">
-    <div style="width:36px;height:36px;border:3px solid rgba(201,168,76,0.2);border-top-color:var(--gold);border-radius:50%;animation:spin 0.8s linear infinite;"></div>
+    <div style="width:36px;height:36px;border:3px solid rgba(154,110,40,0.2);border-top-color:var(--gold);border-radius:50%;animation:spin 0.8s linear infinite;"></div>
     <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--cream-dim);">Chargement...</div>
   </div>
   <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
@@ -1301,7 +1583,7 @@ async function dbGetCourses() {
 async function dbInsertCourse(data) {
   const res = await fetch(`${SUPABASE_URL}/rest/v1/courses`, {
     method: 'POST',
-    headers: { ...HEADERS, 'Prefer': 'return=representation' },
+    headers: { ...authHeaders(), 'Prefer': 'return=representation' },
     body: JSON.stringify(data)
   });
   if (!res.ok) {
@@ -1314,7 +1596,7 @@ async function dbInsertCourse(data) {
 async function dbUpdateCourse(id, data) {
   const res = await fetch(`${SUPABASE_URL}/rest/v1/courses?id=eq.${id}`, {
     method: 'PATCH',
-    headers: { ...HEADERS, 'Prefer': 'return=representation' },
+    headers: { ...authHeaders(), 'Prefer': 'return=representation' },
     body: JSON.stringify(data)
   });
   if (!res.ok) {
@@ -1327,7 +1609,7 @@ async function dbUpdateCourse(id, data) {
 async function dbDeleteCourse(id) {
   const res = await fetch(`${SUPABASE_URL}/rest/v1/courses?id=eq.${id}`, {
     method: 'DELETE',
-    headers: HEADERS
+    headers: authHeaders()
   });
   if (!res.ok) throw new Error('Erreur suppression');
 }
@@ -1868,7 +2150,7 @@ function addLessonField(lesson) {
         <div id="img-wrap-${id}" style="display:flex;flex-direction:column;gap:8px;">
           ${image ? `<img id="img-preview-${id}" src="${escapeAttr(image)}" style="width:100%;border-radius:10px;max-height:140px;object-fit:cover;">` : `<div id="img-preview-${id}" style="display:none;"></div>`}
           <input type="hidden" id="li-${id}" value="${escapeAttr(image)}">
-          <label style="display:flex;align-items:center;justify-content:center;gap:8px;background:rgba(255,255,255,0.04);border:1px dashed rgba(201,168,76,0.3);border-radius:10px;padding:12px;cursor:pointer;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-dim);transition:all 0.2s;" onmouseover="this.style.background='rgba(201,168,76,0.08)'" onmouseout="this.style.background='rgba(255,255,255,0.04)'">
+          <label style="display:flex;align-items:center;justify-content:center;gap:8px;background:rgba(0,0,0,0.06);border:1px dashed rgba(154,110,40,0.3);border-radius:10px;padding:12px;cursor:pointer;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-dim);transition:all 0.2s;" onmouseover="this.style.background='rgba(154,110,40,0.08)'" onmouseout="this.style.background='rgba(0,0,0,0.06)'">
             📁 Choisir une image
             <input type="file" accept="image/*" style="display:none;" onchange="handleImageUpload(event, ${id})">
           </label>
@@ -2064,12 +2346,12 @@ async function authLogin() {
     sessionStorage.setItem('is_admin', profile.is_admin ? '1' : '0');
     currentUser = data.user;
     currentUser.is_admin = profile.is_admin;
-    await loadCourses(); renderHome(); renderCourses();
+    await loadCourses(); renderHome(); renderCourses(); renderWrittenCourses();
     // Masquer le bouton Admin si pas admin
     document.querySelectorAll('.nav-admin-btn').forEach(el => {
       el.style.display = profile.is_admin ? 'flex' : 'none';
     });
-    goTo('home', 'home-nav');
+    goTo('hub', '');
   } catch(e) { errEl.textContent = 'Erreur de connexion'; }
   finally { showLoading(false); }
 }
@@ -2128,13 +2410,16 @@ function authLogout() {
 // ══════════════════════════════
 function switchAdminTab(tab) {
   document.getElementById('tab-courses').style.display = tab === 'courses' ? 'block' : 'none';
+  document.getElementById('tab-written').style.display = tab === 'written' ? 'block' : 'none';
   document.getElementById('tab-users').style.display = tab === 'users' ? 'block' : 'none';
   document.getElementById('tab-activity').style.display = tab === 'activity' ? 'block' : 'none';
   document.getElementById('tab-courses-btn').classList.toggle('active', tab === 'courses');
+  document.getElementById('tab-written-btn').classList.toggle('active', tab === 'written');
   document.getElementById('tab-users-btn').classList.toggle('active', tab === 'users');
   document.getElementById('tab-activity-btn').classList.toggle('active', tab === 'activity');
   if (tab === 'users') loadUsers();
   if (tab === 'activity') loadActivity();
+  if (tab === 'written') renderAdminWritten();
 }
 
 async function loadActivity() {
@@ -2283,12 +2568,426 @@ function escapeAttr(s) {
 }
 
 // ══════════════════════════════
+// WRITTEN COURSES — STATE & DB
+// ══════════════════════════════
+let writtenCourses = [];
+let editingWrittenIndex = null;
+
+function authHeaders() {
+  const token = sessionStorage.getItem('auth_token');
+  return {
+    ...HEADERS,
+    'Authorization': 'Bearer ' + (token || SUPABASE_KEY)
+  };
+}
+
+async function dbGetWrittenCourses() {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/written_courses?order=created_at.desc`, { headers: authHeaders() });
+  if (!res.ok) return [];
+  return await res.json();
+}
+
+async function dbInsertWrittenCourse(data) {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/written_courses`, {
+    method: 'POST',
+    headers: { ...authHeaders(), 'Prefer': 'return=representation' },
+    body: JSON.stringify(data)
+  });
+  if (!res.ok) { const err = await res.json().catch(() => ({})); throw new Error(err.message || 'Erreur'); }
+  return (await res.json())[0];
+}
+
+async function dbUpdateWrittenCourse(id, data) {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/written_courses?id=eq.${id}`, {
+    method: 'PATCH',
+    headers: { ...authHeaders(), 'Prefer': 'return=representation' },
+    body: JSON.stringify(data)
+  });
+  if (!res.ok) { const err = await res.json().catch(() => ({})); throw new Error(err.message || 'Erreur'); }
+  return (await res.json())[0];
+}
+
+async function dbDeleteWrittenCourse(id) {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/written_courses?id=eq.${id}`, { method: 'DELETE', headers: authHeaders() });
+  if (!res.ok) throw new Error('Erreur suppression');
+}
+
+async function loadWrittenCourses() {
+  try {
+    const data = await dbGetWrittenCourses();
+    writtenCourses = data.length ? data : EXAMPLE_WRITTEN_COURSES;
+  } catch(e) {
+    writtenCourses = EXAMPLE_WRITTEN_COURSES;
+  }
+}
+
+const EXAMPLE_WRITTEN_COURSES = [
+  {
+    id: 'example-1',
+    title: 'Les Cinq Piliers de l\'Islam',
+    category: 'Aqida',
+    excerpt: 'Découvrez les fondements essentiels de la pratique islamique : la profession de foi, la prière, l\'aumône, le jeûne et le pèlerinage.',
+    cover_image: null,
+    created_at: new Date().toISOString(),
+    body: `## Introduction
+
+L'Islam repose sur **cinq piliers fondamentaux** qui constituent le socle de la vie du musulman. Ces piliers sont mentionnés dans un hadith célèbre du Prophète ﷺ :
+
+> بُنِيَ الإِسْلَامُ عَلَى خَمْسٍ
+-- Sahih Bukhari & Muslim
+
+*« L'Islam est bâti sur cinq piliers. »*
+
+---
+
+## 1. La Shahada — La Profession de Foi
+
+La Shahada est la **porte d'entrée dans l'Islam**. Elle consiste à attester :
+
+{أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا رَسُولُ اللَّهِ}
+
+*« J'atteste qu'il n'y a de divinité qu'Allah et que Muhammad est Son messager. »*
+
+Cette déclaration implique une conviction profonde du cœur, une affirmation de la langue et une action des membres.
+
+---
+
+## 2. La Salat — La Prière
+
+La prière est le **deuxième pilier** et le lien direct entre le croyant et son Seigneur. Elle est obligatoire **cinq fois par jour** :
+
+### Les cinq prières quotidiennes
+
+- **Fajr** — à l'aube (2 rak'at)
+- **Dhuhr** — en milieu de journée (4 rak'at)
+- **Asr** — en après-midi (4 rak'at)
+- **Maghrib** — au coucher du soleil (3 rak'at)
+- **Isha** — en soirée (4 rak'at)
+
+> الصَّلَاةُ عِمَادُ الدِّينِ
+-- Hadith
+
+*« La prière est la colonne vertébrale de la religion. »*
+
+---
+
+## 3. La Zakat — L'Aumône Légale
+
+La Zakat est la **purification des biens** par le don d'une part de sa richesse aux nécessiteux. Elle est obligatoire pour tout musulman possédant un *nisab* (seuil minimal de richesse) pendant une année lunaire complète.
+
+### Taux de la Zakat
+
+Le taux standard est de **2,5 %** de la richesse accumulée au-dessus du nisab.
+
+> خُذْ مِنْ أَمْوَالِهِمْ صَدَقَةً تُطَهِّرُهُمْ وَتُزَكِّيهِم بِهَا
+-- Sourate At-Tawbah, 9:103
+
+---
+
+## 4. Le Sawm — Le Jeûne de Ramadan
+
+Le jeûne du mois de **Ramadan** est obligatoire pour tout musulman adulte, sain d'esprit et en bonne santé. Il consiste à s'abstenir de manger, boire et des relations conjugales du lever au coucher du soleil.
+
+### Les bénéfices du jeûne
+
+Le jeûne est une école de **patience**, de *discipline* et de gratitude. Il permet au croyant de ressentir la faim des plus démunis et de renforcer sa conscience d'Allah (taqwa).
+
+> يَا أَيُّهَا الَّذِينَ آمَنُوا كُتِبَ عَلَيْكُمُ الصِّيَامُ
+-- Sourate Al-Baqara, 2:183
+
+---
+
+## 5. Le Hajj — Le Pèlerinage
+
+Le Hajj à La Mecque est obligatoire **une fois dans sa vie** pour tout musulman qui en a la capacité physique et financière.
+
+Il se déroule durant le mois de **Dhul Hijja** et comporte plusieurs rites essentiels : le tawaf (circumambulation autour de la Ka'ba), le sa'i (entre Safa et Marwa), la station à Arafat, et le sacrifice.
+
+---
+
+## Conclusion
+
+Ces cinq piliers forment un tout cohérent qui structure la vie spirituelle, sociale et personnelle du musulman. Chacun d'eux a une dimension intérieure — la foi du cœur — et une dimension extérieure — l'action du corps.
+
+> إِنَّ الدِّينَ يُسْرٌ
+-- Sahih Bukhari
+
+*« La religion est facilité. »*`
+  }
+];
+
+// ── WRITTEN COURSES LIST ──
+function goToWritten() {
+  renderWrittenCourses();
+  goTo('written', '');
+}
+
+function renderWrittenCourses(filter) {
+  const list = document.getElementById('written-list');
+  let filtered = filter
+    ? writtenCourses.filter(c => c.title.toLowerCase().includes(filter.toLowerCase()) || (c.category || '').toLowerCase().includes(filter.toLowerCase()))
+    : writtenCourses;
+
+  if (!filtered.length) {
+    list.innerHTML = `<div class="empty-state"><div class="empty-icon">📝</div>Aucun cours écrit disponible pour l'instant.</div>`;
+    return;
+  }
+  list.innerHTML = filtered.map((c, i) => `
+    <div class="written-card" onclick="openWrittenCourse(${writtenCourses.indexOf(c)})">
+      <div class="written-card-inner">
+        <div class="written-card-cat">${c.category || 'Cours'}</div>
+        <div class="written-card-title">${escapeHtml(c.title)}</div>
+        <div class="written-card-excerpt">${escapeHtml(c.excerpt || c.body?.substring(0, 160) || '')}</div>
+        <div class="written-card-footer">
+          <div class="written-card-meta">📖 Lecture</div>
+          <div class="written-card-read">Lire ›</div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterWrittenCourses(val) { renderWrittenCourses(val); }
+
+// ══════════════════════════════
+// MARKDOWN PARSER
+// ══════════════════════════════
+function parseMarkdown(text) {
+  if (!text) return '';
+
+  // Escape HTML first (security)
+  const escape = s => s
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+  const lines = text.split('\n');
+  let html = '';
+  let i = 0;
+
+  while (i < lines.length) {
+    const raw = lines[i];
+    const line = raw.trimEnd();
+
+    // Empty line → paragraph break
+    if (line.trim() === '') { i++; continue; }
+
+    // --- Horizontal rule
+    if (/^---+$/.test(line.trim())) {
+      html += '<hr>';
+      i++; continue;
+    }
+
+    // ## Heading 2
+    if (/^## (.+)/.test(line)) {
+      html += `<h2>${inlineMarkdown(escape(line.replace(/^## /, '')))}</h2>`;
+      i++; continue;
+    }
+
+    // ### Heading 3
+    if (/^### (.+)/.test(line)) {
+      html += `<h3>${inlineMarkdown(escape(line.replace(/^### /, '')))}</h3>`;
+      i++; continue;
+    }
+
+    // > Blockquote (possibly multi-line)
+    if (/^> /.test(line)) {
+      let quoteLines = [];
+      let citeText = '';
+      while (i < lines.length && /^> /.test(lines[i])) {
+        const qline = lines[i].replace(/^> /, '');
+        if (/^-- /.test(qline)) citeText = escape(qline.replace(/^-- /, ''));
+        else quoteLines.push(inlineMarkdown(escape(qline)));
+        i++;
+      }
+      const citeHtml = citeText ? `<cite>${citeText}</cite>` : '';
+      html += `<blockquote>${quoteLines.join('<br>')}${citeHtml}</blockquote>`;
+      continue;
+    }
+
+    // {arabic text} → Arabic styled block
+    if (/^\{(.+)\}$/.test(line.trim())) {
+      const arabic = line.trim().replace(/^\{/, '').replace(/\}$/, '');
+      html += `<span class="arabic">${escape(arabic)}</span>`;
+      i++; continue;
+    }
+
+    // Regular paragraph — gather consecutive non-special lines
+    let paraLines = [];
+    while (i < lines.length) {
+      const l = lines[i].trimEnd();
+      if (l.trim() === '' || /^##|^###|^> |^---+$|^\{.+\}$/.test(l.trim())) break;
+      paraLines.push(inlineMarkdown(escape(l)));
+      i++;
+    }
+    if (paraLines.length) html += `<p>${paraLines.join('<br>')}</p>`;
+  }
+
+  return html;
+}
+
+function inlineMarkdown(text) {
+  return text
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')   // **gras**
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')               // *italique*
+    .replace(/`(.+?)`/g, '<code style="background:rgba(154,110,40,0.1);padding:1px 5px;border-radius:4px;font-size:12px;">$1</code>'); // `code`
+}
+
+function openWrittenCourse(idx) {
+  const c = writtenCourses[idx];
+  document.getElementById('wd-cat').textContent = c.category || 'Cours écrit';
+  document.getElementById('wd-title').textContent = c.title;
+  document.getElementById('wd-meta').textContent = c.category ? `${c.category}` : '';
+  document.getElementById('wd-body').innerHTML = parseMarkdown(c.body || '');
+  const coverWrap = document.getElementById('wd-cover');
+  const coverImg = document.getElementById('wd-cover-img');
+  if (c.cover_image) { coverImg.src = c.cover_image; coverWrap.style.display = 'block'; }
+  else { coverImg.src = ''; coverWrap.style.display = 'none'; }
+  goTo('written-detail', '');
+}
+
+// ── ADMIN WRITTEN ──
+function renderAdminWritten() {
+  const list = document.getElementById('admin-written-list');
+  if (!writtenCourses.length) {
+    list.innerHTML = '<div class="empty-state">Aucun cours écrit. Cliquez sur "+ Ajouter".</div>';
+    return;
+  }
+  list.innerHTML = writtenCourses.map((c, i) => `
+    <div class="admin-course-card">
+      <div class="admin-course-header">
+        <div class="admin-course-emoji" style="font-size:18px;">📝</div>
+        <div class="admin-course-info">
+          <div class="admin-course-title">${escapeHtml(c.title)}</div>
+          <div class="admin-course-sub">${c.category || ''}</div>
+        </div>
+        <div class="admin-course-actions">
+          <button class="btn-icon" onclick="openEditWrittenModal(${i})" title="Modifier">✏️</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function openAddWrittenModal() {
+  editingWrittenIndex = null;
+  document.getElementById('written-modal-title').textContent = 'Nouveau cours écrit';
+  document.getElementById('wm-title').value = '';
+  document.getElementById('wm-cat').value = '';
+  document.getElementById('wm-excerpt').value = '';
+  document.getElementById('wm-body').value = '';
+  document.getElementById('wm-cover').value = '';
+  document.getElementById('wm-img-preview').src = '';
+  document.getElementById('wm-img-preview-wrap').style.display = 'none';
+  document.getElementById('btn-delete-written').style.display = 'none';
+  document.getElementById('modal-written-overlay').classList.add('open');
+  document.getElementById('written-modal-sheet').scrollTop = 0;
+}
+
+function openEditWrittenModal(idx) {
+  editingWrittenIndex = idx;
+  const c = writtenCourses[idx];
+  document.getElementById('written-modal-title').textContent = 'Modifier le cours écrit';
+  document.getElementById('wm-title').value = c.title;
+  document.getElementById('wm-cat').value = c.category || '';
+  document.getElementById('wm-excerpt').value = c.excerpt || '';
+  document.getElementById('wm-body').value = c.body || '';
+  document.getElementById('wm-cover').value = c.cover_image || '';
+  const prevWrap = document.getElementById('wm-img-preview-wrap');
+  const prevImg = document.getElementById('wm-img-preview');
+  if (c.cover_image) { prevImg.src = c.cover_image; prevWrap.style.display = 'block'; }
+  else { prevImg.src = ''; prevWrap.style.display = 'none'; }
+  document.getElementById('btn-delete-written').style.display = 'block';
+  document.getElementById('modal-written-overlay').classList.add('open');
+  document.getElementById('written-modal-sheet').scrollTop = 0;
+}
+
+function closeWrittenModalOnBg(e) {
+  if (e.target === document.getElementById('modal-written-overlay')) {
+    document.getElementById('modal-written-overlay').classList.remove('open');
+  }
+}
+
+function handleWrittenImageUpload(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const img = new Image();
+    img.onload = function() {
+      const canvas = document.createElement('canvas');
+      const MAX = 1000; let w = img.width, h = img.height;
+      if (w > MAX) { h = Math.round(h * MAX / w); w = MAX; }
+      canvas.width = w; canvas.height = h;
+      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+      const base64 = canvas.toDataURL('image/jpeg', 0.82);
+      document.getElementById('wm-cover').value = base64;
+      const preview = document.getElementById('wm-img-preview');
+      preview.src = base64;
+      document.getElementById('wm-img-preview-wrap').style.display = 'block';
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function clearWrittenImage() {
+  document.getElementById('wm-cover').value = '';
+  document.getElementById('wm-img-preview').src = '';
+  document.getElementById('wm-img-preview-wrap').style.display = 'none';
+}
+
+async function saveWrittenCourse() {
+  const title = document.getElementById('wm-title').value.trim();
+  const body = document.getElementById('wm-body').value.trim();
+  if (!title) { showToast('⚠️ Le titre est requis'); return; }
+  if (!body) { showToast('⚠️ Le contenu est requis'); return; }
+  const payload = {
+    title,
+    category: document.getElementById('wm-cat').value.trim(),
+    excerpt: document.getElementById('wm-excerpt').value.trim(),
+    body,
+    cover_image: document.getElementById('wm-cover').value.trim() || null
+  };
+  try {
+    showLoading(true);
+    if (editingWrittenIndex !== null) {
+      const updated = await dbUpdateWrittenCourse(writtenCourses[editingWrittenIndex].id, payload);
+      writtenCourses[editingWrittenIndex] = updated;
+      showToast('✅ Cours mis à jour');
+    } else {
+      const created = await dbInsertWrittenCourse(payload);
+      writtenCourses.unshift(created);
+      showToast('✅ Cours écrit créé');
+    }
+    document.getElementById('modal-written-overlay').classList.remove('open');
+    renderAdminWritten();
+  } catch(e) {
+    showToast('⚠️ ' + (e.message || 'Erreur'));
+  } finally { showLoading(false); }
+}
+
+async function deleteCurrentWrittenCourse() {
+  if (editingWrittenIndex === null) return;
+  if (!confirm('Supprimer ce cours écrit ?')) return;
+  try {
+    showLoading(true);
+    await dbDeleteWrittenCourse(writtenCourses[editingWrittenIndex].id);
+    writtenCourses.splice(editingWrittenIndex, 1);
+    document.getElementById('modal-written-overlay').classList.remove('open');
+    renderAdminWritten();
+    showToast('🗑 Cours supprimé');
+  } catch(e) { showToast('⚠️ Erreur suppression'); }
+  finally { showLoading(false); }
+}
+
+// ══════════════════════════════
 // INIT
 // ══════════════════════════════
 async function init() {
   await loadCourses();
+  await loadWrittenCourses();
   renderHome();
   renderCourses();
+  renderWrittenCourses();
   // Check if user already logged in
   const token = sessionStorage.getItem('auth_token');
   const userStr = sessionStorage.getItem('auth_user');
@@ -2311,7 +3010,7 @@ async function init() {
 
 function splashStart() {
   if (currentUser) {
-    goTo('home', 'home-nav');
+    goTo('hub', '');
   } else {
     goTo('auth-login', '');
   }
