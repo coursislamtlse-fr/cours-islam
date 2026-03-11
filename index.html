@@ -7,7 +7,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>Noor — Cours d'Islam</title>
+<title>Retour vers Allah</title>
 <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Josefin+Sans:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -1168,7 +1168,7 @@ body {
     </div>
 
     <div class="splash-text-block">
-      <div class="splash-title">Cours Islam</div>
+      <div class="splash-title">Retour vers Allah</div>
       <div class="splash-arabic">تعلّم الإسلام</div>
       <div class="splash-sub">Apprendre l'Islam, une leçon à la fois</div>
     </div>
@@ -1216,11 +1216,88 @@ body {
           </div>
           <div class="hub-card-arrow">›</div>
         </div>
+        <div class="hub-card" onclick="goTo('rules','')" style="background:rgba(154,110,40,0.07);border-color:rgba(154,110,40,0.2);">
+          <div class="hub-card-icon" style="background:linear-gradient(135deg,#f0e8d0,#e0d4b0);">📜</div>
+          <div class="hub-card-texts">
+            <div class="hub-card-label">Important</div>
+            <div class="hub-card-name">Règles d'utilisation</div>
+            <div class="hub-card-desc">À lire avant d'accéder aux contenus</div>
+          </div>
+          <div class="hub-card-arrow">›</div>
+        </div>
       </div>
       <div style="font-size:10px;letter-spacing:1.5px;color:var(--cream-dim);text-align:center;opacity:0.6;cursor:pointer;" onclick="goToAdmin()">⚙ Administration</div>
     </div>
   </div>
 
+
+  <!-- ════ RULES ════ -->
+  <div class="screen" id="rules">
+    <div class="detail-header geo-bg" style="background:linear-gradient(155deg,#f0e8d0 0%,#f5f0e4 55%,var(--bg) 100%);">
+      <button class="back-btn" onclick="goTo('hub','')">←</button>
+      <div style="font-size:36px;margin-bottom:8px;">📜</div>
+      <div class="detail-cat">Application Noor</div>
+      <div class="detail-title">Règles d'utilisation</div>
+      <div class="detail-desc">Merci de lire et respecter ces règles pour le bon fonctionnement de la communauté.</div>
+    </div>
+    <div class="scroll-body">
+      <div class="detail-body">
+        <div style="display:flex;flex-direction:column;gap:14px;padding-bottom:20px;">
+
+          <div style="background:var(--bg3);border-radius:16px;border:1px solid rgba(154,110,40,0.12);padding:18px 20px;display:flex;gap:16px;align-items:flex-start;">
+            <div style="font-size:26px;flex-shrink:0;">🚫</div>
+            <div>
+              <div style="font-family:'Amiri',serif;font-size:17px;color:var(--cream);margin-bottom:6px;">Téléchargement interdit</div>
+              <div style="font-size:12px;color:var(--cream-dim);line-height:1.75;">Il est strictement interdit de télécharger, enregistrer ou copier les fichiers audio et contenus de cette application.</div>
+            </div>
+          </div>
+
+          <div style="background:var(--bg3);border-radius:16px;border:1px solid rgba(154,110,40,0.12);padding:18px 20px;display:flex;gap:16px;align-items:flex-start;">
+            <div style="font-size:26px;flex-shrink:0;">🔒</div>
+            <div>
+              <div style="font-family:'Amiri',serif;font-size:17px;color:var(--cream);margin-bottom:6px;">Accès personnel</div>
+              <div style="font-size:12px;color:var(--cream-dim);line-height:1.75;">Votre compte est personnel et ne doit pas être partagé avec d'autres personnes.</div>
+            </div>
+          </div>
+
+          <div style="background:var(--bg3);border-radius:16px;border:1px solid rgba(154,110,40,0.12);padding:18px 20px;display:flex;gap:16px;align-items:flex-start;">
+            <div style="font-size:26px;flex-shrink:0;">🤝</div>
+            <div>
+              <div style="font-family:'Amiri',serif;font-size:17px;color:var(--cream);margin-bottom:6px;">Respect</div>
+              <div style="font-size:12px;color:var(--cream-dim);line-height:1.75;">Toute communication dans la section Partages &amp; Questions doit rester respectueuse et bienveillante.</div>
+            </div>
+          </div>
+
+          <div style="background:var(--bg3);border-radius:16px;border:1px solid rgba(154,110,40,0.12);padding:18px 20px;display:flex;gap:16px;align-items:flex-start;">
+            <div style="font-size:26px;flex-shrink:0;">📵</div>
+            <div>
+              <div style="font-family:'Amiri',serif;font-size:17px;color:var(--cream);margin-bottom:6px;">Diffusion interdite</div>
+              <div style="font-size:12px;color:var(--cream-dim);line-height:1.75;">Il est interdit de diffuser ou redistribuer les contenus de l'application sur d'autres plateformes.</div>
+            </div>
+          </div>
+
+          <div style="background:var(--bg3);border-radius:16px;border:1px solid rgba(154,110,40,0.12);padding:18px 20px;display:flex;gap:16px;align-items:flex-start;">
+            <div style="font-size:26px;flex-shrink:0;">🌙</div>
+            <div>
+              <div style="font-family:'Amiri',serif;font-size:17px;color:var(--cream);margin-bottom:6px;">Usage éthique</div>
+              <div style="font-size:12px;color:var(--cream-dim);line-height:1.75;">Les contenus sont destinés à l'apprentissage personnel et doivent être utilisés dans cet esprit.</div>
+            </div>
+          </div>
+
+          <div style="background:rgba(154,110,40,0.07);border-radius:16px;border:1px solid rgba(154,110,40,0.2);padding:16px 20px;text-align:center;">
+            <div style="font-family:'Amiri',serif;font-size:18px;color:var(--gold);direction:rtl;margin-bottom:6px;">جَزَاكُمُ اللَّهُ خَيْرًا</div>
+            <div style="font-size:11px;color:var(--cream-dim);letter-spacing:0.5px;">Qu'Allah vous récompense pour votre respect de ces règles.</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="bottom-nav">
+      <button class="nav-item active" onclick="goTo('hub','')">
+        <span class="nav-icon">🏠</span><span class="nav-label">Accueil</span>
+      </button>
+    </div>
+  </div>
 
   <!-- ════ RESUME LIST ════ -->
   <div class="screen" id="resume">
@@ -1576,7 +1653,7 @@ body {
             <circle r="2" fill="#f8e8b0"/>
           </g>
         </svg>
-        <div style="font-family:'Amiri',serif; font-size:28px; color:var(--cream); line-height:1.2;">Cours Islam</div>
+        <div style="font-family:'Amiri',serif; font-size:28px; color:var(--cream); line-height:1.2;">Retour vers Allah</div>
       </div>
       <div class="ayah-banner">
         <div class="ayah-ar">اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ</div>
@@ -3353,9 +3430,9 @@ function renderWrittenCourses(filter) {
       <div class="written-card-inner">
         <div class="written-card-cat">${c.category || 'Cours'}</div>
         <div class="written-card-title">${escapeHtml(c.title)}</div>
-        <div class="written-card-excerpt">${escapeHtml(c.excerpt || c.body?.substring(0, 160) || '')}</div>
+        <div class="written-card-excerpt">${escapeHtml(c.excerpt || '')}</div>
         <div class="written-card-footer">
-          <div class="written-card-meta">📖 Lecture</div>
+          <div class="written-card-meta"></div>
           <div class="written-card-read">Lire ›</div>
         </div>
       </div>
