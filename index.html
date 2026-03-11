@@ -2,7 +2,11 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#f5f2eb">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>Noor — Cours d'Islam</title>
 <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Josefin+Sans:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
@@ -22,33 +26,57 @@
   --radius: 20px;
 }
 * { margin:0; padding:0; box-sizing:border-box; }
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
 body {
   font-family: 'Josefin Sans', sans-serif;
-  background: #ddd8cc;
+  background: var(--bg);
   color: var(--cream);
-  min-height: 100vh;
+  height: 100%;
+  width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 }
 
 /* ── PHONE SHELL ── */
 .phone {
-  width: 390px;
-  height: 844px;
+  width: 100%;
+  height: 100%;
+  max-width: 480px;
   background: var(--bg);
-  border-radius: 48px;
-  box-shadow: 0 0 0 10px #ccc7bb, 0 0 0 12px #b8b3a8, 0 40px 80px rgba(0,0,0,0.25);
+  border-radius: 0;
+  box-shadow: none;
   overflow: hidden;
   position: relative;
 }
-.notch {
-  width: 126px; height: 34px;
-  background: #c8c3b8;
-  border-radius: 0 0 20px 20px;
-  position: absolute;
-  top:0; left:50%; transform:translateX(-50%);
-  z-index: 200;
+/* Cacher le notch sur mobile réel */
+.notch { display: none; }
+
+/* Sur desktop, afficher le shell téléphone */
+@media (min-width: 600px) {
+  body {
+    background: #ddd8cc;
+    align-items: center;
+  }
+  .phone {
+    width: 390px;
+    height: 844px;
+    border-radius: 48px;
+    box-shadow: 0 0 0 10px #ccc7bb, 0 0 0 12px #b8b3a8, 0 40px 80px rgba(0,0,0,0.25);
+  }
+  .notch {
+    display: block;
+    width: 126px; height: 34px;
+    background: #c8c3b8;
+    border-radius: 0 0 20px 20px;
+    position: absolute;
+    top:0; left:50%; transform:translateX(-50%);
+    z-index: 200;
+  }
 }
 
 /* ── SCREENS ── */
@@ -255,11 +283,11 @@ body {
 /* Expanded lesson content */
 .lesson-content {
   max-height:0; overflow:hidden;
-  transition: max-height 0.4s ease;
+  transition: max-height 0.6s ease;
   border-top: 0px solid rgba(0,0,0,0.07);
 }
 .lesson-content.open {
-  max-height:600px;
+  max-height:5000px;
   border-top-width:1px;
 }
 .lesson-content-inner { padding:16px; }
@@ -864,6 +892,208 @@ body {
 .activity-empty { text-align:center; padding:30px 20px; color:var(--cream-dim); font-size:12px; opacity:0.5; }
 .activity-toggle-icon { font-size:13px; color:var(--gold-dim); transition:transform 0.3s; }
 .activity-toggle-icon.open { transform:rotate(90deg); }
+
+/* ══════════════════════════════
+   AUDIO — skip buttons
+══════════════════════════════ */
+.audio-skip-btn {
+  width:34px; height:34px;
+  background:rgba(154,110,40,0.1);
+  border:1px solid rgba(154,110,40,0.2);
+  border-radius:50%; color:var(--gold);
+  font-size:9px; letter-spacing:0px;
+  cursor:pointer; display:flex; align-items:center; justify-content:center;
+  flex-shrink:0; transition:all 0.2s; flex-direction:column; gap:0px;
+  font-family:'Josefin Sans',sans-serif; font-weight:600;
+}
+.audio-skip-btn:hover { background:rgba(154,110,40,0.2); transform:scale(1.05); }
+.audio-skip-btn span { font-size:7px; line-height:1; }
+.audio-skip-btn .skip-icon { font-size:12px; line-height:1; }
+.audio-stop-btn {
+  width:34px; height:34px;
+  background:rgba(192,57,43,0.1);
+  border:1px solid rgba(192,57,43,0.25);
+  border-radius:50%; color:#c0392b;
+  font-size:13px;
+  cursor:pointer; display:flex; align-items:center; justify-content:center;
+  flex-shrink:0; transition:all 0.2s;
+}
+.audio-stop-btn:hover { background:rgba(192,57,43,0.2); transform:scale(1.05); }
+.audio-speed-row {
+  display:flex; align-items:center; justify-content:center;
+  gap:6px; margin-top:10px; flex-wrap:wrap;
+}
+.audio-speed-label {
+  font-size:9px; letter-spacing:2px; text-transform:uppercase;
+  color:var(--gold-dim); flex-shrink:0;
+}
+.speed-btn {
+  background:rgba(154,110,40,0.08);
+  border:1px solid rgba(154,110,40,0.18);
+  border-radius:20px; padding:4px 10px;
+  font-family:'Josefin Sans',sans-serif;
+  font-size:10px; font-weight:600; color:var(--gold-dim);
+  cursor:pointer; transition:all 0.2s;
+}
+.speed-btn:hover { background:rgba(154,110,40,0.18); }
+.speed-btn.active {
+  background:var(--gold); color:var(--bg);
+  border-color:var(--gold);
+}
+
+/* ══════════════════════════════
+   Q&R SECTION
+══════════════════════════════ */
+.qa-section {
+  margin-top:18px;
+  border-top:1px solid rgba(154,110,40,0.15);
+  padding-top:14px;
+}
+.qa-section-title {
+  font-size:10px; letter-spacing:2px; text-transform:uppercase;
+  color:var(--gold-dim); margin-bottom:12px;
+  display:flex; align-items:center; gap:6px;
+}
+.qa-ask-form {
+  background:rgba(154,110,40,0.05);
+  border:1px solid rgba(154,110,40,0.15);
+  border-radius:12px; padding:12px; margin-bottom:12px;
+}
+.qa-ask-input {
+  width:100%; background:rgba(255,255,255,0.5);
+  border:1px solid rgba(154,110,40,0.2); border-radius:10px;
+  padding:10px 12px; font-family:'Josefin Sans',sans-serif;
+  font-size:12px; color:var(--cream); outline:none; resize:none;
+  min-height:52px; transition:border-color 0.2s;
+}
+.qa-ask-input:focus { border-color:rgba(154,110,40,0.4); }
+.qa-ask-input::placeholder { color:rgba(176,165,145,0.5); }
+.qa-ask-btn {
+  margin-top:8px; background:var(--gold); border:none;
+  border-radius:20px; padding:8px 20px;
+  font-family:'Josefin Sans',sans-serif; font-size:10px;
+  letter-spacing:2px; text-transform:uppercase; font-weight:600;
+  color:var(--bg); cursor:pointer; transition:all 0.2s; float:right;
+}
+.qa-ask-btn:hover { background:var(--gold-light); }
+.qa-questions-list { clear:both; }
+.qa-item {
+  background:var(--bg2); border-radius:12px;
+  border:1px solid rgba(0,0,0,0.06);
+  margin-bottom:10px; overflow:hidden;
+}
+.qa-question-block {
+  padding:12px 14px;
+  display:flex; align-items:flex-start; gap:10px;
+}
+.qa-avatar {
+  width:28px; height:28px; border-radius:50%;
+  background:rgba(154,110,40,0.12);
+  border:1px solid rgba(154,110,40,0.2);
+  display:flex; align-items:center; justify-content:center;
+  font-size:11px; color:var(--gold); font-weight:600;
+  flex-shrink:0;
+}
+.qa-question-content { flex:1; min-width:0; }
+.qa-user-meta { font-size:9px; color:var(--gold-dim); letter-spacing:1px; text-transform:uppercase; margin-bottom:4px; }
+.qa-question-text { font-size:12px; color:var(--cream); line-height:1.7; }
+.qa-answer-block {
+  background:rgba(42,92,63,0.07);
+  border-top:1px solid rgba(42,92,63,0.15);
+  padding:12px 14px;
+  display:flex; align-items:flex-start; gap:10px;
+}
+.qa-answer-avatar {
+  width:28px; height:28px; border-radius:50%;
+  background:rgba(42,92,63,0.15);
+  border:1px solid rgba(42,92,63,0.25);
+  display:flex; align-items:center; justify-content:center;
+  font-size:12px; flex-shrink:0;
+}
+.qa-answer-content { flex:1; min-width:0; }
+.qa-answer-meta { font-size:9px; color:#2a6640; letter-spacing:1px; text-transform:uppercase; margin-bottom:4px; }
+.qa-answer-text { font-size:12px; color:var(--cream); line-height:1.7; }
+.qa-admin-reply-form {
+  border-top:1px solid rgba(154,110,40,0.1);
+  padding:10px 14px; background:rgba(255,255,255,0.3);
+}
+.qa-admin-reply-input {
+  width:100%; background:rgba(255,255,255,0.6);
+  border:1px solid rgba(154,110,40,0.2); border-radius:8px;
+  padding:8px 10px; font-family:'Josefin Sans',sans-serif;
+  font-size:12px; color:var(--cream); outline:none; resize:none; min-height:44px;
+}
+.qa-admin-reply-input:focus { border-color:rgba(154,110,40,0.4); }
+.qa-admin-reply-btn {
+  margin-top:6px; background:rgba(42,92,63,0.2);
+  border:1px solid rgba(42,92,63,0.35); border-radius:16px;
+  padding:6px 14px; font-family:'Josefin Sans',sans-serif;
+  font-size:9px; letter-spacing:1.5px; text-transform:uppercase;
+  color:#2a6640; cursor:pointer; transition:all 0.2s; float:right;
+}
+.qa-admin-reply-btn:hover { background:rgba(42,92,63,0.35); }
+.qa-empty { text-align:center; font-size:11px; color:var(--cream-dim); opacity:0.5; padding:14px 0; }
+.qa-pending-answer {
+  border-top:1px solid rgba(154,110,40,0.1);
+  padding:8px 14px; font-size:10px;
+  color:var(--gold-dim); letter-spacing:0.5px; font-style:italic;
+}
+.qa-delete-btn {
+  background:none; border:none;
+  font-size:14px; cursor:pointer;
+  opacity:0.4; transition:opacity 0.2s;
+  flex-shrink:0; padding:2px 4px;
+  line-height:1;
+}
+.qa-delete-btn:hover { opacity:0.9; }
+.qa-question-block { position:relative; }
+.qa-question-actions {
+  display:flex; gap:6px; margin-top:8px;
+}
+.qa-action-btn {
+  background:none; border:1px solid rgba(154,110,40,0.2);
+  border-radius:16px; padding:4px 10px;
+  font-family:'Josefin Sans',sans-serif;
+  font-size:9px; letter-spacing:1.5px; text-transform:uppercase;
+  color:var(--gold-dim); cursor:pointer; transition:all 0.2s;
+}
+.qa-action-btn:hover { background:rgba(154,110,40,0.08); }
+.qa-action-btn.del { border-color:rgba(192,57,43,0.25); color:#e07070; }
+.qa-action-btn.del:hover { background:rgba(192,57,43,0.08); }
+.qa-edit-form {
+  margin-top:10px; display:flex; flex-direction:column; gap:8px;
+}
+.qa-img-preview {
+  width:100%; border-radius:10px; max-height:200px;
+  object-fit:contain; background:rgba(0,0,0,0.04);
+  border:1px solid rgba(154,110,40,0.15);
+  display:block; margin-top:8px;
+}
+.qa-img-upload-label {
+  display:flex; align-items:center; gap:6px;
+  background:rgba(0,0,0,0.05); border:1px dashed rgba(154,110,40,0.3);
+  border-radius:8px; padding:8px 12px; cursor:pointer;
+  font-size:10px; letter-spacing:1.5px; text-transform:uppercase;
+  color:var(--gold-dim); transition:all 0.2s;
+}
+.qa-img-upload-label:hover { background:rgba(154,110,40,0.08); }
+.qa-question-image {
+  width:100%; border-radius:10px; max-height:220px;
+  object-fit:contain; background:rgba(0,0,0,0.03);
+  display:block; margin-top:10px;
+  border:1px solid rgba(154,110,40,0.12);
+}
+.qa-ask-img-row {
+  display:flex; align-items:center; gap:8px; margin-top:6px; flex-wrap:wrap;
+}
+.qa-ask-img-preview {
+  max-height:80px; border-radius:8px; max-width:120px;
+  object-fit:contain; border:1px solid rgba(154,110,40,0.2);
+}
+.qa-ask-img-clear {
+  background:none; border:none; color:#e07070;
+  font-size:10px; cursor:pointer; letter-spacing:0.5px;
+}
 </style>
 </head>
 <body>
@@ -1042,6 +1272,26 @@ body {
           <img id="wd-cover-img" src="" alt="">
         </div>
         <div class="written-body-text" id="wd-body"></div>
+        <!-- Section Q&R cours écrits -->
+        <div class="qa-section" id="wd-qa-section">
+          <div class="qa-section-title">💬 Questions &amp; Réponses</div>
+          <div class="qa-ask-form">
+            <textarea class="qa-ask-input" id="wd-qa-input" placeholder="Posez votre question sur ce cours…" rows="2"></textarea>
+            <div class="qa-ask-img-row">
+              <label class="qa-img-upload-label">
+                📎 Image
+                <input type="file" accept="image/*" style="display:none;" onchange="previewAskImage(event, 'wd-qa-ask-img', 'wd-qa-ask-b64')">
+              </label>
+              <img id="wd-qa-ask-img" class="qa-ask-img-preview" style="display:none;">
+              <button id="wd-qa-ask-clear" class="qa-ask-img-clear" style="display:none;" onclick="clearAskImage('wd-qa-ask-img','wd-qa-ask-b64','wd-qa-ask-clear')">✕ Supprimer</button>
+              <input type="hidden" id="wd-qa-ask-b64">
+            </div>
+            <button class="qa-ask-btn" onclick="submitQuestion('written')">Envoyer ›</button>
+          </div>
+          <div class="qa-questions-list" id="wd-qa-list">
+            <div class="qa-empty">Aucune question pour l'instant.</div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="bottom-nav">
@@ -1563,6 +1813,87 @@ body {
 </div>
 
 <script>
+// ── MIT APP INVENTOR — Plein écran forcé (navbar incluse) ──
+(function() {
+
+  // Méthode 1 : Fullscreen API standard (cache navbar + statusbar)
+  function requestFullscreen() {
+    const el = document.documentElement;
+    try {
+      if (el.requestFullscreen) el.requestFullscreen({ navigationUI: 'hide' });
+      else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+      else if (el.mozRequestFullScreen) el.mozRequestFullScreen();
+      else if (el.msRequestFullscreen) el.msRequestFullscreen();
+    } catch(e) {}
+  }
+
+  // Méthode 2 : Android immersive sticky via interface JS
+  function tryAndroidImmersive() {
+    try {
+      // MIT App Inventor WebView bridge
+      if (window.AppInventor) {
+        if (window.AppInventor.setSystemUIVisibility)
+          window.AppInventor.setSystemUIVisibility(false);
+        if (window.AppInventor.setStatusBarHidden)
+          window.AppInventor.setStatusBarHidden(true);
+      }
+      // Interface Android générique
+      if (window.Android) {
+        if (window.Android.hideSystemUI) window.Android.hideSystemUI();
+        if (window.Android.setImmersiveMode) window.Android.setImmersiveMode(true);
+        if (window.Android.hideNavigationBar) window.Android.hideNavigationBar();
+      }
+    } catch(e) {}
+  }
+
+  // Méthode 3 : CSS pour cacher les barres système sur Android WebView
+  const style = document.createElement('style');
+  style.textContent = `
+    ::-webkit-scrollbar { display: none; }
+    html { overflow: hidden; }
+    body { overflow: hidden; }
+    /* Android WebView immersive hints */
+    @media screen {
+      :root {
+        --android-nav-height: env(safe-area-inset-bottom, 0px);
+      }
+    }
+  `;
+  document.head.appendChild(style);
+
+  // Lancer immédiatement
+  tryAndroidImmersive();
+  requestFullscreen();
+
+  // Relancer au toucher (certains navigateurs nécessitent un geste utilisateur)
+  document.addEventListener('touchstart', function onFirstTouch() {
+    requestFullscreen();
+    tryAndroidImmersive();
+    document.removeEventListener('touchstart', onFirstTouch);
+  }, { once: true });
+
+  // Relancer si la navbar réapparaît (ex: retour de l'arrière-plan)
+  document.addEventListener('visibilitychange', function() {
+    if (!document.hidden) {
+      setTimeout(() => { requestFullscreen(); tryAndroidImmersive(); }, 300);
+    }
+  });
+
+  // Forcer la hauteur réelle de l'écran en JS
+  function setRealHeight() {
+    const h = window.innerHeight;
+    document.documentElement.style.height = h + 'px';
+    document.body.style.height = h + 'px';
+    const phone = document.querySelector('.phone');
+    if (phone) phone.style.height = h + 'px';
+  }
+  setRealHeight();
+  window.addEventListener('resize', setRealHeight);
+  window.addEventListener('orientationchange', () => setTimeout(setRealHeight, 300));
+
+})();
+
+
 // ══════════════════════════════
 // SUPABASE CONFIG
 // ══════════════════════════════
@@ -1661,6 +1992,7 @@ async function dbGetCourseViews() {
 // STATE
 // ══════════════════════════════
 let currentCourseId = null;
+let currentWrittenId = null;
 let editingCourseIndex = null;
 let selectedEmoji = '📖';
 let selectedColor = 'gold';
@@ -1892,7 +2224,23 @@ function renderLessons(lessons) {
             <div class="lesson-image-caption">📖 ${escapeHtml(l.name)}</div>
           </div>` : ''}
           ${l.text ? `<div class="lesson-text-content">${escapeHtml(l.text)}</div>` : ''}
-          ${l.audioUrl ? renderAudioPlayer(i, l.audioUrl, l.name) : ''}
+          ${l.audioUrl ? renderAudioPlayer(i, l.audioUrl, l.name) : `
+          <div class="qa-section" style="margin-top:12px;">
+            <div class="qa-section-title">💬 Questions &amp; Réponses</div>
+            <div class="qa-ask-form">
+              <textarea class="qa-ask-input" id="qa-input-${i}" placeholder="Posez votre question sur cette leçon…" rows="2"></textarea>
+              <div class="qa-ask-img-row">
+                <label class="qa-img-upload-label">📎 Image<input type="file" accept="image/*" style="display:none;" onchange="previewAskImage(event,'qa-ask-img-${i}','qa-ask-b64-${i}')"></label>
+                <img id="qa-ask-img-${i}" class="qa-ask-img-preview" style="display:none;">
+                <button id="qa-ask-clear-${i}" class="qa-ask-img-clear" style="display:none;" onclick="clearAskImage('qa-ask-img-${i}','qa-ask-b64-${i}','qa-ask-clear-${i}')">✕</button>
+                <input type="hidden" id="qa-ask-b64-${i}">
+              </div>
+              <button class="qa-ask-btn" onclick="submitQuestion('lesson', ${i})">Envoyer ›</button>
+            </div>
+            <div class="qa-questions-list" id="qa-list-${i}">
+              <div class="qa-empty">Aucune question pour l\'instant.</div>
+            </div>
+          </div>`}
           ${!l.text && !l.audioUrl && !l.imageUrl ? '<div style="color:var(--cream-dim);font-size:12px;text-align:center;padding:10px 0;opacity:0.5">Aucun contenu pour cette leçon.</div>' : ''}
         </div>
       </div>
@@ -1904,11 +2252,18 @@ function renderAudioPlayer(idx, url, name) {
   return `
   <div class="audio-player" id="audio-player-${idx}">
     <div class="audio-title">🎧 Écouter la leçon</div>
-    <div class="audio-controls">
+    <div class="audio-controls" style="display:flex;align-items:center;gap:8px;">
+      <button class="audio-skip-btn" onclick="skipAudio(${idx}, '${escapeAttr(url)}', -10)" title="Reculer 10s">
+        <span class="skip-icon">↺</span><span>10s</span>
+      </button>
       <button class="audio-play-btn" id="aplay-${idx}" onclick="toggleAudio(${idx}, '${escapeAttr(url)}')">
         <span class="pico">▶</span>
       </button>
-      <div class="audio-progress-wrap">
+      <button class="audio-skip-btn" onclick="skipAudio(${idx}, '${escapeAttr(url)}', 10)" title="Avancer 10s">
+        <span class="skip-icon">↻</span><span>10s</span>
+      </button>
+      <button class="audio-stop-btn" onclick="stopAudio(${idx})" title="Stop — revenir au début">■</button>
+      <div class="audio-progress-wrap" style="flex:1;">
         <div class="audio-seek" onclick="seekAudio(event, ${idx})">
           <div class="audio-seek-fill" id="afill-${idx}"></div>
         </div>
@@ -1918,6 +2273,34 @@ function renderAudioPlayer(idx, url, name) {
         </div>
       </div>
     </div>
+    <div class="audio-speed-row">
+      <span class="audio-speed-label">Vitesse</span>
+      <button class="speed-btn" onclick="setSpeed(${idx}, 0.5)" id="spd-${idx}-05">0.5×</button>
+      <button class="speed-btn" onclick="setSpeed(${idx}, 0.75)" id="spd-${idx}-075">0.75×</button>
+      <button class="speed-btn active" onclick="setSpeed(${idx}, 1)" id="spd-${idx}-1">1×</button>
+      <button class="speed-btn" onclick="setSpeed(${idx}, 1.25)" id="spd-${idx}-125">1.25×</button>
+      <button class="speed-btn" onclick="setSpeed(${idx}, 1.5)" id="spd-${idx}-15">1.5×</button>
+      <button class="speed-btn" onclick="setSpeed(${idx}, 2)" id="spd-${idx}-2">2×</button>
+    </div>
+  </div>
+  <div class="qa-section" style="margin-top:14px;">
+    <div class="qa-section-title">💬 Questions &amp; Réponses</div>
+    <div class="qa-ask-form">
+      <textarea class="qa-ask-input" id="qa-input-${idx}" placeholder="Posez votre question sur cette leçon…" rows="2"></textarea>
+      <div class="qa-ask-img-row">
+        <label class="qa-img-upload-label">
+          📎 Image
+          <input type="file" accept="image/*" style="display:none;" onchange="previewAskImage(event, 'qa-ask-img-${idx}', 'qa-ask-b64-${idx}')">
+        </label>
+        <img id="qa-ask-img-${idx}" class="qa-ask-img-preview" style="display:none;">
+        <button id="qa-ask-clear-${idx}" class="qa-ask-img-clear" style="display:none;" onclick="clearAskImage('qa-ask-img-${idx}','qa-ask-b64-${idx}','qa-ask-clear-${idx}')">✕ Supprimer</button>
+        <input type="hidden" id="qa-ask-b64-${idx}">
+      </div>
+      <button class="qa-ask-btn" onclick="submitQuestion('lesson', ${idx})">Envoyer ›</button>
+    </div>
+    <div class="qa-questions-list" id="qa-list-${idx}">
+      <div class="qa-empty">Aucune question pour l\'instant.</div>
+    </div>
   </div>`;
 }
 
@@ -1926,6 +2309,10 @@ function toggleLesson(i) {
   const toggle = document.getElementById(`toggle-${i}`);
   const isOpen = content.classList.toggle('open');
   toggle.classList.toggle('open', isOpen);
+  // Load Q&R when lesson is opened
+  if (isOpen) {
+    loadQAForLesson(i);
+  }
 }
 
 // ══════════════════════════════
@@ -1940,6 +2327,12 @@ function toggleAudio(idx, url) {
   if (!audioObjects[idx]) {
     audioObjects[idx] = new Audio(url);
     const aud = audioObjects[idx];
+    // Restore speed if already set via speed buttons
+    const activeSpeedBtn = document.querySelector(`#audio-player-${idx} .speed-btn.active`);
+    if (activeSpeedBtn) {
+      const spd = parseFloat(activeSpeedBtn.textContent);
+      if (!isNaN(spd)) aud.playbackRate = spd;
+    }
     aud.addEventListener('loadedmetadata', () => {
       document.getElementById(`adur-${idx}`).textContent = formatTime(aud.duration);
     });
@@ -1979,6 +2372,52 @@ function seekAudio(e, idx) {
   const rect = e.currentTarget.getBoundingClientRect();
   const pct = (e.clientX - rect.left) / rect.width;
   aud.currentTime = pct * aud.duration;
+}
+
+function skipAudio(idx, url, seconds) {
+  // Ensure audio object exists
+  if (!audioObjects[idx]) {
+    audioObjects[idx] = new Audio(url);
+    const aud = audioObjects[idx];
+    aud.addEventListener('loadedmetadata', () => {
+      document.getElementById(`adur-${idx}`).textContent = formatTime(aud.duration);
+    });
+    aud.addEventListener('timeupdate', () => {
+      const pct = (aud.currentTime / aud.duration) * 100 || 0;
+      document.getElementById(`afill-${idx}`).style.width = pct + '%';
+      document.getElementById(`atime-${idx}`).textContent = formatTime(aud.currentTime);
+    });
+    aud.addEventListener('ended', () => {
+      document.getElementById(`aplay-${idx}`).innerHTML = '<span class="pico">▶</span>';
+    });
+  }
+  const aud = audioObjects[idx];
+  aud.currentTime = Math.max(0, Math.min(aud.duration || 0, aud.currentTime + seconds));
+}
+
+function stopAudio(idx) {
+  const aud = audioObjects[idx];
+  if (!aud) return;
+  aud.pause();
+  aud.currentTime = 0;
+  const btn = document.getElementById(`aplay-${idx}`);
+  if (btn) btn.innerHTML = '<span class="pico">▶</span>';
+  const fill = document.getElementById(`afill-${idx}`);
+  if (fill) fill.style.width = '0%';
+  const time = document.getElementById(`atime-${idx}`);
+  if (time) time.textContent = '0:00';
+}
+
+function setSpeed(idx, speed) {
+  // Ensure audio exists (init if needed with last known URL)
+  const aud = audioObjects[idx];
+  if (aud) aud.playbackRate = speed;
+  // Update speed buttons UI
+  const speeds = { 0.5: '05', 0.75: '075', 1: '1', 1.25: '125', 1.5: '15', 2: '2' };
+  Object.entries(speeds).forEach(([s, key]) => {
+    const btn = document.getElementById(`spd-${idx}-${key}`);
+    if (btn) btn.classList.toggle('active', parseFloat(s) === speed);
+  });
 }
 
 function stopAudioUI() {
@@ -2841,7 +3280,10 @@ function openWrittenCourse(idx) {
   const coverImg = document.getElementById('wd-cover-img');
   if (c.cover_image) { coverImg.src = c.cover_image; coverWrap.style.display = 'block'; }
   else { coverImg.src = ''; coverWrap.style.display = 'none'; }
+  currentWrittenId = c.id;
   goTo('written-detail', '');
+  // Load Q&R
+  loadQAForWritten(c.id);
 }
 
 // ── ADMIN WRITTEN ──
@@ -2977,6 +3419,291 @@ async function deleteCurrentWrittenCourse() {
     showToast('🗑 Cours supprimé');
   } catch(e) { showToast('⚠️ Erreur suppression'); }
   finally { showLoading(false); }
+}
+
+
+// ══════════════════════════════
+// Q&R SYSTEM
+// ══════════════════════════════
+let currentQAContext = null; // { type: 'lesson'|'written', lessonIdx, writtenId }
+
+// --- DB functions ---
+async function dbGetQuestions(contextType, contextId) {
+  const res = await fetch(
+    `${SUPABASE_URL}/rest/v1/qa_questions?context_type=eq.${contextType}&context_id=eq.${contextId}&order=created_at.asc`,
+    { headers: HEADERS }
+  );
+  if (!res.ok) return [];
+  return await res.json();
+}
+
+async function dbInsertQuestion(data) {
+  const token = sessionStorage.getItem('auth_token');
+  const h = { ...HEADERS, 'Authorization': 'Bearer ' + (token || SUPABASE_KEY), 'Prefer': 'return=representation' };
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/qa_questions`, {
+    method: 'POST', headers: h, body: JSON.stringify(data)
+  });
+  if (!res.ok) { const e = await res.json().catch(()=>({})); throw new Error(e.message || 'Erreur'); }
+  return (await res.json())[0];
+}
+
+async function dbInsertAnswer(questionId, answerText) {
+  const token = sessionStorage.getItem('auth_token');
+  const h = { ...HEADERS, 'Authorization': 'Bearer ' + (token || SUPABASE_KEY), 'Prefer': 'return=representation' };
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/qa_questions?id=eq.${questionId}`, {
+    method: 'PATCH', headers: h,
+    body: JSON.stringify({ answer: answerText, answered_at: new Date().toISOString() })
+  });
+  if (!res.ok) throw new Error('Erreur réponse');
+}
+
+async function dbDeleteQuestion(questionId) {
+  const token = sessionStorage.getItem('auth_token');
+  const h = { ...HEADERS, 'Authorization': 'Bearer ' + (token || SUPABASE_KEY) };
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/qa_questions?id=eq.${questionId}`, {
+    method: 'DELETE', headers: h
+  });
+  if (!res.ok) throw new Error('Erreur suppression');
+}
+
+// --- Rendering ---
+function renderQAList(containerId, questions, isAdmin) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  if (!questions || !questions.length) {
+    container.innerHTML = '<div class="qa-empty">Aucune question pour l\'instant.</div>';
+    return;
+  }
+  container.innerHTML = questions.map(q => {
+    const isOwn = currentUser && q.user_id === currentUser.id;
+    // Delete button: admin can delete all, user can delete own
+    const deleteBtn = (isAdmin || isOwn)
+      ? `<button class="qa-delete-btn" onclick="deleteQuestion('${q.id}', '${containerId}')" title="Supprimer">🗑</button>`
+      : '';
+    // Edit button: only own questions
+    const editBtn = isOwn
+      ? `<button class="qa-action-btn" onclick="startEditQuestion('${q.id}', '${containerId}')">✏️ Modifier</button>`
+      : '';
+    const imgHtml = q.image_url
+      ? `<img src="${q.image_url}" class="qa-question-image" onclick="openImageFullscreen(this.src)">`
+      : '';
+    const answerBlock = q.answer
+      ? `<div class="qa-answer-block">
+           <div class="qa-answer-avatar">🌙</div>
+           <div class="qa-answer-content">
+             <div class="qa-answer-meta">Réponse de l'Admin</div>
+             <div class="qa-answer-text">${escapeHtml(q.answer)}</div>
+           </div>
+         </div>`
+      : (isAdmin
+          ? `<div class="qa-admin-reply-form">
+               <textarea class="qa-admin-reply-input" id="admin-reply-${q.id}" placeholder="Répondre à cette question…" rows="2"></textarea>
+               <button class="qa-admin-reply-btn" onclick="submitAdminAnswer('${q.id}', '${containerId}')">Répondre ›</button>
+             </div>`
+          : `<div class="qa-pending-answer">⏳ En attente de réponse de l'administrateur</div>`);
+    return `
+      <div class="qa-item" id="qa-item-${q.id}">
+        <div class="qa-question-block">
+          <div class="qa-avatar">👤</div>
+          <div class="qa-question-content">
+            <div class="qa-question-text" id="qa-text-${q.id}">${escapeHtml(q.question)}</div>
+            ${imgHtml}
+            <div class="qa-question-actions" id="qa-actions-${q.id}">
+              ${editBtn}
+            </div>
+          </div>
+          ${deleteBtn}
+        </div>
+        ${answerBlock}
+      </div>`;
+  }).join('');
+}
+
+async function loadQAForLesson(lessonIdx) {
+  const courseId = courses[currentCourseId]?.id;
+  if (!courseId) return;
+  const contextId = `${courseId}_lesson_${lessonIdx}`;
+  try {
+    const questions = await dbGetQuestions('lesson', contextId);
+    const isAdmin = sessionStorage.getItem('is_admin') === '1';
+    renderQAList(`qa-list-${lessonIdx}`, questions, isAdmin);
+  } catch(e) { /* silencieux */ }
+}
+
+async function loadQAForWritten(writtenId) {
+  try {
+    const questions = await dbGetQuestions('written', writtenId);
+    const isAdmin = sessionStorage.getItem('is_admin') === '1';
+    renderQAList('wd-qa-list', questions, isAdmin);
+  } catch(e) { /* silencieux */ }
+}
+
+async function submitQuestion(type, lessonIdx) {
+  if (!currentUser) { showToast('⚠️ Connectez-vous pour poser une question'); return; }
+  let inputId, imgB64Id, contextId, containerId;
+  if (type === 'lesson') {
+    const courseId = courses[currentCourseId]?.id;
+    if (!courseId) return;
+    contextId = `${courseId}_lesson_${lessonIdx}`;
+    inputId = `qa-input-${lessonIdx}`;
+    imgB64Id = `qa-ask-b64-${lessonIdx}`;
+    containerId = `qa-list-${lessonIdx}`;
+  } else {
+    const wc = writtenCourses.find(w => w.id === currentWrittenId);
+    if (!wc) return;
+    contextId = String(currentWrittenId);
+    inputId = 'wd-qa-input';
+    imgB64Id = 'wd-qa-ask-b64';
+    containerId = 'wd-qa-list';
+  }
+  const input = document.getElementById(inputId);
+  const text = input?.value?.trim();
+  const imgB64 = document.getElementById(imgB64Id)?.value || null;
+  if (!text) { showToast('⚠️ Écrivez votre question'); return; }
+  try {
+    showLoading(true);
+    await dbInsertQuestion({
+      context_type: type,
+      context_id: contextId,
+      user_id: currentUser.id,
+      user_name: 'Anonyme',
+      question: text,
+      image_url: imgB64 || null,
+      created_at: new Date().toISOString()
+    });
+    input.value = '';
+    // Clear image preview
+    if (imgB64Id) {
+      const b64el = document.getElementById(imgB64Id);
+      if (b64el) b64el.value = '';
+      const imgKey = imgB64Id.replace('-b64', '-img').replace('qa-ask-b64-', 'qa-ask-img-').replace('wd-qa-ask-b64', 'wd-qa-ask-img');
+      const imgEl = document.getElementById(imgKey);
+      if (imgEl) { imgEl.src=''; imgEl.style.display='none'; }
+      const clearKey = imgB64Id.replace('-b64', '-clear').replace('qa-ask-b64-', 'qa-ask-clear-').replace('wd-qa-ask-b64', 'wd-qa-ask-clear');
+      const clearEl = document.getElementById(clearKey);
+      if (clearEl) clearEl.style.display = 'none';
+    }
+    showToast('✅ Question envoyée !');
+    if (type === 'lesson') await loadQAForLesson(lessonIdx);
+    else await loadQAForWritten(currentWrittenId);
+  } catch(e) {
+    showToast('⚠️ ' + (e.message || 'Erreur'));
+  } finally { showLoading(false); }
+}
+
+async function submitAdminAnswer(questionId, containerId) {
+  const input = document.getElementById(`admin-reply-${questionId}`);
+  const text = input?.value?.trim();
+  if (!text) { showToast('⚠️ Rédigez une réponse'); return; }
+  try {
+    showLoading(true);
+    await dbInsertAnswer(questionId, text);
+    showToast('✅ Réponse publiée !');
+    await reloadQAList(containerId);
+  } catch(e) {
+    showToast('⚠️ ' + (e.message || 'Erreur'));
+  } finally { showLoading(false); }
+}
+
+async function deleteQuestion(questionId, containerId) {
+  if (!confirm('Supprimer cette question et sa réponse ?')) return;
+  try {
+    showLoading(true);
+    await dbDeleteQuestion(questionId);
+    showToast('🗑 Question supprimée');
+    await reloadQAList(containerId);
+  } catch(e) {
+    showToast('⚠️ ' + (e.message || 'Erreur suppression'));
+  } finally { showLoading(false); }
+}
+
+async function reloadQAList(containerId) {
+  if (containerId === 'wd-qa-list') {
+    await loadQAForWritten(currentWrittenId);
+  } else {
+    const lessonIdx = parseInt(containerId.replace('qa-list-', ''));
+    if (!isNaN(lessonIdx)) await loadQAForLesson(lessonIdx);
+  }
+}
+
+// ── Image helpers for ask form ──
+function previewAskImage(event, imgId, b64Id) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const img = new Image();
+    img.onload = function() {
+      const canvas = document.createElement('canvas');
+      const MAX = 800; let w = img.width, h = img.height;
+      if (w > MAX) { h = Math.round(h * MAX / w); w = MAX; }
+      canvas.width = w; canvas.height = h;
+      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+      const b64 = canvas.toDataURL('image/jpeg', 0.78);
+      document.getElementById(b64Id).value = b64;
+      const imgEl = document.getElementById(imgId);
+      imgEl.src = b64; imgEl.style.display = 'block';
+      const clearId = b64Id.replace('-b64', '-clear').replace('qa-ask-b64-', 'qa-ask-clear-').replace('wd-qa-ask-b64', 'wd-qa-ask-clear');
+      const clearEl = document.getElementById(clearId);
+      if (clearEl) clearEl.style.display = 'inline';
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function clearAskImage(imgId, b64Id, clearId) {
+  document.getElementById(imgId).src = '';
+  document.getElementById(imgId).style.display = 'none';
+  document.getElementById(b64Id).value = '';
+  document.getElementById(clearId).style.display = 'none';
+}
+
+// ── Edit question (own messages) ──
+function startEditQuestion(questionId, containerId) {
+  const textEl = document.getElementById(`qa-text-${questionId}`);
+  const actionsEl = document.getElementById(`qa-actions-${questionId}`);
+  if (!textEl) return;
+  const currentText = textEl.textContent;
+  actionsEl.innerHTML = `
+    <div class="qa-edit-form">
+      <textarea class="qa-ask-input" id="qa-edit-input-${questionId}" rows="2">${escapeHtml(currentText)}</textarea>
+      <div class="qa-ask-img-row">
+        <label class="qa-img-upload-label">📎 Image<input type="file" accept="image/*" style="display:none;" onchange="previewAskImage(event,'qa-edit-img-${questionId}','qa-edit-b64-${questionId}')"></label>
+        <img id="qa-edit-img-${questionId}" class="qa-ask-img-preview" style="display:none;">
+        <button class="qa-ask-img-clear" style="display:none;" id="qa-edit-clear-${questionId}" onclick="clearAskImage('qa-edit-img-${questionId}','qa-edit-b64-${questionId}','qa-edit-clear-${questionId}')">✕</button>
+        <input type="hidden" id="qa-edit-b64-${questionId}">
+      </div>
+      <div style="display:flex;gap:8px;margin-top:6px;justify-content:flex-end;">
+        <button class="qa-action-btn" onclick="cancelEditQuestion('${questionId}', '${containerId}', \`${escapeHtml(currentText)}\`)">Annuler</button>
+        <button class="qa-ask-btn" style="position:static;float:none;" onclick="saveEditQuestion('${questionId}', '${containerId}')">Enregistrer ›</button>
+      </div>
+    </div>`;
+}
+
+function cancelEditQuestion(questionId, containerId, originalText) {
+  reloadQAList(containerId);
+}
+
+async function saveEditQuestion(questionId, containerId) {
+  const newText = document.getElementById(`qa-edit-input-${questionId}`)?.value?.trim();
+  const newImg = document.getElementById(`qa-edit-b64-${questionId}`)?.value || null;
+  if (!newText) { showToast('⚠️ Le message ne peut pas être vide'); return; }
+  try {
+    showLoading(true);
+    const token = sessionStorage.getItem('auth_token');
+    const h = { ...HEADERS, 'Authorization': 'Bearer ' + (token || SUPABASE_KEY) };
+    const patch = { question: newText };
+    if (newImg) patch.image_url = newImg;
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/qa_questions?id=eq.${questionId}`, {
+      method: 'PATCH', headers: h, body: JSON.stringify(patch)
+    });
+    if (!res.ok) throw new Error('Erreur modification');
+    showToast('✅ Message modifié');
+    await reloadQAList(containerId);
+  } catch(e) {
+    showToast('⚠️ ' + (e.message || 'Erreur'));
+  } finally { showLoading(false); }
 }
 
 // ══════════════════════════════
