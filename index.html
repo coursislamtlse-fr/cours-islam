@@ -653,13 +653,13 @@ body {
 .btn-outline:hover { border-color:var(--gold); color:var(--gold); }
 
 /* Users management in admin */
-.users-tabs { display:flex; gap:8px; margin-bottom:16px; }
+.users-tabs { display:flex; gap:5px; margin-bottom:16px; }
 .tab-btn {
   flex:1; background:var(--bg3); border:1px solid rgba(0,0,0,0.07);
-  border-radius:10px; padding:10px; color:var(--cream-dim);
-  font-family:'Josefin Sans',sans-serif; font-size:10px;
-  letter-spacing:2px; text-transform:uppercase; cursor:pointer;
-  transition:all 0.2s;
+  border-radius:10px; padding:8px 4px; color:var(--cream-dim);
+  font-family:'Josefin Sans',sans-serif; font-size:8px;
+  letter-spacing:0.5px; text-transform:uppercase; cursor:pointer;
+  transition:all 0.2s; white-space:nowrap;
 }
 .tab-btn.active { background:rgba(154,110,40,0.1); border-color:rgba(154,110,40,0.3); color:var(--gold); }
 .user-card {
@@ -750,6 +750,7 @@ body {
 .hub-card:hover { transform:translateY(-3px); box-shadow:0 8px 30px rgba(0,0,0,0.1); border-color:rgba(154,110,40,0.35); background:rgba(255,255,255,0.75); }
 .hub-card-icon { width:60px; height:60px; border-radius:18px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:30px; }
 .hub-card-icon.audio { background:linear-gradient(135deg,#d4ead8,#b8d8c8); }
+.hub-card-icon.resume { background:linear-gradient(135deg,#d4ead8,#b8d8c8); }
 .hub-card-icon.written { background:linear-gradient(135deg,#e8dfc8,#d4c8a8); }
 .hub-card-texts { flex:1; }
 .hub-card-label { font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--gold-dim); margin-bottom:4px; }
@@ -1198,11 +1199,11 @@ body {
           <div class="hub-card-arrow">›</div>
         </div>
         <div class="hub-card" onclick="goToResume()">
-          <div class="hub-card-icon resume">📋</div>
+          <div class="hub-card-icon resume">🎧</div>
           <div class="hub-card-texts">
-            <div class="hub-card-label">Résumés</div>
+            <div class="hub-card-label">Résumés audio</div>
             <div class="hub-card-name">Résumé des cours</div>
-            <div class="hub-card-desc">Synthèses claires des cours audio</div>
+            <div class="hub-card-desc">Synthèses audio des cours à écouter</div>
           </div>
           <div class="hub-card-arrow">›</div>
         </div>
@@ -1258,7 +1259,7 @@ body {
     </div>
     <div class="scroll-body">
       <div class="detail-body">
-        <div id="resume-detail-img-banner" style="display:none;width:100%;margin-bottom:20px;border-radius:16px;overflow:hidden;border:1px solid rgba(154,110,40,0.15);">
+        <div id="resume-detail-img-banner" style="display:none;width:50%;margin:0 auto 20px;border-radius:16px;overflow:hidden;border:1px solid rgba(154,110,40,0.15);">
           <img id="resume-detail-img" src="" style="width:100%;height:auto;display:block;">
         </div>
         <div class="section-label">Leçons</div>
@@ -1322,7 +1323,7 @@ body {
         <div class="qa-section" id="wd-qa-section">
           <div class="qa-section-title">💬 Partages &amp; Questions / Réponses</div>
           <div class="qa-ask-form">
-            <textarea class="qa-ask-input" id="wd-qa-input" placeholder="Posez votre question sur ce cours ou partagez des éléments…" rows="2"></textarea>
+            <textarea class="qa-ask-input" id="wd-qa-input" placeholder="Posez votre question et partagez des éléments sur ce cours…" rows="2"></textarea>
             <div class="qa-ask-img-row">
               <label class="qa-img-upload-label">
                 📎 Image
@@ -1641,7 +1642,7 @@ body {
     </div>
     <div class="scroll-body">
       <div class="detail-body">
-        <div id="detail-img-banner" style="display:none;width:100%;margin-bottom:20px;border-radius:16px;overflow:hidden;border:1px solid rgba(154,110,40,0.15);">
+        <div id="detail-img-banner" style="display:none;width:50%;margin:0 auto 20px;border-radius:16px;overflow:hidden;border:1px solid rgba(154,110,40,0.15);">
           <img id="detail-img" src="" style="width:100%;height:auto;display:block;" onclick="openImageFullscreen(this.src)">
         </div>
         <div class="section-label">Leçons</div>
@@ -1688,12 +1689,12 @@ body {
         </div>
 
         <!-- Tabs -->
-        <div class="users-tabs" style="gap:6px;">
-          <button class="tab-btn active" id="tab-courses-btn" onclick="switchAdminTab('courses')" style="font-size:9px;">📚 Audio</button>
-          <button class="tab-btn" id="tab-resume-btn" onclick="switchAdminTab('resume')" style="font-size:9px;">📋 Résumés</button>
-          <button class="tab-btn" id="tab-written-btn" onclick="switchAdminTab('written')" style="font-size:9px;">📝 Écrits</button>
-          <button class="tab-btn" id="tab-users-btn" onclick="switchAdminTab('users')" style="font-size:9px;">👥 Membres</button>
-          <button class="tab-btn" id="tab-activity-btn" onclick="switchAdminTab('activity')" style="font-size:9px;">📊 Stats</button>
+        <div class="users-tabs" style="gap:5px;">
+          <button class="tab-btn active" id="tab-courses-btn" onclick="switchAdminTab('courses')">📚 Audio</button>
+          <button class="tab-btn" id="tab-resume-btn" onclick="switchAdminTab('resume')">🎧 Résumés</button>
+          <button class="tab-btn" id="tab-written-btn" onclick="switchAdminTab('written')">📝 Écrits</button>
+          <button class="tab-btn" id="tab-users-btn" onclick="switchAdminTab('users')">👥 Membres</button>
+          <button class="tab-btn" id="tab-activity-btn" onclick="switchAdminTab('activity')">📊 Stats</button>
         </div>
 
         <!-- Courses tab -->
@@ -2374,7 +2375,7 @@ function renderLessons(lessons) {
           <div class="qa-section" style="margin-top:12px;">
             <div class="qa-section-title">💬 Partages &amp; Questions / Réponses</div>
             <div class="qa-ask-form">
-              <textarea class="qa-ask-input" id="qa-input-${i}" placeholder="Posez votre question sur cette leçon ou partagez des éléments…" rows="2"></textarea>
+              <textarea class="qa-ask-input" id="qa-input-${i}" placeholder="Posez votre question et partagez des éléments sur cette leçon…" rows="2"></textarea>
               <div class="qa-ask-img-row">
                 <label class="qa-img-upload-label">📎 Image<input type="file" accept="image/*" style="display:none;" onchange="previewAskImage(event,'qa-ask-img-${i}','qa-ask-b64-${i}')"></label>
                 <img id="qa-ask-img-${i}" class="qa-ask-img-preview" style="display:none;">
@@ -2423,7 +2424,7 @@ function renderAudioPlayer(idx, url, name) {
   <div class="qa-section" style="margin-top:14px;">
     <div class="qa-section-title">💬 Partages &amp; Questions / Réponses</div>
     <div class="qa-ask-form">
-      <textarea class="qa-ask-input" id="qa-input-${idx}" placeholder="Posez votre question sur cette leçon ou partagez des élément…" rows="2"></textarea>
+      <textarea class="qa-ask-input" id="qa-input-${idx}" placeholder="Posez votre question et partagez des éléments sur cette leçon…" rows="2"></textarea>
       <div class="qa-ask-img-row">
         <label class="qa-img-upload-label">
           📎 Image
@@ -3993,6 +3994,7 @@ function renderResumeLessons(lessons) {
         <div class="lesson-texts">
           <div class="lesson-name">${l.name}</div>
           <div class="lesson-badges">
+            ${l.audioUrl ? '<span class="badge badge-audio">🎧 Audio</span>' : ''}
             ${l.text ? '<span class="badge badge-text">Texte</span>' : ''}
             ${l.imageUrl ? '<span class="badge" style="background:rgba(100,150,201,0.1);color:#8ab4e8;border:1px solid rgba(100,150,201,0.2);">🖼 Image</span>' : ''}
           </div>
@@ -4004,16 +4006,16 @@ function renderResumeLessons(lessons) {
           ${l.imageUrl ? `
           <div class="lesson-image-wrap">
             <img src="${escapeAttr(l.imageUrl)}" alt="${escapeAttr(l.name)}"
-              onerror="this.parentElement.innerHTML='<div style=padding:14px;text-align:center;font-size:11px;color:var(--cream-dim);opacity:0.5>⚠️ Image non disponible</div>'">
+              onerror="this.parentElement.innerHTML='<div style=padding:14px;text-align:center;font-size:11px;color:var(--cream-dim);opacity:0.5>⚠️ Image non disponible</div>'"
+              onclick="openImageFullscreen(this.src)">
             <div class="lesson-image-caption">📋 ${escapeHtml(l.name)}</div>
           </div>` : ''}
           ${l.text ? `<div class="lesson-text-content">${escapeHtml(l.text)}</div>` : ''}
-          ${!l.text && !l.imageUrl ? '<div style="color:var(--cream-dim);font-size:12px;text-align:center;padding:10px 0;opacity:0.5">Aucun contenu pour cette leçon.</div>' : ''}
-          <!-- Q&R -->
+          ${l.audioUrl ? renderResumeAudioPlayer(i, l.audioUrl, l.name) : `
           <div class="qa-section" style="margin-top:12px;">
             <div class="qa-section-title">💬 Partages &amp; Questions / Réponses</div>
             <div class="qa-ask-form">
-              <textarea class="qa-ask-input" id="rqa-input-${i}" placeholder="Posez votre question sur ce résumé ou partagez des éléments…" rows="2"></textarea>
+              <textarea class="qa-ask-input" id="rqa-input-${i}" placeholder="Posez votre question et partagez des éléments sur ce résumé…" rows="2"></textarea>
               <div class="qa-ask-img-row">
                 <label class="qa-img-upload-label">📎 Image<input type="file" accept="image/*" style="display:none;" onchange="previewAskImage(event,'rqa-ask-img-${i}','rqa-ask-b64-${i}')"></label>
                 <img id="rqa-ask-img-${i}" class="qa-ask-img-preview" style="display:none;">
@@ -4025,11 +4027,56 @@ function renderResumeLessons(lessons) {
             <div class="qa-questions-list" id="rqa-list-${i}">
               <div class="qa-empty">Aucune question pour l\'instant.</div>
             </div>
-          </div>
+          </div>`}
+          ${!l.text && !l.audioUrl && !l.imageUrl ? '<div style="color:var(--cream-dim);font-size:12px;text-align:center;padding:10px 0;opacity:0.5">Aucun contenu pour cette leçon.</div>' : ''}
         </div>
       </div>
     </div>
   `).join('');
+}
+
+function renderResumeAudioPlayer(idx, url, name) {
+  return `
+  <div class="audio-player" id="raudio-player-${idx}">
+    <div class="audio-title">🎧 Écouter le résumé audio</div>
+    <div class="audio-controls" style="display:flex;align-items:center;gap:8px;">
+      <button class="audio-skip-btn" onclick="skipResumeAudio(${idx}, '${escapeAttr(url)}', -10)" title="Reculer 10s">
+        <span class="skip-icon">↺</span><span>10s</span>
+      </button>
+      <button class="audio-play-btn" id="raplay-${idx}" onclick="toggleResumeAudio(${idx}, '${escapeAttr(url)}')">
+        <span class="pico">▶</span>
+      </button>
+      <button class="audio-skip-btn" onclick="skipResumeAudio(${idx}, '${escapeAttr(url)}', 10)" title="Avancer 10s">
+        <span class="skip-icon">↻</span><span>10s</span>
+      </button>
+      <button class="audio-stop-btn" onclick="stopResumeAudio(${idx})" title="Stop">■</button>
+      <div class="audio-progress-wrap" style="flex:1;">
+        <div class="audio-seek" onclick="seekResumeAudio(event, ${idx})">
+          <div class="audio-seek-fill" id="rafill-${idx}"></div>
+        </div>
+        <div class="audio-time">
+          <span id="ratime-${idx}">0:00</span>
+          <span id="radur-${idx}">--:--</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="qa-section" style="margin-top:14px;">
+    <div class="qa-section-title">💬 Partages &amp; Questions / Réponses</div>
+    <div class="qa-ask-form">
+      <textarea class="qa-ask-input" id="rqa-input-${idx}" placeholder="Posez votre question et partagez des éléments sur ce résumé…" rows="2"></textarea>
+      <div class="qa-ask-img-row">
+        <label class="qa-img-upload-label">📎 Image<input type="file" accept="image/*" style="display:none;" onchange="previewAskImage(event,'rqa-ask-img-${idx}','rqa-ask-b64-${idx}')"></label>
+        <img id="rqa-ask-img-${idx}" class="qa-ask-img-preview" style="display:none;">
+        <button id="rqa-ask-clear-${idx}" class="qa-ask-img-clear" style="display:none;" onclick="clearAskImage('rqa-ask-img-${idx}','rqa-ask-b64-${idx}','rqa-ask-clear-${idx}')">✕ Supprimer</button>
+        <input type="hidden" id="rqa-ask-b64-${idx}">
+      </div>
+      <button class="qa-ask-btn" onclick="submitQuestion('resume', ${idx})">Envoyer ›</button>
+    </div>
+    <div class="qa-questions-list" id="rqa-list-${idx}">
+      <div class="qa-empty">Aucune question pour l\'instant.</div>
+    </div>
+  </div>`;
 }
 
 function toggleResumeLesson(i) {
@@ -4038,6 +4085,86 @@ function toggleResumeLesson(i) {
   const isOpen = content.classList.toggle('open');
   toggle.classList.toggle('open', isOpen);
   if (isOpen) loadQAForResumeLesson(i);
+}
+
+// ══════════════════════════════
+// AUDIO PLAYER — RÉSUMÉS
+// ══════════════════════════════
+const resumeAudioObjects = {};
+
+function toggleResumeAudio(idx, url) {
+  if (!url) return;
+  if (!resumeAudioObjects[idx]) {
+    resumeAudioObjects[idx] = new Audio(url);
+    const aud = resumeAudioObjects[idx];
+    aud.addEventListener('loadedmetadata', () => {
+      document.getElementById(`radur-${idx}`).textContent = formatTime(aud.duration);
+    });
+    aud.addEventListener('timeupdate', () => {
+      const pct = (aud.currentTime / aud.duration) * 100 || 0;
+      document.getElementById(`rafill-${idx}`).style.width = pct + '%';
+      document.getElementById(`ratime-${idx}`).textContent = formatTime(aud.currentTime);
+    });
+    aud.addEventListener('ended', () => {
+      document.getElementById(`raplay-${idx}`).innerHTML = '<span class="pico">▶</span>';
+    });
+  }
+  const aud = resumeAudioObjects[idx];
+  const btn = document.getElementById(`raplay-${idx}`);
+  if (!aud.paused) {
+    aud.pause();
+    btn.innerHTML = '<span class="pico">▶</span>';
+  } else {
+    Object.entries(resumeAudioObjects).forEach(([k, a]) => {
+      if (k != idx && !a.paused) {
+        a.pause();
+        const ob = document.getElementById(`raplay-${k}`);
+        if (ob) ob.innerHTML = '<span class="pico">▶</span>';
+      }
+    });
+    // Also pause main audio player
+    Object.entries(audioObjects).forEach(([k, a]) => {
+      if (!a.paused) { a.pause(); const ob = document.getElementById(`aplay-${k}`); if (ob) ob.innerHTML = '<span class="pico">▶</span>'; }
+    });
+    aud.play().catch(() => showToast('⚠️ Impossible de lire l\'audio'));
+    btn.innerHTML = '<span>⏸</span>';
+  }
+}
+
+function seekResumeAudio(e, idx) {
+  const aud = resumeAudioObjects[idx];
+  if (!aud || !aud.duration) return;
+  const rect = e.currentTarget.getBoundingClientRect();
+  const pct = (e.clientX - rect.left) / rect.width;
+  aud.currentTime = pct * aud.duration;
+}
+
+function skipResumeAudio(idx, url, seconds) {
+  if (!resumeAudioObjects[idx]) {
+    resumeAudioObjects[idx] = new Audio(url);
+    const aud = resumeAudioObjects[idx];
+    aud.addEventListener('loadedmetadata', () => { document.getElementById(`radur-${idx}`).textContent = formatTime(aud.duration); });
+    aud.addEventListener('timeupdate', () => {
+      const pct = (aud.currentTime / aud.duration) * 100 || 0;
+      document.getElementById(`rafill-${idx}`).style.width = pct + '%';
+      document.getElementById(`ratime-${idx}`).textContent = formatTime(aud.currentTime);
+    });
+    aud.addEventListener('ended', () => { document.getElementById(`raplay-${idx}`).innerHTML = '<span class="pico">▶</span>'; });
+  }
+  const aud = resumeAudioObjects[idx];
+  aud.currentTime = Math.max(0, Math.min(aud.duration || 0, aud.currentTime + seconds));
+}
+
+function stopResumeAudio(idx) {
+  const aud = resumeAudioObjects[idx];
+  if (!aud) return;
+  aud.pause(); aud.currentTime = 0;
+  const btn = document.getElementById(`raplay-${idx}`);
+  if (btn) btn.innerHTML = '<span class="pico">▶</span>';
+  const fill = document.getElementById(`rafill-${idx}`);
+  if (fill) fill.style.width = '0%';
+  const time = document.getElementById(`ratime-${idx}`);
+  if (time) time.textContent = '0:00';
 }
 
 // Q&R pour résumés
@@ -4155,6 +4282,7 @@ function addResumeLessonField(lesson) {
   const name = lesson ? lesson.name : '';
   const text = lesson ? (lesson.text || '') : '';
   const image = lesson ? (lesson.imageUrl || '') : '';
+  const audio = lesson ? (lesson.audioUrl || '') : '';
   const div = document.createElement('div');
   div.className = 'lesson-admin-card';
   div.id = `resume-lesson-field-${id}`;
@@ -4186,6 +4314,10 @@ function addResumeLessonField(lesson) {
             <input type="file" accept="image/*" style="display:none;" onchange="handleResumeImageUpload(event, ${id})">
           </label>
         </div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">🎧 Lien audio MP3 (URL)</div>
+        <input type="url" class="field-input" id="rla-${id}" placeholder="https://exemple.com/audio.mp3" value="${escapeAttr(audio)}" style="font-size:12px;padding:11px 14px;">
       </div>
     </div>`;
   document.getElementById('modal-resume-lessons-list').appendChild(div);
@@ -4259,7 +4391,8 @@ async function saveResumeCourse() {
     const name = document.getElementById(`rln-${id}`)?.value?.trim() || '';
     const text = document.getElementById(`rlt-${id}`)?.value?.trim() || '';
     const imageUrl = document.getElementById(`rli-${id}`)?.value?.trim() || '';
-    if (name) lessons.push({ name, text, imageUrl: imageUrl || null });
+    const audioUrl = document.getElementById(`rla-${id}`)?.value?.trim() || '';
+    if (name) lessons.push({ name, text, imageUrl: imageUrl || null, audioUrl: audioUrl || null });
   });
   const payload = {
     title,
